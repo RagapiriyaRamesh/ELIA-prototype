@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>No access · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, EmptyState, Card, Badge } = window.Elia;
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "calendar", role: "Sales Assistant", user: "Tharushi Fernando" }, /* @__PURE__ */ React.createElement(Card, { style: { minHeight: 560, display: "grid", placeItems: "center" } }, /* @__PURE__ */ React.createElement(EmptyState, { icon: "lock", title: "You don't have access to Users", description: "Your role is Sales Assistant. This page is for Admins. If you think you should be able to open it, ask an Admin to change your role.", action: /* @__PURE__ */ React.createElement("div", { className: "el-row", style: { justifyContent: "center" } }, /* @__PURE__ */ React.createElement(Badge, { tone: "brand", dot: true }, "Sales Assistant"), /* @__PURE__ */ React.createElement(Button, { href: "sales-assistant-home.html", variant: "primary" }, "Back to calendar")) })))
+  );
+})();
+</script>
+</body>
+</html>

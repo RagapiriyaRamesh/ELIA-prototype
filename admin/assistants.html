@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sales assistants · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { Menu, AppShell, PageHeader, Button, Card, Avatar, Badge, Switch, Icon, IconButton, Input, FilterChip, Toolbar, Table, CellMain, Pagination, StatusBadge, Modal, Field, Select, DescriptionList } = window.Elia;
+  const { useState } = React;
+  const INITIAL = { "modal": null, "who": 2, "menu": 2 };
+  function RowMenu({ open: o0, onView, onEdit }) {
+    const [open, setOpen] = useState(!!o0);
+    return /* @__PURE__ */ React.createElement("span", { onClick: (e) => e.stopPropagation(), style: { position: "relative", display: "inline-block" } }, /* @__PURE__ */ React.createElement(IconButton, { icon: "more", label: "Actions", size: "sm", onClick: () => setOpen(!open) }), open ? /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", right: 0, top: 34, zIndex: 30 } }, /* @__PURE__ */ React.createElement(Menu, { style: { width: 150 }, items: [{ label: "View", icon: "eye", onClick: () => {
+      setOpen(false);
+      onView();
+    } }, { label: "Edit", icon: "edit", onClick: () => {
+      setOpen(false);
+      onEdit();
+    } }] })) : null);
+  }
+  function Tile({ label, value, hint }) {
+    return /* @__PURE__ */ React.createElement("div", { style: { border: "1px solid var(--line)", borderRadius: 10, padding: "10px 12px", background: "var(--surface)" } }, /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted" }, label), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 20, fontWeight: 600, lineHeight: "28px" } }, value), hint ? /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted" }, hint) : null);
+  }
+  function MiniList({ title, rows: rows2, empty }) {
+    return /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-section-title", style: { marginBottom: 6 } }, title), rows2.length ? /* @__PURE__ */ React.createElement("div", { style: { border: "1px solid var(--line)", borderRadius: 10, overflow: "hidden" } }, rows2.map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r[0], className: "el-between", style: { padding: "9px 12px", borderTop: i ? "1px solid var(--line)" : "none", gap: 12 } }, /* @__PURE__ */ React.createElement("span", { className: "el-row", style: { minWidth: 0 } }, /* @__PURE__ */ React.createElement("span", { className: "el-mono el-strong el-xs" }, r[0]), /* @__PURE__ */ React.createElement("span", { className: "el-sm el-truncate" }, r[1])), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted", style: { flexShrink: 0 } }, r[2])))) : /* @__PURE__ */ React.createElement("div", { className: "el-sm el-muted" }, empty));
+  }
+  const rows = [
+    { id: 1, n: "Tharushi Fernando", d: "Senior Sales Consultant", tags: ["Site visits", "Apartments", "Villas"], w: "+94 77 123 4567", on: true, acct: "tharushi@harbourview.lk", week: 11, up: 4, done: 38, bk: [["BK-24A7-QX", "Ruwan Wickramasinghe · Site visit · Studio A", "Thu 9 Oct 10:30"], ["BK-24A6-MW", "Chathuri Abeysekara · Site visit · 2BR Sea View", "Thu 9 Oct 14:00"]] },
+    { id: 2, n: "Nimal Perera", d: "Payment Plan Specialist", tags: ["Payment plans", "Legal"], w: "+94 71 234 5678", on: true, acct: "nimal@harbourview.lk", week: 7, up: 3, done: 29, bk: [["BK-24A9-PE", "Nadeesha Peiris · Payment plan consultation", "Thu 9 Oct 11:30"]] },
+    { id: 3, n: "Kavin Rajan", d: "Resale Valuer", tags: ["Valuations", "Resale listings"], w: "+94 76 345 6789", on: true, acct: "kavin@harbourview.lk", week: 6, up: 1, done: 22, bk: [["BK-24A5-KD", "Mohamed Imran · Resale valuation", "Wed 8 Oct 11:15"], ["BK-24A2-TT", "Sahan Gunawardena · Site visit · Penthouse · Cancelled", "Wed 8 Oct 15:00"]] },
+    { id: 4, n: "Ayesha Nazeer", d: "Handover Coordinator", tags: ["Handover", "Registration"], w: "+94 70 456 7890", on: true, acct: "ayesha@harbourview.lk", week: 5, up: 2, done: 17, bk: [["BK-24A3-LB", "Lahiru Bandara · Key handover", "Fri 10 Oct 15:30"]] },
+    { id: 5, n: "Dilan Jayasuriya", d: "Customer Care Advisor", tags: ["Customer care"], w: "+94 72 567 8901", on: false, acct: "dilan@harbourview.lk", week: 0, up: 0, done: 14, bk: [["BK-249Z-QA", "Dinesh Kumar · Site visit · Garden Villa · Completed", "Tue 7 Oct 08:30"]] }
+  ];
+  function ViewPopup({ r, onClose, onEdit }) {
+    return /* @__PURE__ */ React.createElement(
+      Modal,
+      {
+        width: 640,
+        title: "Sales assistant",
+        description: "Read-only details. Use Edit to change them.",
+        icon: "user",
+        footer: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("a", { className: "el-sm", style: { marginRight: "auto", cursor: "pointer" }, href: "assistant.html" }, "Open full profile"), /* @__PURE__ */ React.createElement(Button, { onClick: onClose }, "Close"), /* @__PURE__ */ React.createElement(Button, { variant: "primary", icon: "edit", onClick: onEdit }, "Edit"))
+      },
+      /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 18 } }, /* @__PURE__ */ React.createElement("div", { className: "el-row-3" }, /* @__PURE__ */ React.createElement(Avatar, { name: r.n, size: "xl" }), /* @__PURE__ */ React.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ React.createElement("div", { className: "el-strong", style: { fontSize: 16 } }, r.n), /* @__PURE__ */ React.createElement("div", { className: "el-sm el-muted" }, r.d)), /* @__PURE__ */ React.createElement(Badge, { tone: r.on ? "success" : "neutral", dot: true }, r.on ? "Active" : "Inactive")), /* @__PURE__ */ React.createElement("div", { className: "el-grid el-g4", style: { gap: 10 } }, /* @__PURE__ */ React.createElement(Tile, { label: "This week", value: r.week, hint: "bookings" }), /* @__PURE__ */ React.createElement(Tile, { label: "Upcoming", value: r.up, hint: "confirmed" }), /* @__PURE__ */ React.createElement(Tile, { label: "Completed", value: r.done, hint: "all time" }), /* @__PURE__ */ React.createElement(Tile, { label: "Utilisation", value: r.on ? Math.min(92, r.week * 8) + "%" : "–", hint: "of open hours" })), /* @__PURE__ */ React.createElement("div", { className: "el-row", style: { flexWrap: "wrap", gap: 6 } }, r.tags.map((t) => /* @__PURE__ */ React.createElement(Badge, { key: t, tone: "brand" }, t))), /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 150, items: [{ label: "WhatsApp contact", value: r.w }, { label: "Portal account", value: r.acct + " · Sales Assistant" }, { label: "Calendar access", value: "Can view their own calendar only" }] }), /* @__PURE__ */ React.createElement(MiniList, { title: "Latest bookings", rows: r.bk, empty: "No bookings yet." }))
+    );
+  }
+  function EditPopup({ r, add, onClose, onDelete }) {
+    const tags = add ? [] : r.tags;
+    return /* @__PURE__ */ React.createElement(
+      Modal,
+      {
+        width: 680,
+        title: add ? "Add sales assistant" : "Edit " + r.n,
+        description: add ? "ELIA matches customers to them by expertise." : "Changes apply to new bookings straight away.",
+        icon: add ? "plus" : "edit",
+        footer: /* @__PURE__ */ React.createElement(React.Fragment, null, add ? null : /* @__PURE__ */ React.createElement(Button, { variant: "danger-soft", icon: "trash", style: { marginRight: "auto" }, onClick: onDelete }, "Delete assistant"), /* @__PURE__ */ React.createElement(Button, { onClick: onClose }, "Cancel"), /* @__PURE__ */ React.createElement(Button, { variant: "primary", icon: "check", onClick: onClose }, add ? "Add sales assistant" : "Save changes"))
+      },
+      /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 16 } }, /* @__PURE__ */ React.createElement("div", { className: "el-row-4", style: { alignItems: "center" } }, /* @__PURE__ */ React.createElement(Avatar, { name: add ? "New person" : r.n, size: "xl" }), /* @__PURE__ */ React.createElement("div", { className: "el-stack-2" }, /* @__PURE__ */ React.createElement("div", { className: "el-row" }, /* @__PURE__ */ React.createElement(Button, { size: "sm", icon: "upload" }, "Upload photo"), /* @__PURE__ */ React.createElement(Button, { size: "sm", variant: "ghost" }, "Remove")), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, "JPG or PNG, at least 400×400 px, up to 2 MB."))), /* @__PURE__ */ React.createElement("div", { className: "el-grid el-g2" }, /* @__PURE__ */ React.createElement(Field, { label: "Full name", required: true }, /* @__PURE__ */ React.createElement(Input, { defaultValue: add ? "" : r.n, placeholder: "e.g. Nimali Perera" })), /* @__PURE__ */ React.createElement(Field, { label: "Designation", required: true }, /* @__PURE__ */ React.createElement(Input, { defaultValue: add ? "" : r.d, placeholder: "e.g. Sales Consultant" }))), /* @__PURE__ */ React.createElement(Field, { label: "Expertise", hint: "ELIA uses these tags to pick the right person. Press Enter to add." }, /* @__PURE__ */ React.createElement("div", { className: "el-input", style: { height: "auto", minHeight: 40, flexWrap: "wrap", padding: "6px 8px", gap: 6 } }, tags.map((t) => /* @__PURE__ */ React.createElement(Badge, { key: t, tone: "brand" }, t, /* @__PURE__ */ React.createElement(Icon, { name: "x", size: 11, stroke: 2.4 }))), /* @__PURE__ */ React.createElement("input", { placeholder: "Add a tag…", style: { flex: 1, minWidth: 120 } }))), /* @__PURE__ */ React.createElement(Field, { label: "WhatsApp number", required: true, hint: "Booking notifications are sent to this number." }, /* @__PURE__ */ React.createElement(Input, { icon: "chat", defaultValue: add ? "" : r.w, placeholder: "+94 7X XXX XXXX" })), /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { border: "1px solid var(--line)", borderRadius: 10, padding: "12px 14px" } }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-strong" }, "Active"), /* @__PURE__ */ React.createElement("div", { className: "el-sm el-muted" }, "Active sales assistants can be booked. Working hours are set in Availability.")), /* @__PURE__ */ React.createElement(Switch, { checked: add ? true : r.on })))
+    );
+  }
+  function Page() {
+    const [m, setM] = useState(INITIAL.modal);
+    const [who, setWho] = useState(INITIAL.who);
+    const r = rows.find((x) => x.id === who) || rows[0];
+    const open = (kind, id) => {
+      setWho(id);
+      setM(kind);
+    };
+    const overlay = m === "view" ? /* @__PURE__ */ React.createElement(ViewPopup, { r, onClose: () => setM(null), onEdit: () => setM("edit") }) : m === "edit" ? /* @__PURE__ */ React.createElement(EditPopup, { r, onClose: () => setM(null), onDelete: () => {
+      window.location.href = "delete-assistant.html";
+    } }) : m === "add" ? /* @__PURE__ */ React.createElement(EditPopup, { add: true, r, onClose: () => setM(null) }) : null;
+    return /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "assistants", role: "Admin", overlay }, /* @__PURE__ */ React.createElement(PageHeader, { title: "Sales assistants", description: "The people customers are booked with. ELIA matches them by expertise.", actions: /* @__PURE__ */ React.createElement(Button, { variant: "primary", icon: "plus", onClick: () => open("add", who) }, "Add sales assistant") }), /* @__PURE__ */ React.createElement(Card, { padded: false }, /* @__PURE__ */ React.createElement(Toolbar, null, /* @__PURE__ */ React.createElement(Input, { icon: "search", size: "sm", placeholder: "Search by name or expertise", style: { width: 280 } }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Status" }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Expertise" }), /* @__PURE__ */ React.createElement("span", { className: "el-spacer" }), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, "5 sales assistants · 4 active")), /* @__PURE__ */ React.createElement(Table, { columns: [
+      { key: "n", label: "Sales assistant", width: 280, render: (x) => /* @__PURE__ */ React.createElement(CellMain, { title: /* @__PURE__ */ React.createElement("a", { style: { cursor: "pointer" }, onClick: () => open("view", x.id) }, x.n), sub: x.d, lead: /* @__PURE__ */ React.createElement(Avatar, { name: x.n, size: "md" }) }) },
+      { key: "tags", label: "Expertise", render: (x) => /* @__PURE__ */ React.createElement("span", { className: "el-row", style: { flexWrap: "wrap", gap: 6 } }, x.tags.map((t) => /* @__PURE__ */ React.createElement(Badge, { key: t, tone: "brand" }, t))) },
+      { key: "w", label: "WhatsApp contact", width: 170, render: (x) => /* @__PURE__ */ React.createElement("span", { className: "el-row el-sm" }, /* @__PURE__ */ React.createElement(Icon, { name: "chat", size: 14, className: "el-muted" }), x.w) },
+      { key: "st", label: "Status", width: 150, render: (x) => /* @__PURE__ */ React.createElement("span", { className: "el-row" }, /* @__PURE__ */ React.createElement(Switch, { size: "sm", checked: x.on }), /* @__PURE__ */ React.createElement("span", { className: "el-sm" }, x.on ? "Active" : "Inactive")) },
+      { key: "x", label: "Action", align: "right", width: 100, render: (x) => /* @__PURE__ */ React.createElement(RowMenu, { open: false, onView: () => open("view", x.id), onEdit: () => open("edit", x.id) }) }
+    ], rows }), /* @__PURE__ */ React.createElement(Pagination, { page: 1, pages: 1, total: 5 })));
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(/* @__PURE__ */ React.createElement(Page, null));
+})();
+</script>
+</body>
+</html>

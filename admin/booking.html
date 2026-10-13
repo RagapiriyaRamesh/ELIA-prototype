@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Booking detail · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, Card, Table, CellMain, Avatar, StatusBadge, Icon, IconButton, Drawer, DescriptionList, Timeline, Badge } = window.Elia;
+  const rows = [
+    ["BK-24A7-QX", "Ruwan Wickramasinghe", "Site visit · Studio A", "Thu 9 Oct · 10:30", "CONFIRMED"],
+    ["BK-24A9-PE", "Nadeesha Peiris", "Payment plan consultation", "Thu 9 Oct · 11:30", "CONFIRMED"],
+    ["BK-24A6-MW", "Chathuri Abeysekara", "Site visit · 2BR Sea View", "Thu 9 Oct · 14:00", "CONFIRMED"],
+    ["BK-24A5-KD", "Mohamed Imran", "Resale valuation", "Wed 8 Oct · 11:15", "CONFIRMED"],
+    ["BK-24A3-LB", "Lahiru Bandara", "Key handover", "Fri 10 Oct · 15:30", "CONFIRMED"],
+    ["BK-24A2-TT", "Sahan Gunawardena", "Site visit · Penthouse", "Wed 8 Oct · 15:00", "CANCELLED"],
+    ["BK-24A1-RF", "Kumari Dissanayake", "Resale valuation", "Tue 7 Oct · 09:00", "COMPLETED"]
+  ].map(([id, c, s, w, st]) => ({ id, c, s, w, st }));
+  const drawer = /* @__PURE__ */ React.createElement(
+    Drawer,
+    {
+      closeHref: "bookings.html",
+      width: 520,
+      title: /* @__PURE__ */ React.createElement("span", { className: "el-row-3" }, /* @__PURE__ */ React.createElement("span", { className: "el-mono", style: { fontSize: 16 } }, "BK-24A7-QX"), /* @__PURE__ */ React.createElement(StatusBadge, { status: "CONFIRMED" })),
+      description: "Site visit · Studio A",
+      footer: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Button, { href: "delete-booking.html", variant: "danger-soft", icon: "trash" }, "Delete"), /* @__PURE__ */ React.createElement("span", { className: "el-spacer" }), /* @__PURE__ */ React.createElement(Button, { href: "chat-sessions-completed.html", icon: "layers" }, "Open case"), /* @__PURE__ */ React.createElement(Button, { href: "edit-booking.html", variant: "primary", icon: "edit" }, "Edit booking"))
+    },
+    /* @__PURE__ */ React.createElement("div", { className: "el-stack-5" }, /* @__PURE__ */ React.createElement("div", { className: "el-grid el-g2", style: { gap: 12 } }, /* @__PURE__ */ React.createElement("div", { className: "el-evidence" }, /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, "When"), /* @__PURE__ */ React.createElement("span", { className: "el-strong" }, "Thu 9 Oct 2026"), /* @__PURE__ */ React.createElement("span", { className: "el-sm" }, "10:30 – 11:15 · 45 min")), /* @__PURE__ */ React.createElement("div", { className: "el-evidence" }, /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, "Where"), /* @__PURE__ */ React.createElement("span", { className: "el-strong" }, "Colombo 03 sales gallery"), /* @__PURE__ */ React.createElement("span", { className: "el-sm" }, "Unit 2 · Studio A show flat"))), /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 130, items: [
+      { label: "Customer", value: /* @__PURE__ */ React.createElement("span", { className: "el-row" }, /* @__PURE__ */ React.createElement(Avatar, { name: "Ruwan Wickramasinghe", size: "xs" }), "Ruwan Wickramasinghe · +94 77 ••• 4182") },
+      { label: "Sales assistant", value: /* @__PURE__ */ React.createElement("span", { className: "el-row" }, /* @__PURE__ */ React.createElement(Avatar, { name: "Tharushi Fernando", size: "xs" }), "Tharushi Fernando") },
+      { label: "Booking ID", value: /* @__PURE__ */ React.createElement("span", { className: "el-mono" }, "BK-24A7-QX") },
+      { label: "Case", value: /* @__PURE__ */ React.createElement("a", { href: "chat-sessions-completed.html" }, "CS-1036 · Open case") }
+    ] }), /* @__PURE__ */ React.createElement("hr", { className: "el-divider" }), /* @__PURE__ */ React.createElement("div", { className: "el-stack-2" }, /* @__PURE__ */ React.createElement("span", { className: "el-section-title" }, "Timeline"), /* @__PURE__ */ React.createElement(Timeline, { items: [
+      { title: "Reminder scheduled for Wed 8 Oct, 10:30", meta: "24 hours before the appointment", icon: "clock" },
+      { title: "Booking confirmed by customer", meta: "10:07 · on WhatsApp", tone: "success", icon: "calcheck" },
+      { title: "Slot held for 10 minutes", meta: "10:05 · ELIA", tone: "warning", icon: "clock" }
+    ] })))
+  );
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "appointments", role: "Admin", overlay: drawer }, /* @__PURE__ */ React.createElement(PageHeader, { title: "Bookings", description: "Every appointment booked by customers through ELIA." }), /* @__PURE__ */ React.createElement(Card, { padded: false }, /* @__PURE__ */ React.createElement(Table, { columns: [
+      { key: "id", label: "Booking ID", render: (r) => /* @__PURE__ */ React.createElement("span", { className: "el-mono el-strong" }, r.id) },
+      { key: "c", label: "Customer", render: (r) => /* @__PURE__ */ React.createElement(CellMain, { title: r.c, lead: /* @__PURE__ */ React.createElement(Avatar, { name: r.c, size: "sm" }) }) },
+      { key: "s", label: "Service" },
+      { key: "w", label: "When" },
+      { key: "st", label: "Status", render: (r) => /* @__PURE__ */ React.createElement(StatusBadge, { status: r.st }) }
+    ], rows, selected: ["BK-24A7-QX"], rowHref: () => "booking.html" })))
+  );
+})();
+</script>
+</body>
+</html>

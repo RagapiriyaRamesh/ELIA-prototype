@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Knowledge base · Website links · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, Card, Table, Toolbar, Input, FilterChip, CellMain, StatusBadge, Icon, IconButton, Pagination, Tabs, StatCard, FileIcon, ProgressBar, Toast, Menu, Modal, Dropzone, Field, Select, Switch, Alert, Badge, Checkbox, Radio, DescriptionList } = window.Elia;
+  const { useState } = React;
+  function RowMenu({ open: o0, items }) {
+    const [open, setOpen] = useState(!!o0);
+    return /* @__PURE__ */ React.createElement("span", { onClick: (e) => e.stopPropagation(), style: { position: "relative", display: "inline-block" } }, /* @__PURE__ */ React.createElement(IconButton, { icon: "more", label: "Actions", size: "sm", onClick: () => setOpen(!open) }), open ? /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", right: 0, top: 34, zIndex: 30 } }, /* @__PURE__ */ React.createElement(Menu, { style: { width: 170 }, items: items.map((it) => it === "-" ? it : Object.assign({}, it, { onClick: () => {
+      setOpen(false);
+      if (it.onClick) it.onClick();
+    } })) })) : null);
+  }
+  function readKb(key) {
+    try {
+      return JSON.parse(sessionStorage.getItem(key) || "[]");
+    } catch (e) {
+      return [];
+    }
+  }
+  function takeFlash() {
+    try {
+      const f = JSON.parse(sessionStorage.getItem("elia.kb.flash") || "null");
+      sessionStorage.removeItem("elia.kb.flash");
+      return f;
+    } catch (e) {
+      return null;
+    }
+  }
+  function KbStats({ nd = 0, nl = 0 }) {
+    return /* @__PURE__ */ React.createElement("div", { className: "el-grid el-g4", style: { marginBottom: 20 } }, /* @__PURE__ */ React.createElement(StatCard, { label: "Total sources", value: String(48 + nd + nl), hint: 40 + nd + " documents · " + (8 + nl) + " website links", icon: "file" }), /* @__PURE__ */ React.createElement(StatCard, { label: "Indexed", value: "46", hint: "ELIA can answer from these", icon: "checkcircle" }), /* @__PURE__ */ React.createElement(StatCard, { label: "Processing", value: String(1 + nd + nl), hint: "usually under 5 minutes", icon: "refresh" }), /* @__PURE__ */ React.createElement(StatCard, { label: "Failed", value: "1", hint: "needs your attention", icon: "alert" }));
+  }
+  function KbTabs({ value, nd = 0, nl = 0 }) {
+    return /* @__PURE__ */ React.createElement("div", { style: { padding: "0 20px" } }, /* @__PURE__ */ React.createElement(Tabs, { value, items: [{ id: "docs", label: "Documents", count: 40 + nd, href: "documents.html" }, { id: "links", label: "Website links", count: 8 + nl, href: "website-links.html" }] }));
+  }
+  function KbActions() {
+    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Button, { icon: "link", onClick: () => {
+      window.location.href = "add-website-link.html";
+    } }, "Add website link"), /* @__PURE__ */ React.createElement(Button, { variant: "primary", icon: "upload", onClick: () => {
+      window.location.href = "upload.html";
+    } }, "Upload document"));
+  }
+  const links = [
+    { id: 1, u: "harbourview.lk/offers", t: "Current offers · Harbour View Homes", pages: 4, st: "INDEXED", sch: "Daily 06:00", last: "Today, 06:00", by: "Pavithiran S" },
+    { id: 2, u: "harbourview.lk/projects/sea-view", t: "2BR Sea View · project page", pages: 12, st: "INDEXED", sch: "Daily 06:00", last: "Today, 06:00", by: "Pavithiran S" },
+    { id: 3, u: "harbourview.lk/projects/garden-villa", t: "Garden Villa · project page", pages: 9, st: "INDEXED", sch: "Daily 06:00", last: "Today, 06:00", by: "Ishara Silva" },
+    { id: 4, u: "harbourview.lk/payment-plans", t: "Payment plans and bank partners", pages: 3, st: "INDEXED", sch: "Weekly · Monday", last: "Mon 6 Oct", by: "Ishara Silva" },
+    { id: 5, u: "harbourview.lk/faq", t: "Frequently asked questions", pages: 1, st: "INDEXED", sch: "Weekly · Monday", last: "Mon 6 Oct", by: "Ishara Silva" },
+    { id: 6, u: "harbourview.lk/handover", t: "Handover and snagging guide", pages: 5, st: "INDEXED", sch: "Weekly · Monday", last: "Mon 6 Oct", by: "Ishara Silva" },
+    { id: 7, u: "harbourview.lk/contact", t: "Sales gallery · location and hours", pages: 1, st: "INDEXED", sch: "Monthly · 1st", last: "1 Oct", by: "Pavithiran S" },
+    { id: 8, u: "harbourview.lk/news", t: "News and launch updates", pages: 6, st: "INDEXED", sch: "Weekly · Monday", last: "Mon 6 Oct", by: "Pavithiran S" }
+  ];
+  const DEMO = false;
+  function Page() {
+    const [added] = useState(() => readKb("elia.kb.links"));
+    const nd = readKb("elia.kb.docs").length;
+    const [flash, setFlashMsg] = useState(() => takeFlash());
+    React.useEffect(() => {
+      if (flash) {
+        const t = setTimeout(() => setFlashMsg(null), 4200);
+        return () => clearTimeout(t);
+      }
+    }, []);
+    const rows = added.map((a, i) => Object.assign({ id: 100 + i, st: "PROCESSING", last: "Just now", by: "Pavithiran S", isNew: true }, a)).concat(links);
+    const [msg, setMsg] = useState(null);
+    const flashRefresh = (t) => {
+      setMsg(t);
+      setTimeout(() => setMsg(null), 2600);
+    };
+    return /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "documents", role: "Admin", minHeight: 1170 }, /* @__PURE__ */ React.createElement(PageHeader, { title: "Knowledge base", description: "The documents and web pages ELIA answers customers from.", actions: /* @__PURE__ */ React.createElement(KbActions, null) }), /* @__PURE__ */ React.createElement(KbStats, { nd, nl: added.length }), /* @__PURE__ */ React.createElement(Card, { padded: false }, /* @__PURE__ */ React.createElement(KbTabs, { value: "links", nd, nl: added.length }), /* @__PURE__ */ React.createElement(Toolbar, null, /* @__PURE__ */ React.createElement(Input, { icon: "search", size: "sm", placeholder: "Search website links", style: { width: 260 } }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Status" }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Refresh" }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Added by" }), /* @__PURE__ */ React.createElement("span", { className: "el-spacer" }), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, 8 + added.length, " website links · 41 pages read")), /* @__PURE__ */ React.createElement(Table, { columns: [
+      { key: "u", label: "Website link", render: (r) => /* @__PURE__ */ React.createElement(CellMain, { title: r.u, sub: r.t, lead: /* @__PURE__ */ React.createElement(FileIcon, { type: "url" }) }) },
+      { key: "st", label: "Status", width: 150, render: (r) => r.isNew ? /* @__PURE__ */ React.createElement(StatusBadge, { status: "PROCESSING", label: "Reading page" }) : /* @__PURE__ */ React.createElement(StatusBadge, { status: r.st }) },
+      { key: "pg", label: "Pages read", width: 110, render: (r) => /* @__PURE__ */ React.createElement("span", { className: "el-sm" }, r.isNew ? "—" : r.pages) },
+      { key: "sch", label: "Refreshes", width: 170, render: (r) => /* @__PURE__ */ React.createElement(CellMain, { title: /* @__PURE__ */ React.createElement("span", { className: "el-sm" }, r.sch), sub: "Last " + r.last }) },
+      { key: "by", label: "Added by", width: 140, render: (r) => /* @__PURE__ */ React.createElement("span", { className: "el-sm" }, r.by) },
+      { key: "x", label: "Action", align: "right", width: 90, render: (r) => /* @__PURE__ */ React.createElement(RowMenu, { open: r.id === 1 && DEMO, items: [{ label: "View", icon: "eye", onClick: () => {
+        window.location.href = "website-link.html";
+      } }, { label: "Refresh now", icon: "refresh", onClick: () => flashRefresh("Refreshing " + r.u) }, { label: "Replace link", icon: "swap", onClick: () => {
+        window.location.href = "add-website-link.html";
+      } }] }) }
+    ], rows, rowHref: () => "website-link.html" }), /* @__PURE__ */ React.createElement(Pagination, { page: 1, pages: 1, total: 8 + added.length, shown: rows.length })), /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", right: 24, bottom: 24, width: 380 } }, flash ? /* @__PURE__ */ React.createElement(Toast, { tone: flash.tone, title: flash.title, description: flash.description }) : null, msg ? /* @__PURE__ */ React.createElement(Toast, { tone: "success", title: msg, description: "ELIA will use the latest version of the page shortly." }) : null));
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(/* @__PURE__ */ React.createElement(Page, null));
+})();
+</script>
+</body>
+</html>

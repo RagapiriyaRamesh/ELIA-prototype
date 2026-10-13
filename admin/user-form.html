@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Add / edit user · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, Card, Table, CellMain, Avatar, Badge, Drawer, Field, Input, Select, Radio, Switch, Alert, Icon, Toolbar } = window.Elia;
+  const rows = [
+    { id: 1, n: "Pavithiran S", e: "pavithiran@harbourview.lk", r: ["Admin", "accent"] },
+    { id: 2, n: "Ishara Silva", e: "ishara@harbourview.lk", r: ["Content Manager", "info"] },
+    { id: 3, n: "Dinuka Ranasinghe", e: "dinuka@harbourview.lk", r: ["Support Team", "warning"] },
+    { id: 4, n: "Tharushi Fernando", e: "tharushi@harbourview.lk", r: ["Sales Assistant", "brand"] }
+  ];
+  const roles = [["Admin", "Authority over every page and action.", false], ["Content Manager", "Can view the Knowledge base only. No dashboard.", false], ["Support Team", "Chat sessions, Cases, Support handoff and Reports.", true], ["Sales Assistant", "Can only view the Calendar.", false]];
+  const drawer = /* @__PURE__ */ React.createElement(
+    Drawer,
+    {
+      closeHref: "users.html",
+      width: 520,
+      title: "Add user",
+      description: "They'll get an email to set a password.",
+      footer: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Button, { href: "users.html" }, "Cancel"), /* @__PURE__ */ React.createElement("span", { className: "el-spacer" }), /* @__PURE__ */ React.createElement(Button, { href: "users.html", variant: "primary", icon: "mail" }, "Create and send invite"))
+    },
+    /* @__PURE__ */ React.createElement("div", { className: "el-stack-5" }, /* @__PURE__ */ React.createElement(Field, { label: "Full name", required: true }, /* @__PURE__ */ React.createElement(Input, { defaultValue: "Malini Jayawardena" })), /* @__PURE__ */ React.createElement(Field, { label: "Work email", required: true }, /* @__PURE__ */ React.createElement(Input, { icon: "mail", defaultValue: "malini@harbourview.lk" })), /* @__PURE__ */ React.createElement("div", { className: "el-stack-2" }, /* @__PURE__ */ React.createElement("span", { className: "el-label" }, "Role", /* @__PURE__ */ React.createElement("span", { className: "req" }, "*")), roles.map(([n, d, sel]) => /* @__PURE__ */ React.createElement("div", { key: n, className: "el-evidence", style: { flexDirection: "row", alignItems: "flex-start", gap: 12, borderColor: sel ? "var(--brand)" : void 0, background: sel ? "var(--brand-soft)" : void 0 } }, /* @__PURE__ */ React.createElement(Radio, { checked: sel }), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-strong el-sm" }, n), /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted" }, d))))), /* @__PURE__ */ React.createElement(Field, { label: "Linked support person", required: true, hint: "Requests and reports for this user come from this support person." }, /* @__PURE__ */ React.createElement(Select, { options: ["Malini Jayawardena · +94 70 456 7890", "Add a new support person…"], icon: "user" })), /* @__PURE__ */ React.createElement("div", { className: "el-between" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-strong el-sm" }, "Active"), /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted" }, "Inactive users cannot sign in.")), /* @__PURE__ */ React.createElement(Switch, { checked: true })))
+  );
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "users", role: "Admin", overlay: drawer }, /* @__PURE__ */ React.createElement(PageHeader, { title: "Users", description: "Everyone who can sign in to the Admin Portal, and what they can do.", actions: /* @__PURE__ */ React.createElement(Button, { href: "user-form.html", variant: "primary", icon: "plus" }, "Add user") }), /* @__PURE__ */ React.createElement(Card, { padded: false }, /* @__PURE__ */ React.createElement(Table, { columns: [
+      { key: "n", label: "User", render: (r) => /* @__PURE__ */ React.createElement(CellMain, { title: r.n, sub: r.e, lead: /* @__PURE__ */ React.createElement(Avatar, { name: r.n, size: "sm" }) }) },
+      { key: "r", label: "Role", render: (r) => /* @__PURE__ */ React.createElement(Badge, { tone: r.r[1], dot: true }, r.r[0]) }
+    ], rows })))
+  );
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Upload document · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, Card, Table, Toolbar, Input, FilterChip, CellMain, StatusBadge, Icon, IconButton, Pagination, Tabs, StatCard, FileIcon, ProgressBar, Toast, Menu, Modal, Dropzone, Field, Select, Switch, Alert, Badge, Checkbox, Radio, DescriptionList } = window.Elia;
+  const { useState } = React;
+  function readKb(key) {
+    try {
+      return JSON.parse(sessionStorage.getItem(key) || "[]");
+    } catch (e) {
+      return [];
+    }
+  }
+  function writeKb(key, add) {
+    try {
+      sessionStorage.setItem(key, JSON.stringify(add.concat(readKb(key))));
+    } catch (e) {
+    }
+  }
+  function setFlash(f) {
+    try {
+      sessionStorage.setItem("elia.kb.flash", JSON.stringify(f));
+    } catch (e) {
+    }
+  }
+  function KbActions() {
+    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Button, { icon: "link", onClick: () => {
+      window.location.href = "add-website-link.html";
+    } }, "Add website link"), /* @__PURE__ */ React.createElement(Button, { variant: "primary", icon: "upload", onClick: () => {
+      window.location.href = "upload.html";
+    } }, "Upload document"));
+  }
+  const TYPES = { pdf: "pdf", docx: "docx", xlsx: "xlsx", txt: "txt" };
+  const fmt = (b) => b >= 1048576 ? (b / 1048576).toFixed(1) + " MB" : Math.max(1, Math.round(b / 1024)) + " KB";
+  function Page() {
+    const [list, setList] = useState([]);
+    const input = React.useRef(null);
+    const add = (fl) => {
+      const next = Array.from(fl).map((f) => {
+        const t = TYPES[f.name.split(".").pop().toLowerCase()];
+        if (!t) return { n: f.name, t: "file", s: fmt(f.size), err: "This file type isn’t supported. Use PDF, DOCX, XLSX or TXT." };
+        if (f.size > 25 * 1048576) return { n: f.name, t, s: fmt(f.size), err: "File is " + fmt(f.size) + " — the limit is 25 MB. Split it or compress the images." };
+        return { n: f.name, t, s: fmt(f.size), err: null };
+      });
+      setList(list.filter((x) => !next.some((y) => y.n === x.n)).concat(next));
+    };
+    const remove = (n) => setList(list.filter((x) => x.n !== n));
+    const ok = list.filter((x) => !x.err);
+    const upload = () => {
+      if (!ok.length) return;
+      writeKb("elia.kb.docs", ok.map((x) => ({ n: x.n, t: x.t, sz: x.s })));
+      setFlash({ tone: "success", title: ok.length === 1 ? ok[0].n + " uploaded" : ok.length + " documents uploaded", description: "ELIA is reading " + (ok.length === 1 ? "it" : "them") + " now. We'll show Indexed here when " + (ok.length === 1 ? "it's" : "they're") + " ready." });
+      window.location.href = "documents.html";
+    };
+    const modal = /* @__PURE__ */ React.createElement(
+      Modal,
+      {
+        closeHref: "documents.html",
+        width: 640,
+        icon: "upload",
+        title: "Upload documents",
+        description: "ELIA can answer from a document once it shows as Indexed.",
+        footer: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted el-row", style: { marginRight: "auto" } }, /* @__PURE__ */ React.createElement(Icon, { name: "shield", size: 13 }), list.length ? ok.length + " of " + list.length + " file" + (list.length === 1 ? "" : "s") + " can be uploaded" : "No files chosen yet"), /* @__PURE__ */ React.createElement(Button, { href: "documents.html" }, "Cancel"), /* @__PURE__ */ React.createElement(Button, { variant: "primary", icon: "upload", disabled: !ok.length, onClick: upload }, ok.length === 1 ? "Upload 1 file" : ok.length ? "Upload " + ok.length + " files" : "Upload"))
+      },
+      /* @__PURE__ */ React.createElement("div", { className: "el-stack-5" }, /* @__PURE__ */ React.createElement("div", { onDragOver: (e) => e.preventDefault(), onDrop: (e) => {
+        e.preventDefault();
+        add(e.dataTransfer.files);
+      } }, /* @__PURE__ */ React.createElement(Dropzone, { title: "Drop documents to upload", hint: /* @__PURE__ */ React.createElement("span", null, "PDF, DOCX, XLSX or TXT · up to 25 MB each · ", /* @__PURE__ */ React.createElement("a", null, "browse")), onClick: () => input.current && input.current.click() }), /* @__PURE__ */ React.createElement("input", { ref: input, type: "file", multiple: true, accept: ".pdf,.docx,.xlsx,.txt", "aria-label": "Choose documents", style: { display: "none" }, onChange: (e) => {
+        add(e.target.files);
+        e.target.value = "";
+      } })), /* @__PURE__ */ React.createElement("div", { className: "el-stack-2" }, list.map((f) => /* @__PURE__ */ React.createElement("div", { key: f.n, className: "el-row-3", style: { padding: "10px 12px", border: "1px solid " + (f.err ? "var(--danger)" : "var(--line)"), background: f.err ? "var(--danger-soft)" : void 0, borderRadius: 8, alignItems: "flex-start" } }, /* @__PURE__ */ React.createElement(FileIcon, { type: f.t }), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { className: "el-between" }, /* @__PURE__ */ React.createElement("span", { className: "el-sm el-strong el-truncate" }, f.n), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, f.s)), f.err ? /* @__PURE__ */ React.createElement("div", { className: "el-xs", style: { color: "var(--danger)", marginTop: 4, display: "flex", gap: 6 } }, /* @__PURE__ */ React.createElement(Icon, { name: "alert", size: 13 }), f.err) : /* @__PURE__ */ React.createElement(ProgressBar, { value: 100, tone: "success", style: { height: 4, marginTop: 8 } })), /* @__PURE__ */ React.createElement(IconButton, { icon: f.err ? "x" : "check", label: "Remove " + f.n, size: "sm", onClick: () => remove(f.n) })))), /* @__PURE__ */ React.createElement(Alert, { tone: "info", title: "Adding a web page instead?" }, "Use ", /* @__PURE__ */ React.createElement("a", { href: "add-website-link.html" }, "Add website link"), ". Web pages are read and refreshed on a schedule, which documents are not."))
+    );
+    return /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "documents", role: "Admin", overlay: modal }, /* @__PURE__ */ React.createElement(PageHeader, { title: "Knowledge base", description: "The documents and web pages ELIA answers customers from.", actions: /* @__PURE__ */ React.createElement(KbActions, null) }), /* @__PURE__ */ React.createElement(Card, { style: { height: 600 } }));
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(/* @__PURE__ */ React.createElement(Page, null));
+})();
+</script>
+</body>
+</html>

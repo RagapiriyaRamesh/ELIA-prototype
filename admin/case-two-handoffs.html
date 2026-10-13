@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Case · two handoffs (2nd live) · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Avatar, StatusBadge, Badge, Button, Icon, IconButton, Card, Timeline, DescriptionList, Tabs, Switch, ChatBubble, SystemMessage, Dropzone, FileIcon, ProgressBar, Select, Field, Input, Alert } = window.Elia;
+  const { useState } = React;
+  const INITIAL = { tab: "overview" };
+  const D = {
+    "handoff": true,
+    "name": "Kumari Dissanayake",
+    "id": "CS-1038",
+    "status": "ASSIGNED",
+    "statusLabel": "With support",
+    "started": "Today 09:50",
+    "phone": "+94 77 555 4108",
+    "line": "Resale valuation · started 09:50 · second handoff in progress with Malini Jayawardena",
+    "nowLabel": "Right now",
+    "nowTitle": "Malini Jayawardena is chatting with her on WhatsApp",
+    "nowText": "Kumari asked for a person a second time at 10:05, about the bank valuation letter. Malini accepted at 10:06. The first handoff (Chamod Silva) is finished and his report is below.",
+    "nowTone": "accent",
+    "nowIcon": "headset",
+    "nowBadge": "2nd handoff",
+    "timelineSub": "Newest at the bottom",
+    "timeline": [
+      {
+        "icon": "chat",
+        "tone": "brand",
+        "title": "Customer started a chat about a resale valuation",
+        "meta": "09:50 · case CS-1038 created · ELIA answered from Resale-Valuation-Guide.pdf"
+      },
+      {
+        "icon": "chat",
+        "tone": "brand",
+        "title": "Customer asked for a person (1st time)",
+        "meta": '09:52:10 · "Can I speak to someone about the valuation fee first?"'
+      },
+      {
+        "icon": "send",
+        "tone": "accent",
+        "title": "ELIA assigned the case to Chamod Silva",
+        "meta": "09:52:12 · chat summary, customer details and case link sent on WhatsApp"
+      },
+      {
+        "icon": "check",
+        "tone": "success",
+        "title": "Chamod accepted and contacted her on WhatsApp",
+        "meta": "09:54:18 · direct chat, not shown in ELIA"
+      },
+      {
+        "icon": "file",
+        "tone": "success",
+        "title": "Chamod submitted his report with a file",
+        "meta": "10:03:20 · outcome: needs an appointment"
+      },
+      {
+        "icon": "send",
+        "tone": "brand",
+        "title": "ELIA took the next step",
+        "meta": "10:03:40 · offered valuation times with Kavin Rajan · waiting for her reply"
+      },
+      {
+        "icon": "chat",
+        "tone": "brand",
+        "title": "Customer asked for a person again (2nd time)",
+        "meta": '10:05:20 · "will the bank accept your valuation letter?"'
+      },
+      {
+        "icon": "send",
+        "tone": "accent",
+        "title": "ELIA assigned the case to Malini Jayawardena",
+        "meta": "10:05:22 · chat summary, first report and case link sent on WhatsApp"
+      },
+      {
+        "icon": "check",
+        "tone": "success",
+        "title": "Malini accepted and contacted her on WhatsApp",
+        "meta": "10:06:21 · direct chat, not shown in ELIA · chatting now"
+      }
+    ],
+    "rounds": [
+      {
+        "state": "done",
+        "support": "Chamod Silva",
+        "supportRole": "Support team",
+        "supportTimes": [
+          {
+            "label": "Assigned",
+            "value": "09:52"
+          },
+          {
+            "label": "Accepted",
+            "value": "09:54"
+          },
+          {
+            "label": "Report",
+            "value": "10:03"
+          }
+        ],
+        "reportBy": "Written by Chamod Silva · 10:03",
+        "report": [
+          {
+            "label": "Outcome",
+            "value": /* @__PURE__ */ React.createElement(Badge, { tone: "warning", dot: true }, "Needs an appointment")
+          },
+          {
+            "label": "What was discussed",
+            "value": "Valuation is free for owners selling through Harbour View. The visit takes 30 minutes and a written estimate follows within 24 hours."
+          },
+          {
+            "label": "Next step for ELIA",
+            "value": "Offer resale valuation times with Kavin Rajan"
+          },
+          {
+            "label": "Message ELIA sent",
+            "value": '"Hi Kumari, Chamod has noted you would like a resale valuation. Would Friday at 11:00 suit you with Kavin Rajan?"'
+          }
+        ],
+        "file": {
+          "name": "Report-CS-1038-Chamod.pdf",
+          "size": "212 KB"
+        }
+      },
+      {
+        "state": "live",
+        "support": "Malini Jayawardena",
+        "supportRole": "Support team",
+        "supportTimes": [
+          {
+            "label": "Assigned",
+            "value": "10:05"
+          },
+          {
+            "label": "Accepted",
+            "value": "10:06"
+          },
+          {
+            "label": "Report",
+            "value": "After the chat"
+          }
+        ]
+      }
+    ],
+    "feedback": /* @__PURE__ */ React.createElement("div", { className: "el-row el-sm el-muted" }, /* @__PURE__ */ React.createElement(Icon, { name: "clock", size: 15 }), "Not asked yet. ELIA asks once the case is resolved."),
+    "need": "Wants to sell her apartment through Harbour View and book a resale valuation.",
+    "brief": "Kumari wants to sell her apartment through Harbour View. ELIA explained the valuation visit (30 minutes, written estimate within 24 hours). Her first request for a person was handled by Chamod (report on file) and ELIA then offered valuation times. She asked for a person again about whether banks accept the valuation letter.",
+    "doubts": "Will the bank accept the valuation letter? How long does the written estimate take?",
+    "chat": [
+      {
+        "sys": true,
+        "icon": "calendar",
+        "text": "Wednesday 8 October"
+      },
+      {
+        "from": "customer",
+        "author": "Kumari Dissanayake",
+        "text": "I want to sell my apartment through you. How does the valuation work?",
+        "time": "09:50"
+      },
+      {
+        "from": "ai",
+        "text": "A sales assistant inspects the unit and gives a written estimate within 24 hours. The visit takes about 30 minutes. Shall I book one?",
+        "time": "09:50",
+        "actions": [
+          "Book a valuation",
+          "Talk to a person"
+        ]
+      },
+      {
+        "from": "customer",
+        "author": "Kumari Dissanayake",
+        "text": "Can I speak to someone about the valuation fee first?",
+        "time": "09:52"
+      },
+      {
+        "from": "ai",
+        "text": "Thanks for waiting, Kumari. One of our support team will contact you here on WhatsApp shortly.",
+        "time": "09:52"
+      },
+      {
+        "sys": true,
+        "icon": "headset",
+        "text": "1st handoff · Chamod Silva accepted at 09:54 · continued directly on WhatsApp, not shown here"
+      },
+      {
+        "sys": true,
+        "icon": "file",
+        "text": "Support report received 10:03 (file attached) · ELIA resumed at 10:03"
+      },
+      {
+        "from": "ai",
+        "text": "Hi Kumari, Chamod has noted you would like a resale valuation. Would Friday at 11:00 suit you with Kavin Rajan?",
+        "time": "10:03",
+        "actions": [
+          "Fri 10 Oct · 11:00",
+          "Another time"
+        ]
+      },
+      {
+        "from": "customer",
+        "author": "Kumari Dissanayake",
+        "text": "Before I book, will the bank accept your valuation letter? Can I speak to someone?",
+        "time": "10:05"
+      },
+      {
+        "from": "ai",
+        "text": "Good question, Kumari. I will ask a person to help you with that. Please wait a moment.",
+        "time": "10:05"
+      },
+      {
+        "sys": true,
+        "icon": "headset",
+        "text": "2nd handoff · Malini Jayawardena accepted at 10:06 · continued directly on WhatsApp, not shown here"
+      }
+    ],
+    "thread": [
+      {
+        "sys": true,
+        "icon": "headset",
+        "text": "1st handoff · 09:52 · Kumari asked for a person"
+      },
+      {
+        "from": "ai",
+        "text": "New customer for you.\nKumari Dissanayake · +94 77 555 4108\nChat summary: she wants to sell her apartment through Harbour View. ELIA explained the valuation visit (30 minutes, written estimate within 24 hours). She then asked about the valuation fee.\nShe needs: a resale valuation and the fee explained.\nOpen the case: harbourview.elia.app/case/CS-1038\nAccept, contact her on WhatsApp, then write your report from the case link.",
+        "time": "09:52",
+        "actions": [
+          "Accept and connect"
+        ]
+      },
+      {
+        "sys": true,
+        "icon": "send",
+        "text": "09:52 · ELIA assigned the case to Chamod Silva (available) · brief and case link sent"
+      },
+      {
+        "from": "support",
+        "author": "Chamod Silva",
+        "text": "Accept and connect",
+        "time": "09:54"
+      },
+      {
+        "sys": true,
+        "icon": "check",
+        "text": "09:54 · Chamod accepted"
+      },
+      {
+        "sys": true,
+        "icon": "whatsapp",
+        "text": "09:54 – 10:00 · Chamod chatted with the customer directly on WhatsApp (not shown)"
+      },
+      {
+        "from": "ai",
+        "text": "How did it go with Kumari? Please write your report from the case link (you can attach a file): harbourview.elia.app/case/CS-1038",
+        "time": "10:00",
+        "actions": [
+          "Write report"
+        ]
+      },
+      {
+        "sys": true,
+        "icon": "file",
+        "text": "10:03 · Report submitted with a file: needs an appointment"
+      },
+      {
+        "sys": true,
+        "icon": "headset",
+        "text": "2nd handoff · 10:05 · Kumari asked for a person again"
+      },
+      {
+        "from": "ai",
+        "text": "New customer for you.\nKumari Dissanayake · +94 77 555 4108\nChat summary: she wants a resale valuation for her apartment. Chamod helped her earlier (his report is in the case). ELIA offered valuation times, then she asked whether banks accept the valuation letter.\nShe needs: confirmation that banks accept the letter.\nOpen the case: harbourview.elia.app/case/CS-1038\nAccept, contact her on WhatsApp, then write your report from the case link.",
+        "time": "10:05",
+        "actions": [
+          "Accept and connect"
+        ]
+      },
+      {
+        "sys": true,
+        "icon": "send",
+        "text": "10:05 · ELIA assigned the case to Malini Jayawardena (available) · brief and case link sent"
+      },
+      {
+        "from": "support",
+        "author": "Malini Jayawardena",
+        "text": "Accept and connect",
+        "time": "10:06"
+      },
+      {
+        "sys": true,
+        "icon": "check",
+        "text": "10:06 · Malini accepted"
+      },
+      {
+        "from": "ai",
+        "text": "Thanks Malini. Her WhatsApp is +94 77 555 4108. Chamod helped her earlier; his report is in the case. When you finish, write your report from the case link.",
+        "time": "10:06"
+      }
+    ],
+    "outcomeTitle": "Outcome",
+    "outcomeSub": "What ELIA did without help from a person",
+    "aloneNote": "ELIA handled this case alone",
+    "noBooking": "No booking was made."
+  };
+  const ORD = ["1st", "2nd", "3rd", "4th"];
+  function Tl({ items }) {
+    return /* @__PURE__ */ React.createElement(Timeline, { items });
+  }
+  function Transcript({ items }) {
+    return /* @__PURE__ */ React.createElement("div", { className: "el-chat is-wide" }, items.map((m, i) => m.sys ? /* @__PURE__ */ React.createElement(SystemMessage, { key: i, icon: m.icon }, m.text) : /* @__PURE__ */ React.createElement(ChatBubble, { key: i, from: m.from === "support" ? "customer" : m.from, author: m.from === "customer" || m.from === "support" ? m.author : void 0, text: m.text, time: m.time, status: m.from === "ai" ? "read" : void 0, actions: m.actions })));
+  }
+  function FileRow({ f }) {
+    return /* @__PURE__ */ React.createElement("span", { className: "el-row", style: { gap: 8 } }, /* @__PURE__ */ React.createElement(FileIcon, { type: "pdf" }), /* @__PURE__ */ React.createElement("span", { className: "el-sm el-strong" }, f.name), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, f.size), /* @__PURE__ */ React.createElement("a", { className: "el-sm", style: { cursor: "pointer" } }, "Download"));
+  }
+  function RoundReport({ r, i, n }) {
+    const tag = n > 1 ? " · " + ORD[i] + " handoff" : "";
+    if (r.state === "done") {
+      const items = r.report.concat(r.file ? [{ label: "Report file", value: /* @__PURE__ */ React.createElement(FileRow, { f: r.file }) }] : []);
+      return /* @__PURE__ */ React.createElement(Card, { title: "Support report" + tag, subtitle: r.reportBy, actions: /* @__PURE__ */ React.createElement(Badge, { tone: "success", icon: "check" }, "Submitted") }, /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 150, items }));
+    }
+    if (r.state === "due") {
+      return /* @__PURE__ */ React.createElement(Card, { title: "Report due" + tag, subtitle: "Required after every handoff · no time limit", actions: /* @__PURE__ */ React.createElement(Badge, { tone: "warning", icon: "file" }, "Waiting for report") }, /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary", style: { marginBottom: 14 } }, r.support, " chatted with ", D.name, " directly on WhatsApp, so ELIA cannot see it. The report is written from this case link. ELIA carries on with the customer from it."), /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { gap: 12 } }, /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, "Every field is required except the report file, which is an optional attachment."), /* @__PURE__ */ React.createElement(Button, { variant: "primary", icon: "file", onClick: () => {
+        window.location.href = "support-report.html";
+      } }, "Write report")));
+    }
+    if (r.state === "live") {
+      return /* @__PURE__ */ React.createElement(Card, { title: "Support report" + tag, subtitle: "After the chat ends" }, /* @__PURE__ */ React.createElement("div", { className: "el-row el-sm el-muted", style: { alignItems: "flex-start" } }, /* @__PURE__ */ React.createElement(Icon, { name: "clock", size: 15 }), r.support, " is chatting with ", D.name, " now. When the chat ends, ", r.support.split(" ")[0], " writes the report from this case link, with an optional file attached. ELIA continues from it."));
+    }
+    return /* @__PURE__ */ React.createElement(Card, { title: "Assigned to " + r.sentTo[0] + tag, subtitle: r.waitSub }, /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 10 } }, /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary" }, r.waitText), /* @__PURE__ */ React.createElement("div", { className: "el-row", style: { gap: 8, flexWrap: "wrap" } }, r.sentTo.map((p) => /* @__PURE__ */ React.createElement("span", { key: p, className: "el-row", style: { gap: 6, border: "1px solid var(--line)", borderRadius: 999, padding: "3px 10px 3px 4px" } }, /* @__PURE__ */ React.createElement(Avatar, { name: p, size: "xs" }), /* @__PURE__ */ React.createElement("span", { className: "el-sm" }, p))))));
+  }
+  function RoundSide({ r, i, n }) {
+    const tag = n > 1 ? " · " + ORD[i] + " handoff" : "";
+    if (r.state === "waiting") {
+      return /* @__PURE__ */ React.createElement(Card, { title: "Support person" + tag }, /* @__PURE__ */ React.createElement("div", { className: "el-row-3" }, /* @__PURE__ */ React.createElement(Avatar, { name: r.sentTo[0], size: "lg" }), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-strong" }, r.sentTo[0]), /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted" }, "Support team · has not accepted yet"))), /* @__PURE__ */ React.createElement("hr", { className: "el-divider", style: { margin: "14px 0" } }), /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 92, items: r.supportTimes }));
+    }
+    return /* @__PURE__ */ React.createElement(Card, { title: "Support person" + tag }, /* @__PURE__ */ React.createElement("div", { className: "el-row-3" }, /* @__PURE__ */ React.createElement(Avatar, { name: r.support, size: "lg" }), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-strong" }, r.support), /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted" }, r.supportRole))), /* @__PURE__ */ React.createElement("hr", { className: "el-divider", style: { margin: "14px 0" } }), /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 92, items: r.supportTimes }));
+  }
+  function Case() {
+    const [tab, setTab] = useState(INITIAL.tab);
+    const R = D.rounds || [];
+    const [show, setShow] = useState(D.handoff);
+    const [copied, setCopied] = useState(false);
+    const hasThread = D.handoff && D.thread && D.thread.length > 0;
+    const items = [{ id: "overview", label: "Overview" }, { id: "chat", label: "Customer chat" }].concat(show && hasThread ? [{ id: "support", label: "Agent and support" }] : []);
+    const cur = tab === "support" && !(show && hasThread) ? "overview" : tab;
+    return /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "cases", role: "Admin", minHeight: 1e3 }, /* @__PURE__ */ React.createElement(
+      PageHeader,
+      {
+        breadcrumbs: [["Cases", "cases.html"], D.id],
+        title: D.name,
+        badge: /* @__PURE__ */ React.createElement("span", { className: "el-row" }, /* @__PURE__ */ React.createElement(StatusBadge, { status: D.status, label: D.statusLabel }), /* @__PURE__ */ React.createElement("span", { className: "el-mono el-muted", style: { fontSize: 13 } }, D.id)),
+        description: D.line,
+        actions: /* @__PURE__ */ React.createElement("span", { className: "el-row", style: { gap: 16 } }, hasThread ? /* @__PURE__ */ React.createElement(Switch, { checked: show, onChange: setShow, label: /* @__PURE__ */ React.createElement("span", { className: "el-sm" }, "Show agent chat with support") }) : /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted el-row" }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 14 }), D.handoff ? "Support chats are on direct WhatsApp" : D.aloneNote), /* @__PURE__ */ React.createElement(Button, { href: "conversation-profile.html", icon: "user" }, "Profile"))
+      }
+    ), /* @__PURE__ */ React.createElement(Tabs, { value: cur, onChange: setTab, items, style: { marginBottom: 20 } }), cur === "overview" ? /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "minmax(0, 1fr) 380px", gap: 20, alignItems: "start" } }, /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 20 } }, D.dueFirst ? R.map((r, i) => r.state === "due" ? /* @__PURE__ */ React.createElement(RoundReport, { key: "d" + i, r, i, n: R.length }) : null) : null, /* @__PURE__ */ React.createElement(Card, { title: "What happened", subtitle: D.timelineSub }, /* @__PURE__ */ React.createElement(Tl, { items: D.timeline })), D.handoff ? R.map((r, i) => D.dueFirst && r.state === "due" ? null : /* @__PURE__ */ React.createElement(RoundReport, { key: i, r, i, n: R.length })) : /* @__PURE__ */ React.createElement(Card, { title: D.outcomeTitle, subtitle: D.outcomeSub }, /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 150, items: D.outcome })), /* @__PURE__ */ React.createElement(Card, { title: "Customer feedback", subtitle: "Asked by ELIA at the end of the case" }, D.feedback)), /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 20 } }, /* @__PURE__ */ React.createElement(Card, { title: D.handoff ? "Brief sent to support" : "Summary", subtitle: D.handoff ? "Sent on WhatsApp when the case was assigned" : void 0, icon: "sparkle" }, /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 14 } }, D.handoff ? /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-section-title", style: { marginBottom: 4 } }, "Chat summary"), /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary" }, D.brief)) : null, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-section-title", style: { marginBottom: 4 } }, D.handoff ? "What they need from support" : "What they need"), /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary" }, D.need)), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-section-title", style: { marginBottom: 4 } }, "Questions and doubts"), /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary" }, D.doubts)), D.handoff ? /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { marginBottom: 6 } }, /* @__PURE__ */ React.createElement("span", { className: "el-section-title" }, "Case link for support"), /* @__PURE__ */ React.createElement(Button, { size: "sm", icon: copied ? "check" : "copy", onClick: () => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } }, copied ? "Copied" : "Copy")), /* @__PURE__ */ React.createElement("div", { className: "el-mono el-sm", style: { border: "1px solid var(--line)", background: "var(--surface-sunken)", borderRadius: 8, padding: "7px 10px", fontSize: 12.5 } }, "harbourview.elia.app/case/", D.id), /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted", style: { marginTop: 6 } }, "Opens this case for the support person. They write their report from it.")) : null)), /* @__PURE__ */ React.createElement(Card, { title: "Customer" }, /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 92, items: [{ label: "Name", value: D.name }, { label: "Phone", value: D.phone }, { label: "Asked about", value: D.line.split(" · ")[0] }, { label: "Started", value: D.started }] })), D.handoff ? R.map((r, i) => /* @__PURE__ */ React.createElement(RoundSide, { key: i, r, i, n: R.length })) : /* @__PURE__ */ React.createElement(Card, { title: D.booking ? "Linked booking" : "Booking" }, D.booking ? /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { alignItems: "flex-start", gap: 8 } }, /* @__PURE__ */ React.createElement("span", { className: "el-strong" }, D.booking.s), /* @__PURE__ */ React.createElement(StatusBadge, { status: D.booking.st, size: "sm" })), /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary", style: { marginTop: 8 } }, D.booking.when), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 10 } }, /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted el-mono" }, D.booking.id))) : /* @__PURE__ */ React.createElement("div", { className: "el-sm el-muted" }, D.noBooking)))) : null, cur === "chat" ? /* @__PURE__ */ React.createElement("div", { className: "el-card", style: { overflow: "hidden" } }, /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { padding: "12px 20px", borderBottom: "1px solid var(--line)" } }, /* @__PURE__ */ React.createElement("span", { className: "el-sm el-strong" }, "Customer chat with ELIA"), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, "Read-only", D.handoff ? " · the support person's WhatsApp chat is not shown" : "")), /* @__PURE__ */ React.createElement(Transcript, { items: D.chat })) : null, cur === "support" ? /* @__PURE__ */ React.createElement("div", { className: "el-card", style: { overflow: "hidden" } }, /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { padding: "12px 20px", borderBottom: "1px solid var(--line)" } }, /* @__PURE__ */ React.createElement("span", { className: "el-sm el-strong" }, "ELIA with support, on WhatsApp"), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, "Offers, accepts, reminders and the report. Their chat with the customer is not included.")), /* @__PURE__ */ React.createElement(Transcript, { items: D.thread })) : null);
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(/* @__PURE__ */ React.createElement(Case, null));
+})();
+</script>
+</body>
+</html>

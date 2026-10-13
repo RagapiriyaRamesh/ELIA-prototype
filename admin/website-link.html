@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Website link detail · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, Card, Table, Toolbar, Input, FilterChip, CellMain, StatusBadge, Icon, IconButton, Pagination, Tabs, StatCard, FileIcon, ProgressBar, Toast, Menu, Modal, Dropzone, Field, Select, Switch, Alert, Badge, Checkbox, Radio, DescriptionList } = window.Elia;
+  const { useState } = React;
+  const pages = [
+    ["/offers", "Current offers · Harbour View Homes", "Today 06:00", "Indexed"],
+    ["/offers/early-bird", "Early-bird launch offer", "Today 06:00", "Indexed"],
+    ["/offers/bank-partners", "Bank partner offers", "Today 06:00", "Indexed"],
+    ["/offers/referral", "Referral rewards", "Today 06:00", "Indexed"]
+  ].map(([id, l, t, s]) => ({ id, l, t, s }));
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "documents", role: "Admin", minHeight: 980 }, /* @__PURE__ */ React.createElement(
+      PageHeader,
+      {
+        breadcrumbs: [["Knowledge base", "website-links.html"], "harbourview.lk/offers"],
+        title: /* @__PURE__ */ React.createElement("span", { className: "el-row-3" }, /* @__PURE__ */ React.createElement(FileIcon, { type: "url" }), "harbourview.lk/offers"),
+        badge: /* @__PURE__ */ React.createElement(StatusBadge, { status: "INDEXED" }),
+        description: "Website link · 4 pages read · added by Pavithiran S on 2 days ago · refreshes daily at 06:00",
+        actions: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Button, { icon: "link" }, "Open page"), /* @__PURE__ */ React.createElement(Button, { icon: "refresh" }, "Refresh now"), /* @__PURE__ */ React.createElement(Button, { href: "add-website-link.html", icon: "swap" }, "Replace link"), /* @__PURE__ */ React.createElement(Button, { href: "website-links.html", variant: "danger-soft", icon: "trash" }, "Remove"))
+      }
+    ), /* @__PURE__ */ React.createElement("div", { className: "el-grid", style: { gridTemplateColumns: "minmax(0, 1.7fr) minmax(0, 1fr)" } }, /* @__PURE__ */ React.createElement("div", { className: "el-stack-5" }, /* @__PURE__ */ React.createElement(Card, { title: "Pages ELIA reads", subtitle: "Found from the address, updated on each refresh", padded: false, actions: /* @__PURE__ */ React.createElement(Badge, { tone: "success", icon: "check" }, "4 of 4 indexed") }, /* @__PURE__ */ React.createElement(Table, { dense: true, columns: [
+      { key: "id", label: "Page", width: 190, render: (r) => /* @__PURE__ */ React.createElement("span", { className: "el-mono el-sm" }, r.id) },
+      { key: "l", label: "Title" },
+      { key: "t", label: "Last read", width: 130 },
+      { key: "s", label: "Status", width: 110, render: (r) => /* @__PURE__ */ React.createElement(StatusBadge, { status: "INDEXED", size: "sm" }) }
+    ], rows: pages })), /* @__PURE__ */ React.createElement(Card, { title: "What changed on the last refresh", subtitle: "Today, 06:00" }, /* @__PURE__ */ React.createElement("div", { className: "el-stack-2 el-sm" }, /* @__PURE__ */ React.createElement("div", { className: "el-row" }, /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 14, className: "el-muted" }), "“Early-bird launch offer” was updated: the closing date moved to 31 Oct."), /* @__PURE__ */ React.createElement("div", { className: "el-row" }, /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 14, className: "el-muted" }), "No pages were removed or became unreachable.")))), /* @__PURE__ */ React.createElement("div", { className: "el-stack-5" }, /* @__PURE__ */ React.createElement(Card, { title: "Details" }, /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 120, items: [
+      { label: "Web address", value: "https://harbourview.lk/offers" },
+      { label: "Reads", value: "This page and pages linked from it" },
+      { label: "Refreshes", value: "Daily at 06:00" },
+      { label: "Last refreshed", value: "Today, 06:00" },
+      { label: "Added by", value: "Pavithiran S" },
+      { label: "Times used", value: "214 answers this week" }
+    ] })), /* @__PURE__ */ React.createElement(Card, { title: "History" }, /* @__PURE__ */ React.createElement("div", { className: "el-stack-2 el-sm" }, /* @__PURE__ */ React.createElement("div", { className: "el-between" }, /* @__PURE__ */ React.createElement("span", null, "Refreshed automatically"), /* @__PURE__ */ React.createElement("span", { className: "el-muted" }, "Today")), /* @__PURE__ */ React.createElement("div", { className: "el-between" }, /* @__PURE__ */ React.createElement("span", null, "Refreshed automatically"), /* @__PURE__ */ React.createElement("span", { className: "el-muted" }, "Yesterday")), /* @__PURE__ */ React.createElement("div", { className: "el-between" }, /* @__PURE__ */ React.createElement("span", null, "Added by Pavithiran S"), /* @__PURE__ */ React.createElement("span", { className: "el-muted" }, "7 Oct")))))))
+  );
+})();
+</script>
+</body>
+</html>

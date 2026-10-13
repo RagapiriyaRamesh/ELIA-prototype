@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Processing failed · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, Card, Stepper, DescriptionList, StatusBadge, Alert, Badge, FileIcon, Icon } = window.Elia;
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "documents", role: "Admin", minHeight: 860 }, /* @__PURE__ */ React.createElement(
+      PageHeader,
+      {
+        breadcrumbs: [["Knowledge base", "documents.html"], "Payment-Plans-2025.pdf"],
+        title: /* @__PURE__ */ React.createElement("span", { className: "el-row-3" }, /* @__PURE__ */ React.createElement(FileIcon, { type: "pdf" }), "Payment-Plans-2025.pdf"),
+        badge: /* @__PURE__ */ React.createElement(StatusBadge, { status: "FAILED" }),
+        description: "PDF · 5.1 MB · uploaded by Ishara Silva yesterday at 16:40",
+        actions: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Button, { icon: "download" }, "Download"), /* @__PURE__ */ React.createElement(Button, { href: "replace-document.html", icon: "upload" }, "Replace file"), /* @__PURE__ */ React.createElement(Button, { href: "document.html", variant: "primary", icon: "refresh" }, "Re-index"))
+      }
+    ), /* @__PURE__ */ React.createElement("div", { className: "el-grid", style: { gridTemplateColumns: "minmax(0, 1.7fr) minmax(0, 1fr)" } }, /* @__PURE__ */ React.createElement("div", { className: "el-stack-5" }, /* @__PURE__ */ React.createElement(Alert, { tone: "danger", title: "ELIA couldn't read this document", action: /* @__PURE__ */ React.createElement(Button, { href: "document.html", size: "sm", icon: "refresh" }, "Re-index") }, "The file uploaded fine, but the pages are scanned images and the text could not be extracted. Customers won't get answers from this document until it is fixed."), /* @__PURE__ */ React.createElement(Card, { title: "Processing", subtitle: "Stopped at step 2 of 4", actions: /* @__PURE__ */ React.createElement(Badge, { tone: "danger", icon: "x" }, "Failed") }, /* @__PURE__ */ React.createElement(Stepper, { steps: [
+      { label: "Uploaded", status: "done", meta: "Yesterday 16:40" },
+      { label: "Text read", status: "error", meta: "No readable text on 12 of 12 pages" },
+      { label: "Split into sections", status: "pending" },
+      { label: "Indexed", status: "pending" }
+    ] })), /* @__PURE__ */ React.createElement(Card, { title: "What you can try", icon: "info" }, /* @__PURE__ */ React.createElement("div", { className: "el-stack-2 el-sm" }, /* @__PURE__ */ React.createElement("div", { className: "el-row" }, /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 14, className: "el-muted" }), "Re-index — sometimes a temporary problem clears on its own."), /* @__PURE__ */ React.createElement("div", { className: "el-row" }, /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 14, className: "el-muted" }), "Replace the file with a text-based PDF, or export the original as DOCX."), /* @__PURE__ */ React.createElement("div", { className: "el-row" }, /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 14, className: "el-muted" }), "Remove it if the content is out of date.")))), /* @__PURE__ */ React.createElement(Card, { title: "Details" }, /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 120, items: [
+      { label: "File type", value: "PDF" },
+      { label: "Size", value: "5.1 MB · 12 pages" },
+      { label: "Uploaded by", value: "Ishara Silva" },
+      { label: "Uploaded", value: "Yesterday, 16:40" },
+      { label: "Last attempt", value: "Yesterday, 16:44" },
+      { label: "Attempts", value: "2" }
+    ] }))))
+  );
+})();
+</script>
+</body>
+</html>

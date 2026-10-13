@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Add website link · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, Card, Table, Toolbar, Input, FilterChip, CellMain, StatusBadge, Icon, IconButton, Pagination, Tabs, StatCard, FileIcon, ProgressBar, Toast, Menu, Modal, Dropzone, Field, Select, Switch, Alert, Badge, Checkbox, Radio, DescriptionList } = window.Elia;
+  const { useState } = React;
+  function readKb(key) {
+    try {
+      return JSON.parse(sessionStorage.getItem(key) || "[]");
+    } catch (e) {
+      return [];
+    }
+  }
+  function writeKb(key, add) {
+    try {
+      sessionStorage.setItem(key, JSON.stringify(add.concat(readKb(key))));
+    } catch (e) {
+    }
+  }
+  function setFlash(f) {
+    try {
+      sessionStorage.setItem("elia.kb.flash", JSON.stringify(f));
+    } catch (e) {
+    }
+  }
+  function KbActions() {
+    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Button, { icon: "link", onClick: () => {
+      window.location.href = "add-website-link.html";
+    } }, "Add website link"), /* @__PURE__ */ React.createElement(Button, { variant: "primary", icon: "upload", onClick: () => {
+      window.location.href = "upload.html";
+    } }, "Upload document"));
+  }
+  const EXISTING = ["harbourview.lk/offers", "harbourview.lk/projects/sea-view", "harbourview.lk/projects/garden-villa", "harbourview.lk/payment-plans", "harbourview.lk/faq", "harbourview.lk/handover", "harbourview.lk/contact", "harbourview.lk/news"];
+  const SCHED = { "Daily at 06:00": "Daily 06:00", "Weekly on Monday": "Weekly · Monday", "Monthly on the 1st": "Monthly · 1st", "Never (read once)": "Read once" };
+  function parse(u) {
+    if (!u) return null;
+    try {
+      const x = new URL(/^https?:\/\//i.test(u) ? u : "https://" + u);
+      if (!/\.[a-z]{2,}$/i.test(x.hostname)) return null;
+      const host = x.hostname.replace(/^www\./, "");
+      const path = x.pathname.replace(/\/$/, "");
+      const seg = path.split("/").filter(Boolean).pop();
+      const nice = seg ? seg.replace(/[-_]/g, " ").replace(/^./, (c) => c.toUpperCase()) : "Home page";
+      return { label: host + path, path: path || "/", title: nice + " · " + (host === "harbourview.lk" ? "Harbour View Homes" : host), n: 2 + path.length % 8 };
+    } catch (e) {
+      return null;
+    }
+  }
+  function Page() {
+    const [url, setUrl] = useState("");
+    const [scope, setScope] = useState("linked");
+    const [refresh, setRefresh] = useState("Daily at 06:00");
+    const p = parse(url.trim());
+    const dup = p && (EXISTING.indexOf(p.label) >= 0 || readKb("elia.kb.links").some((l) => l.u === p.label));
+    const state = !url.trim() ? "empty" : !p ? "bad" : dup ? "dup" : "ok";
+    const n = scope === "linked" && p ? p.n : 1;
+    const addLink = () => {
+      if (state !== "ok") return;
+      writeKb("elia.kb.links", [{ u: p.label, t: p.title, pages: n, sch: SCHED[refresh] }]);
+      setFlash({ tone: "success", title: p.label + " added", description: "ELIA is reading " + (n === 1 ? "the page" : n + " pages") + " now. It will show Indexed when it is ready." });
+      window.location.href = "website-links.html";
+    };
+    const choice = (id, title, hint) => /* @__PURE__ */ React.createElement("div", { className: "el-evidence", onClick: () => setScope(id), style: { flexDirection: "row", alignItems: "flex-start", gap: 12, cursor: "pointer", borderColor: scope === id ? "var(--brand)" : void 0, background: scope === id ? "var(--brand-soft)" : void 0 } }, /* @__PURE__ */ React.createElement(Radio, { checked: scope === id }), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-strong el-sm" }, title), /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted" }, hint)));
+    const modal = /* @__PURE__ */ React.createElement(
+      Modal,
+      {
+        closeHref: "website-links.html",
+        width: 640,
+        icon: "link",
+        title: "Add website link",
+        description: "ELIA reads the page and keeps it up to date.",
+        footer: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted el-row", style: { marginRight: "auto" } }, /* @__PURE__ */ React.createElement(Icon, { name: "shield", size: 13 }), "Only public pages can be added"), /* @__PURE__ */ React.createElement(Button, { href: "website-links.html" }, "Cancel"), /* @__PURE__ */ React.createElement(Button, { variant: "primary", icon: "plus", disabled: state !== "ok", onClick: addLink }, "Add website link"))
+      },
+      /* @__PURE__ */ React.createElement("div", { className: "el-stack-5" }, /* @__PURE__ */ React.createElement(Field, { label: "Web address", required: true, hint: "Paste the full address of the page.", error: state === "bad" ? "That doesn’t look like a web address. Try something like https://example.lk/page." : state === "dup" ? "This page is already in your knowledge base." : null }, /* @__PURE__ */ React.createElement(Input, { icon: "link", value: url, placeholder: "https://", invalid: state === "bad" || state === "dup", onChange: (e) => setUrl(e.target.value), "aria-label": "Web address" })), state === "ok" ? /* @__PURE__ */ React.createElement("div", { className: "el-row el-sm", style: { gap: 8, color: "var(--success)" } }, /* @__PURE__ */ React.createElement(Icon, { name: "checkcircle", size: 16 }), "Page found: “", p.title, "” · ", p.n, " pages linked from it") : null, /* @__PURE__ */ React.createElement("div", { className: "el-stack-2" }, /* @__PURE__ */ React.createElement("div", { className: "el-section-title" }, "What should ELIA read?"), choice("linked", "This page and the pages linked from it" + (p ? " on " + p.label.split("/")[0] : ""), p ? "Up to " + p.n + " pages found under " + p.path + "." : "Up to a few pages found under this address."), choice("single", "Only this page", "Ignore the pages it links to.")), /* @__PURE__ */ React.createElement("div", { className: "el-grid el-g2" }, /* @__PURE__ */ React.createElement(Field, { label: "Refresh", hint: "How often ELIA checks for changes." }, /* @__PURE__ */ React.createElement(Select, { options: ["Daily at 06:00", "Weekly on Monday", "Monthly on the 1st", "Never (read once)"], value: "Daily at 06:00", "aria-label": "Refresh", onChange: (e) => setRefresh(e.target.value) })), /* @__PURE__ */ React.createElement(Field, { label: "Added by" }, /* @__PURE__ */ React.createElement(Input, { defaultValue: "Pavithiran S", disabled: true }))))
+    );
+    return /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "documents", role: "Admin", overlay: modal }, /* @__PURE__ */ React.createElement(PageHeader, { title: "Knowledge base", description: "The documents and web pages ELIA answers customers from.", actions: /* @__PURE__ */ React.createElement(KbActions, null) }), /* @__PURE__ */ React.createElement(Card, { style: { height: 600 } }));
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(/* @__PURE__ */ React.createElement(Page, null));
+})();
+</script>
+</body>
+</html>

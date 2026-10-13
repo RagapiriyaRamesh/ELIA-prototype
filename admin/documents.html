@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Knowledge base · Documents · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, Card, Table, Toolbar, Input, FilterChip, CellMain, StatusBadge, Icon, IconButton, Pagination, Tabs, StatCard, FileIcon, ProgressBar, Toast, Menu, Modal, Dropzone, Field, Select, Switch, Alert, Badge, Checkbox, Radio, DescriptionList } = window.Elia;
+  const { useState } = React;
+  function RowMenu({ open: o0, items }) {
+    const [open, setOpen] = useState(!!o0);
+    return /* @__PURE__ */ React.createElement("span", { onClick: (e) => e.stopPropagation(), style: { position: "relative", display: "inline-block" } }, /* @__PURE__ */ React.createElement(IconButton, { icon: "more", label: "Actions", size: "sm", onClick: () => setOpen(!open) }), open ? /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", right: 0, top: 34, zIndex: 30 } }, /* @__PURE__ */ React.createElement(Menu, { style: { width: 170 }, items: items.map((it) => it === "-" ? it : Object.assign({}, it, { onClick: () => {
+      setOpen(false);
+      if (it.onClick) it.onClick();
+    } })) })) : null);
+  }
+  function readKb(key) {
+    try {
+      return JSON.parse(sessionStorage.getItem(key) || "[]");
+    } catch (e) {
+      return [];
+    }
+  }
+  function takeFlash() {
+    try {
+      const f = JSON.parse(sessionStorage.getItem("elia.kb.flash") || "null");
+      sessionStorage.removeItem("elia.kb.flash");
+      return f;
+    } catch (e) {
+      return null;
+    }
+  }
+  function KbStats({ nd = 0, nl = 0 }) {
+    return /* @__PURE__ */ React.createElement("div", { className: "el-grid el-g4", style: { marginBottom: 20 } }, /* @__PURE__ */ React.createElement(StatCard, { label: "Total sources", value: String(48 + nd + nl), hint: 40 + nd + " documents · " + (8 + nl) + " website links", icon: "file" }), /* @__PURE__ */ React.createElement(StatCard, { label: "Indexed", value: "46", hint: "ELIA can answer from these", icon: "checkcircle" }), /* @__PURE__ */ React.createElement(StatCard, { label: "Processing", value: String(1 + nd + nl), hint: "usually under 5 minutes", icon: "refresh" }), /* @__PURE__ */ React.createElement(StatCard, { label: "Failed", value: "1", hint: "needs your attention", icon: "alert" }));
+  }
+  function KbTabs({ value, nd = 0, nl = 0 }) {
+    return /* @__PURE__ */ React.createElement("div", { style: { padding: "0 20px" } }, /* @__PURE__ */ React.createElement(Tabs, { value, items: [{ id: "docs", label: "Documents", count: 40 + nd, href: "documents.html" }, { id: "links", label: "Website links", count: 8 + nl, href: "website-links.html" }] }));
+  }
+  function KbActions() {
+    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Button, { icon: "link", onClick: () => {
+      window.location.href = "add-website-link.html";
+    } }, "Add website link"), /* @__PURE__ */ React.createElement(Button, { variant: "primary", icon: "upload", onClick: () => {
+      window.location.href = "upload.html";
+    } }, "Upload document"));
+  }
+  const docs = [
+    { id: 1, n: "Unit-Pricing-2026.pdf", sz: "2.4 MB · 18 pages", t: "pdf", st: "INDEXED", u: "Pavithiran S", d: "Today, 09:12" },
+    { id: 2, n: "Stock-List-Oct.xlsx", sz: "640 KB · 3 sheets", t: "xlsx", st: "PROCESSING", p: 65, u: "Ishara Silva", d: "Today, 10:02" },
+    { id: 3, n: "Bank-Partners.xlsx", sz: "88 KB · 2 sheets", t: "xlsx", st: "INDEXED", u: "Ishara Silva", d: "Today, 09:48" },
+    { id: 4, n: "Warranty-Terms.docx", sz: "210 KB · 9 pages", t: "docx", st: "INDEXED", u: "Ishara Silva", d: "28 Sep" },
+    { id: 5, n: "Payment-Plans-2025.pdf", sz: "5.1 MB · scanned", t: "pdf", st: "FAILED", err: "Could not read the text in this scan", u: "Ishara Silva", d: "Yesterday" },
+    { id: 6, n: "Resale-Valuation-Guide.pdf", sz: "1.1 MB · 7 pages", t: "pdf", st: "INDEXED", u: "Ishara Silva", d: "2 Oct" },
+    { id: 7, n: "Sales-Gallery-FAQ.txt", sz: "12 KB", t: "txt", st: "INDEXED", u: "Pavithiran S", d: "21 Sep" }
+  ];
+  const DEMO = false;
+  function Page() {
+    const [dl, setDl] = useState(null);
+    const [added] = useState(() => readKb("elia.kb.docs"));
+    const nl = readKb("elia.kb.links").length;
+    const [flash, setFlashMsg] = useState(() => takeFlash());
+    React.useEffect(() => {
+      if (flash) {
+        const t = setTimeout(() => setFlashMsg(null), 4200);
+        return () => clearTimeout(t);
+      }
+    }, []);
+    const rows = added.map((a, i) => ({ id: 100 + i, n: a.n, sz: a.sz, t: a.t, st: "PROCESSING", p: 15, u: "Pavithiran S", d: "Just now" })).concat(docs);
+    const download = (n) => {
+      setDl(n);
+      setTimeout(() => setDl(null), 2600);
+    };
+    const view = (r) => {
+      window.location.href = r.st === "FAILED" ? "document-failed.html" : "document.html";
+    };
+    return /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "documents", role: "Admin", minHeight: 1170 }, /* @__PURE__ */ React.createElement(PageHeader, { title: "Knowledge base", description: "The documents and web pages ELIA answers customers from.", actions: /* @__PURE__ */ React.createElement(KbActions, null) }), /* @__PURE__ */ React.createElement(KbStats, { nd: added.length, nl }), /* @__PURE__ */ React.createElement(Card, { padded: false }, /* @__PURE__ */ React.createElement(KbTabs, { value: "docs", nd: added.length, nl }), /* @__PURE__ */ React.createElement(Toolbar, null, /* @__PURE__ */ React.createElement(Input, { icon: "search", size: "sm", placeholder: "Search documents", style: { width: 260 } }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Type" }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Status" }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Uploaded by" }), /* @__PURE__ */ React.createElement("span", { className: "el-spacer" }), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, 40 + added.length, " documents")), /* @__PURE__ */ React.createElement(Table, { columns: [
+      { key: "n", label: "Document", render: (r) => /* @__PURE__ */ React.createElement(CellMain, { title: r.n, sub: r.sz, lead: /* @__PURE__ */ React.createElement(FileIcon, { type: r.t }) }) },
+      { key: "st", label: "Status", width: 230, render: (r) => r.st === "PROCESSING" ? /* @__PURE__ */ React.createElement("div", { className: "el-stack-1", style: { alignItems: "flex-start" } }, /* @__PURE__ */ React.createElement(StatusBadge, { status: "PROCESSING", label: "Processing " + r.p + "%" }), /* @__PURE__ */ React.createElement(ProgressBar, { value: r.p, tone: "warning", style: { width: 120, height: 4 } })) : r.st === "FAILED" ? /* @__PURE__ */ React.createElement("div", { className: "el-stack-1", style: { alignItems: "flex-start" } }, /* @__PURE__ */ React.createElement(StatusBadge, { status: "FAILED" }), /* @__PURE__ */ React.createElement("span", { className: "el-xs", style: { color: "var(--danger)" } }, r.err)) : /* @__PURE__ */ React.createElement(StatusBadge, { status: r.st }) },
+      { key: "u", label: "Uploaded by", render: (r) => /* @__PURE__ */ React.createElement(CellMain, { title: /* @__PURE__ */ React.createElement("span", { className: "el-sm" }, r.u), sub: r.d }) },
+      { key: "x", label: "Action", align: "right", width: 90, render: (r) => /* @__PURE__ */ React.createElement(RowMenu, { open: r.id === 1 && DEMO, items: [{ label: "View", icon: "eye", onClick: () => view(r) }, { label: "Download", icon: "download", onClick: () => download(r.n) }, { label: "Replace file", icon: "swap", onClick: () => {
+        window.location.href = "replace-document.html";
+      } }] }) }
+    ], rows, rowHref: (r) => r.st === "FAILED" ? "document-failed.html" : "document.html" }), /* @__PURE__ */ React.createElement(Pagination, { page: 1, pages: 4, total: 40 + added.length, shown: Math.min(10, rows.length) })), /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", right: 24, bottom: 24, display: "flex", flexDirection: "column", gap: 12, width: 380 } }, dl ? /* @__PURE__ */ React.createElement(Toast, { tone: "success", title: "Downloading " + dl, description: "Your browser will save the file in a moment." }) : null, flash ? /* @__PURE__ */ React.createElement(Toast, { tone: flash.tone, title: flash.title, description: flash.description }) : null, DEMO ? /* @__PURE__ */ React.createElement(Toast, { tone: "success", title: "Stock-List-Oct.xlsx uploaded", description: "ELIA is reading it now. We'll show Indexed here when it's ready." }) : null, DEMO ? /* @__PURE__ */ React.createElement(Toast, { tone: "danger", title: "Legal-Checklist.pdf didn't upload", description: "The connection dropped before the file finished. Nothing was saved.", action: /* @__PURE__ */ React.createElement(Button, { size: "sm" }, "Try again") }) : null));
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(/* @__PURE__ */ React.createElement(Page, null));
+})();
+</script>
+</body>
+</html>

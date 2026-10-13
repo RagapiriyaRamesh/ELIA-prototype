@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chat sessions · Chat tab · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, Tabs, Input, Avatar, StatusBadge, IconButton, Button, Card, Timeline, DescriptionList, Icon, Menu, ChatBubble, SystemMessage, Badge } = window.Elia;
+  const { useState } = React;
+  const INITIAL = { menu: false, panel: null, tab: "chat", ltab: "live" };
+  const LIVE = [
+    { n: "Fathima Rizna", m: "ELIA sent appointment options", t: "10:21", st: "FOLLOWING_UP", c: "CS-1042" },
+    { n: "Sahan Gunawardena", m: "Sent to 3 available support people", t: "10:21", st: "PENDING", c: "CS-1044" },
+    { n: "Arjun Selvaraj", m: "What documents do I need for registration?", t: "10:19", st: "AI", c: "CS-1043" },
+    { n: "Hasini Mendis", m: "Chat ended · report due from Sanduni", t: "10:18", st: "REPORT_DUE", c: "CS-1041" },
+    { n: "Kumari Dissanayake", m: "With Malini Jayawardena on WhatsApp · 2nd handoff", t: "10:06", st: "ASSIGNED", c: "CS-1038" },
+    { n: "Nuwan Perera", m: "Yes please, Thursday 10:30 works.", t: "10:06", st: "AI", c: "CS-1039" }
+  ];
+  const DONE = [
+    { n: "Nadeesha Peiris", m: "Booked ✓ BK-24A9-PE · rated 5 of 5", t: "10:16", st: "RESOLVED", c: "CS-1040" },
+    { n: "Dinesh Kumar", m: "Support resolved it · report file uploaded", t: "09:41", st: "COMPLETED", c: "CS-1035" },
+    { n: "Ruwan Wickramasinghe", m: "Booked ✓ BK-24A7-QX", t: "09:30", st: "RESOLVED", c: "CS-1036" },
+    { n: "Mohamed Imran", m: "Booked ✓ BK-24A5-KD", t: "Yesterday", st: "RESOLVED", c: "CS-1034" },
+    { n: "Lahiru Bandara", m: "Support resolved it · rated 5 of 5", t: "Yesterday", st: "RESOLVED", c: "CS-1033" },
+    { n: "Chathuri Abeysekara", m: "Booked ✓ BK-24A6-MW", t: "Tue", st: "RESOLVED", c: "CS-1030" }
+  ];
+  const LDESC = {
+    live: "Customers chatting now that are not complete yet",
+    done: "Chats that have ended, newest first. Each one has a closed case you can open to see how it finished."
+  };
+  const VIEW = {
+    live: {
+      name: "Fathima Rizna",
+      st: "FOLLOWING_UP",
+      phone: "+94 71 555 0937",
+      bookings: [
+        { id: "BK-2275-VZ", s: "Site visit · 2BR Sea View", st: "COMPLETED", when: "Mon 22 Sep · 11:00–11:45", a: "Tharushi Fernando" }
+      ],
+      nowLabel: "Right now",
+      nowTitle: "ELIA is following up after support",
+      nowText: "Dinuka Ranasinghe's report said she needs a payment plan consultation. ELIA sent her times for Thursday at 10:21 and is waiting for her reply.",
+      facts: [["Case", "CS-1042", true], ["Started", "09:55 today"], ["Last activity", "10:21"]],
+      timeline: [
+        { icon: "chat", tone: "brand", title: "Asked ELIA about payment plan options for the 2BR Sea View", meta: "09:55 · ELIA answered from the pricing and payment plan documents" },
+        { icon: "headset", tone: "accent", title: "Asked for a person · ELIA told her to wait", meta: "10:02 · ELIA assigned the case to Dinuka Ranasinghe" },
+        { icon: "check", tone: "success", title: "Dinuka Ranasinghe accepted and contacted her on WhatsApp", meta: "10:08 · this chat happens directly on WhatsApp, so it is not shown here" },
+        { icon: "file", tone: "success", title: "Dinuka submitted his report", meta: "10:20 · next step: book a payment plan consultation" },
+        { icon: "send", tone: "brand", title: "ELIA sent her payment plan consultation times for Thursday", meta: "10:21 · waiting for her reply" }
+      ],
+      chat: [
+        ["sys", "calendar", "Wednesday 8 October"],
+        ["c", "What payment plan options do you have for the 2BR Sea View?", "09:55"],
+        ["a", "We partner with Commercial Bank PLC. Instalments up to 60 months from 11.5% p.a. Would you like an estimate?", "09:55", ["Get an estimate", "Talk to a person"]],
+        ["c", "Can I speak to someone? My husband would be the guarantor and I'm self-employed.", "10:02"],
+        ["a", "Thanks for waiting, Fathima. One of our support team will contact you here on WhatsApp shortly.", "10:02"],
+        ["sys", "headset", "Handed to support at 10:08 · continued directly on WhatsApp, not shown here"],
+        ["sys", "file", "Support report received 10:20 · ELIA resumed at 10:21"],
+        ["a", "Hi Fathima, Dinuka has shared a plan for your payment plan. Would Thursday at 15:00 suit you for a payment plan consultation?", "10:21", ["Thu 9 Oct · 15:00", "Fri 10 Oct · 11:00", "Another time"]]
+      ]
+    },
+    done: {
+      name: "Nadeesha Peiris",
+      st: "RESOLVED",
+      phone: "+94 77 555 3310",
+      bookings: [
+        { id: "BK-24A9-PE", s: "Payment plan consultation", st: "CONFIRMED", when: "Thu 9 Oct · 11:30–12:00", a: "Nimal Perera" }
+      ],
+      nowLabel: "Outcome",
+      nowTitle: "Resolved by ELIA · booking confirmed",
+      nowText: "ELIA answered her payment plan questions from the documents and booked a consultation with Nimal Perera. No support was needed.",
+      facts: [["Case", "CS-1040", true], ["Started", "Today 10:02"], ["Last activity", "Today 10:16"]],
+      timeline: [
+        { icon: "chat", tone: "brand", title: "Asked which banks ELIA works with for a payment plan", meta: "10:02 · ELIA answered from Payment-Plans-2025.pdf" },
+        { icon: "calcheck", tone: "success", title: "Booked a payment plan consultation · BK-24A9-PE", meta: "10:14 · Thu 9 Oct 11:30 with Nimal Perera" },
+        { icon: "check", tone: "success", title: "Chat ended and the case was closed", meta: "10:16 · resolved with ELIA, rated 5 of 5" }
+      ],
+      chat: [
+        ["sys", "calendar", "Wednesday 8 October"],
+        ["c", "Which banks do you work with for a payment plan?", "10:02"],
+        ["a", "We work with Commercial Bank PLC and two others. A guarantor is not needed for salaried applicants. Would you like a payment plan consultation?", "10:03", ["Book a consultation", "Not now"]],
+        ["c", "Yes please, tomorrow morning if possible.", "10:09"],
+        ["a", "Tomorrow (Thu 9 Oct) at 11:30 with Nimal is free. Shall I book it?", "10:09", ["Confirm", "Another time"]],
+        ["c", "Confirm", "10:14"],
+        ["a", "Booked ✓ Thu 9 Oct, 11:30 with Nimal Perera. Booking ID BK-24A9-PE. I will remind you the day before.", "10:14", ["Add to calendar"]]
+      ]
+    }
+  };
+  function Pane({ children, style }) {
+    return /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", minHeight: 0, minWidth: 0, ...style } }, children);
+  }
+  function PanelHead({ title, sub, onClose }) {
+    return /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { padding: "14px 20px", height: 68, borderBottom: "1px solid var(--line)" } }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-strong", style: { fontSize: 15 } }, title), sub ? /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted" }, sub) : null), /* @__PURE__ */ React.createElement(IconButton, { icon: "x", label: "Close", size: "sm", onClick: onClose }));
+  }
+  function StatusTab({ v, onCase }) {
+    return /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 20 } }, /* @__PURE__ */ React.createElement(Card, null, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 20, alignItems: "start" } }, /* @__PURE__ */ React.createElement("div", { style: { minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted", style: { marginBottom: 6 } }, "Status"), /* @__PURE__ */ React.createElement(StatusBadge, { status: v.st })), v.facts.map(([k, val, mono]) => /* @__PURE__ */ React.createElement("div", { key: k, style: { minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted", style: { marginBottom: 6 } }, k), mono ? /* @__PURE__ */ React.createElement("a", { className: "el-sm el-strong el-mono el-row", style: { cursor: "pointer", gap: 6 }, onClick: onCase }, val) : /* @__PURE__ */ React.createElement("div", { className: "el-sm el-strong" }, val))))), /* @__PURE__ */ React.createElement(Card, { title: "What happened" }, /* @__PURE__ */ React.createElement(Timeline, { items: v.timeline })));
+  }
+  function ChatTab({ v }) {
+    return /* @__PURE__ */ React.createElement("div", { className: "el-card", style: { overflow: "hidden" } }, /* @__PURE__ */ React.createElement("div", { className: "el-chat" }, v.chat.map((m, i) => m[0] === "sys" ? /* @__PURE__ */ React.createElement(SystemMessage, { key: i, icon: m[1] }, m[2]) : m[0] === "c" ? /* @__PURE__ */ React.createElement(ChatBubble, { key: i, from: "customer", author: v.name, text: m[1], time: m[2] }) : /* @__PURE__ */ React.createElement(ChatBubble, { key: i, from: "ai", text: m[1], time: m[2], status: "read", actions: m[3] }))));
+  }
+  function Sessions() {
+    const [menu, setMenu] = useState(INITIAL.menu);
+    const [panel, setPanel] = useState(INITIAL.panel);
+    const [tab, setTab] = useState(INITIAL.tab);
+    const [ltab, setLtab] = useState(INITIAL.ltab);
+    const v = VIEW[ltab];
+    const list = ltab === "live" ? LIVE : DONE;
+    const pick = (p) => {
+      setPanel(p);
+      setMenu(false);
+    };
+    return /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "conversations", role: "Admin", flush: true }, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: panel ? "300px minmax(0, 1fr) 320px" : "340px minmax(0, 1fr)", flex: 1, minWidth: 0, minHeight: 840 } }, /* @__PURE__ */ React.createElement(Pane, { style: { borderRight: "1px solid var(--line)", background: "var(--surface)" } }, /* @__PURE__ */ React.createElement("div", { style: { padding: "18px 20px 0" } }, /* @__PURE__ */ React.createElement("h2", { style: { margin: 0, fontSize: 18, fontWeight: 600, letterSpacing: "-0.01em" } }, "Chat sessions"), /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted", style: { marginTop: 2, minHeight: 32 } }, LDESC[ltab]), /* @__PURE__ */ React.createElement(Input, { icon: "search", size: "sm", placeholder: "Search customer or case", style: { marginTop: 10 } }), /* @__PURE__ */ React.createElement(Tabs, { value: ltab, onChange: setLtab, style: { marginTop: 8, gap: 18 }, items: [{ id: "live", label: "Live", count: 6 }, { id: "done", label: "Completed" }] })), /* @__PURE__ */ React.createElement("div", { style: { overflow: "hidden" } }, list.map((c, i) => /* @__PURE__ */ React.createElement("div", { key: c.n, onClick: () => {
+      window.location.href = ltab === "live" ? "conversations.html" : "chat-sessions-completed.html";
+    }, className: "el-list-item" + (i === (ltab === "live" ? 0 : 0) ? " is-on" : ""), style: { alignItems: "flex-start", padding: "13px 20px", cursor: "pointer" } }, /* @__PURE__ */ React.createElement(Avatar, { name: c.n, size: "md" }), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { className: "el-between" }, /* @__PURE__ */ React.createElement("span", { className: "el-cell-title el-truncate" }, c.n), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted", style: { flexShrink: 0, marginLeft: 8 } }, c.t)), /* @__PURE__ */ React.createElement("div", { className: "el-sm el-muted el-truncate", style: { marginTop: 2 } }, c.m), /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { marginTop: 8 } }, /* @__PURE__ */ React.createElement(StatusBadge, { status: c.st, size: "sm", label: c.st === "AI" ? "With ELIA" : void 0 }), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted el-mono" }, c.c))))))), /* @__PURE__ */ React.createElement(Pane, null, /* @__PURE__ */ React.createElement("div", { style: { background: "var(--surface)", borderBottom: "1px solid var(--line)" } }, /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { padding: "14px 24px 0", height: 68, gap: 12 } }, /* @__PURE__ */ React.createElement("div", { className: "el-row-3", style: { minWidth: 0 } }, /* @__PURE__ */ React.createElement(Avatar, { name: v.name, size: "lg" }), /* @__PURE__ */ React.createElement("span", { className: "el-strong el-truncate", style: { fontSize: 15 } }, v.name), /* @__PURE__ */ React.createElement("span", { style: { flexShrink: 0 } }, /* @__PURE__ */ React.createElement(StatusBadge, { status: v.st }))), /* @__PURE__ */ React.createElement("div", { className: "el-row", style: { flexShrink: 0 } }, /* @__PURE__ */ React.createElement(Button, { size: "sm", icon: "layers", onClick: () => {
+      window.location.href = ltab === "live" ? "case.html" : "case-no-handoff.html";
+    } }, "Open case"), /* @__PURE__ */ React.createElement("div", { style: { position: "relative" } }, /* @__PURE__ */ React.createElement(IconButton, { icon: "more", label: "More", size: "sm", onClick: () => setMenu(!menu) }), menu ? /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", right: 0, top: 38, zIndex: 20 } }, /* @__PURE__ */ React.createElement(Menu, { style: { width: 210 }, items: [
+      { label: "Profile", icon: "user", active: panel === "profile", onClick: () => pick("profile") },
+      { label: "Booking context", icon: "calcheck", active: panel === "bookings", onClick: () => pick("bookings") }
+    ] })) : null))), /* @__PURE__ */ React.createElement(Tabs, { value: tab, onChange: setTab, style: { padding: "0 24px", gap: 22 }, items: [{ id: "status", label: "Status" }, { id: "chat", label: "Chat" }] })), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0, padding: 24, background: "var(--surface-sunken)", overflow: "hidden" } }, tab === "status" ? /* @__PURE__ */ React.createElement(StatusTab, { v, onCase: () => {
+      window.location.href = ltab === "live" ? "case.html" : "case-no-handoff.html";
+    } }) : /* @__PURE__ */ React.createElement(ChatTab, { v }))), panel === "profile" ? /* @__PURE__ */ React.createElement(Pane, { style: { borderLeft: "1px solid var(--line)", background: "var(--surface)" } }, /* @__PURE__ */ React.createElement(PanelHead, { title: "Profile", onClose: () => setPanel(null) }), /* @__PURE__ */ React.createElement("div", { style: { padding: 24 } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", alignItems: "center", gap: 12, paddingBottom: 20 } }, /* @__PURE__ */ React.createElement(Avatar, { name: v.name, size: "xl" }), /* @__PURE__ */ React.createElement("div", { className: "el-strong", style: { fontSize: 16 } }, v.name)), /* @__PURE__ */ React.createElement("hr", { className: "el-divider" }), /* @__PURE__ */ React.createElement("div", { style: { margin: "20px 0" } }, /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 80, items: [{ label: "Name", value: v.name }, { label: "Phone", value: v.phone }] })), /* @__PURE__ */ React.createElement("hr", { className: "el-divider" }), /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { marginTop: 20, gap: 12 } }, /* @__PURE__ */ React.createElement(Button, { icon: "chat", style: { width: "100%" }, onClick: () => setTab("chat") }, "View chat with ELIA")))) : null, panel === "bookings" ? /* @__PURE__ */ React.createElement(Pane, { style: { borderLeft: "1px solid var(--line)", background: "var(--surface)" } }, /* @__PURE__ */ React.createElement(PanelHead, { title: "Booking context", sub: v.bookings.length + (v.bookings.length === 1 ? " booking for " : " bookings for ") + v.name.split(" ")[0], onClose: () => setPanel(null) }), /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { padding: 20, gap: 12 } }, v.bookings.map((b) => /* @__PURE__ */ React.createElement("div", { key: b.id, onClick: () => {
+      window.location.href = "booking.html";
+    }, className: "el-card", style: { padding: 16, display: "flex", flexDirection: "column", gap: 10, cursor: "pointer" } }, /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { alignItems: "flex-start", gap: 8 } }, /* @__PURE__ */ React.createElement("span", { className: "el-strong" }, b.s), /* @__PURE__ */ React.createElement("span", { style: { flexShrink: 0 } }, /* @__PURE__ */ React.createElement(StatusBadge, { status: b.st, size: "sm" }))), /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary el-row" }, /* @__PURE__ */ React.createElement(Icon, { name: "clock", size: 14 }), b.when), /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary el-row" }, /* @__PURE__ */ React.createElement(Icon, { name: "user", size: 14 }), b.a), /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted el-mono" }, b.id))))) : null));
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(/* @__PURE__ */ React.createElement(Sessions, null));
+})();
+</script>
+</body>
+</html>

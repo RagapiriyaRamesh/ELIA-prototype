@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>View report · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, Card, Avatar, Badge, DescriptionList, StatusBadge, FileIcon } = window.Elia;
+  const D = {
+    "title": "Report on the chat with Fathima Rizna",
+    "crumbs": [
+      [
+        "Reports",
+        "reports.html"
+      ],
+      "CS-1042",
+      "View report"
+    ],
+    "desc": "Written by Dinuka Ranasinghe after chatting with her directly on WhatsApp.",
+    "by": "Written by Dinuka Ranasinghe · submitted 10:20",
+    "outcome": "Needs an appointment",
+    "asked": "Wants a 60-month payment plan on the 2BR Sea View. Self-employed, with her husband as guarantor.",
+    "discussed": "Self-employed applicants are welcome. Her husband can be the guarantor. She needs 6 months of bank statements and her BR certificate.",
+    "next": "Book a payment plan consultation for Thursday 15:00",
+    "fileName": "Report-CS-1042-Dinuka.pdf",
+    "cust": "Fathima Rizna",
+    "topic": "Payment plan options · 2BR Sea View",
+    "facts": [
+      {
+        "label": "Case",
+        "value": "CS-1042"
+      },
+      {
+        "label": "Phone",
+        "value": "+94 71 555 0937"
+      },
+      {
+        "label": "Accepted",
+        "value": "10:08"
+      },
+      {
+        "label": "Chat ended",
+        "value": "10:15"
+      }
+    ],
+    "elia": "At 10:21 ELIA sent her payment plan consultation times for Thursday and is waiting for her reply."
+  };
+  function View() {
+    return /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "reports", role: "Admin", minHeight: 960 }, /* @__PURE__ */ React.createElement(
+      PageHeader,
+      {
+        title: D.title,
+        breadcrumbs: D.crumbs,
+        description: D.desc,
+        badge: /* @__PURE__ */ React.createElement(Badge, { tone: "success", icon: "check" }, "Submitted"),
+        actions: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Button, { icon: "layers", onClick: () => {
+          window.location.href = "case.html";
+        } }, "Open case"), /* @__PURE__ */ React.createElement(Button, { variant: "primary", icon: "edit", onClick: () => {
+          window.location.href = "edit-report.html";
+        } }, "Edit report"))
+      }
+    ), /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "minmax(0, 1fr) 400px", gap: 20, alignItems: "start" } }, /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 20 } }, /* @__PURE__ */ React.createElement(Card, { title: "Report", subtitle: D.by }, /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 170, items: [
+      { label: "Outcome", value: /* @__PURE__ */ React.createElement(Badge, { tone: "accent", dot: true }, D.outcome) },
+      { label: "What the customer asked", value: D.asked },
+      { label: "What was discussed or agreed", value: D.discussed },
+      { label: "Next step for ELIA", value: D.next },
+      { label: "Feedback asked", value: "Yes, ELIA asks for a 1 to 5 rating at the end" }
+    ] })), /* @__PURE__ */ React.createElement(Card, { title: "Report file", subtitle: "Optional attachment" }, /* @__PURE__ */ React.createElement("span", { className: "el-row", style: { gap: 10 } }, /* @__PURE__ */ React.createElement(FileIcon, { type: "pdf" }), /* @__PURE__ */ React.createElement("span", { className: "el-sm el-strong" }, D.fileName), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, "184 KB · uploaded 10:20"), /* @__PURE__ */ React.createElement("a", { className: "el-sm", style: { cursor: "pointer", marginLeft: 8 } }, "Download")))), /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 20 } }, /* @__PURE__ */ React.createElement(Card, { title: "Customer" }, /* @__PURE__ */ React.createElement("div", { className: "el-row-3", style: { marginBottom: 14 } }, /* @__PURE__ */ React.createElement(Avatar, { name: D.cust }), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-cell-title" }, D.cust), /* @__PURE__ */ React.createElement("div", { className: "el-cell-sub" }, D.topic))), /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 92, items: D.facts })), /* @__PURE__ */ React.createElement(Card, { title: "What ELIA did next" }, /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary" }, D.elia)))));
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(/* @__PURE__ */ React.createElement(View, null));
+})();
+</script>
+</body>
+</html>

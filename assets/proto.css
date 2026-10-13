@@ -1,0 +1,60 @@
+/* ELIA prototype layer — app behaviour on top of bundle.css (sticky chrome, links, responsive shell). */
+html, body { background: var(--canvas); }
+.el-shell > .el-side { position: sticky; top: 0; height: 100vh; align-self: start; overflow-y: auto; }
+.el-top { position: sticky; top: 0; z-index: 15; }
+.el-overlay { position: fixed; z-index: 40; cursor: pointer; }
+.el-overlay > * { cursor: auto; }
+.el-auth { min-height: 100vh; }
+.el-table tr.is-link { cursor: pointer; }
+.el-ev { cursor: pointer; transition: box-shadow .15s; }
+.el-ev:hover { box-shadow: var(--shadow-md); }
+.el-check, .el-switch { user-select: none; }
+.el-check:focus-visible, .el-switch:focus-visible { outline: 2px solid transparent; box-shadow: var(--focus-ring); border-radius: var(--radius-xs); }
+a.el-ws:hover, a.el-menu-item:hover, a.el-btn:hover { text-decoration: none; }
+.el-top-user:focus-visible { outline: 2px solid transparent; box-shadow: var(--focus-ring); border-radius: var(--radius-sm); }
+.el-top-dropdown { position: absolute; right: 0; top: calc(100% + 12px); z-index: 30; cursor: default; }
+.el-top-dropdown .el-menu-label { text-transform: none; letter-spacing: 0; font-weight: 500; font-size: 12px; }
+.el-top-menu, .el-scrim-nav { display: none; }
+
+@media (max-width: 1180px) {
+  .el-top-search { width: 260px; }
+  .el-top-scope { display: none !important; }
+}
+@media (max-width: 960px) {
+  .el-shell { grid-template-columns: minmax(0, 1fr); }
+  .el-shell > .el-side { display: none; }
+  body.nav-open .el-shell > .el-side { display: flex; position: fixed; left: 0; top: 0; bottom: 0; width: var(--sidebar-width); height: 100%; z-index: 50; box-shadow: var(--shadow-lg); }
+  body.nav-open .el-scrim-nav { display: block; position: fixed; inset: 0; background: var(--scrim); z-index: 45; }
+  .el-top-menu { display: inline-flex; }
+  .el-top { padding: 0 16px; gap: 6px; }
+  .el-top-search, .el-top-who { display: none; }
+  .el-top-user { padding-left: 8px; }
+  .el-content { padding: 20px 16px 40px; }
+  .el-content.is-flush { overflow-x: auto; }
+  .el-ph-row { flex-wrap: wrap; align-items: flex-start; }
+  .el-ph-row > .el-row { flex: 1 1 100% !important; min-width: 0; flex-wrap: wrap; }
+  .el-content .el-row, .el-content .el-row-3, .el-content .el-row-4 { flex-wrap: wrap; }
+  .el-content .el-card { overflow-x: auto; }
+  .el-card-foot, .el-modal-foot { flex-wrap: wrap; }
+  .el-tabs { overflow-x: auto; }
+  .el-grid.el-g4, .el-grid.el-g3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .el-content [style*="grid-template-columns"] { grid-template-columns: minmax(0, 1fr) !important; }
+  .el-table-wrap { overflow-x: auto; }
+  .el-toolbar .el-input { width: 100% !important; }
+  .el-auth { grid-template-columns: minmax(0, 1fr); }
+  .el-auth-art { display: none; }
+  .el-auth-form { padding: 24px 16px; }
+  .el-auth-inner { width: 100%; max-width: 400px; margin: 40px auto; }
+  .el-drawer { width: 100% !important; }
+  .el-modal { max-width: calc(100% - 24px); }
+  .el-settings { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .el-otp span { width: 42px; height: 50px; }
+}
+@media (max-width: 560px) {
+  .el-grid.el-g4, .el-grid.el-g3, .el-grid.el-g2 { grid-template-columns: minmax(0, 1fr); }
+  .el-ph h1 { font-size: 20px; line-height: 28px; }
+  .el-auth-inner h1 { font-size: 26px; line-height: 32px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}

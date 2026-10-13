@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Users · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, Card, Table, CellMain, Avatar, Badge, IconButton, Icon, Input, Switch, FilterChip, Toolbar, Pagination, Menu } = window.Elia;
+  const { useState } = React;
+  const rows = [
+    { id: 1, n: "Pavithiran S", e: "pavithiran@harbourview.lk", r: ["Admin", "accent"], on: true, l: "Now" },
+    { id: 2, n: "Ishara Silva", e: "ishara@harbourview.lk", r: ["Content Manager", "info"], on: true, l: "12 min ago" },
+    { id: 3, n: "Dinuka Ranasinghe", e: "dinuka@harbourview.lk", r: ["Support Team", "warning"], on: true, l: "4 min ago" },
+    { id: 4, n: "Chamod Silva", e: "chamod@harbourview.lk", r: ["Support Team", "warning"], on: true, l: "20 min ago" },
+    { id: 5, n: "Malini Jayawardena", e: "malini@harbourview.lk", r: ["Support Team", "warning"], on: true, l: "1 min ago" },
+    { id: 6, n: "Sanduni Herath", e: "sanduni@harbourview.lk", r: ["Support Team", "warning"], on: true, l: "2 min ago" },
+    { id: 7, n: "Tharushi Fernando", e: "tharushi@harbourview.lk", r: ["Sales Assistant", "brand"], on: true, l: "3 min ago" },
+    { id: 8, n: "Nimal Perera", e: "nimal@harbourview.lk", r: ["Sales Assistant", "brand"], on: true, l: "1 h ago" },
+    { id: 9, n: "Kavin Rajan", e: "kavin@harbourview.lk", r: ["Sales Assistant", "brand"], on: true, l: "2 h ago" },
+    { id: 10, n: "Dilan Jayasuriya", e: "dilan@harbourview.lk", r: ["Sales Assistant", "brand"], on: false, l: "3 weeks ago" }
+  ];
+  function RowMenu({ open: o0, items }) {
+    const [open, setOpen] = useState(!!o0);
+    return /* @__PURE__ */ React.createElement("span", { onClick: (e) => e.stopPropagation(), style: { position: "relative", display: "inline-block" } }, /* @__PURE__ */ React.createElement(IconButton, { icon: "more", label: "Actions", size: "sm", onClick: () => setOpen(!open) }), open ? /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", right: 0, top: 34, zIndex: 30 } }, /* @__PURE__ */ React.createElement(Menu, { style: { width: 180 }, items: items.map((it) => it === "-" ? it : Object.assign({}, it, { onClick: () => {
+      setOpen(false);
+      if (it.go) window.location.href = it.go;
+    } })) })) : null);
+  }
+  const perms = [
+    ["Dashboard", true, false, false, false],
+    ["Chat sessions", true, false, true, false],
+    ["Cases", true, false, true, false],
+    ["Support handoff", true, false, true, false],
+    ["Reports", true, false, true, false],
+    ["Bookings (view, edit, delete)", true, false, false, false],
+    ["Calendar", true, false, false, "view"],
+    ["Support team", true, false, false, false],
+    ["Sales assistants and availability", true, false, false, false],
+    ["Knowledge base", true, "view", false, false],
+    ["Business rules", true, false, false, false],
+    ["Users, customers and notifications", true, false, false, false],
+    ["My profile and password (Settings)", true, true, true, true]
+  ];
+  const cell = (v) => v ? /* @__PURE__ */ React.createElement("span", { className: "el-row", style: { justifyContent: "center", gap: 6, color: "var(--success)" } }, /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 17, stroke: 2.4 }), v === "view" ? /* @__PURE__ */ React.createElement("span", { className: "el-xs" }, "View only") : null) : /* @__PURE__ */ React.createElement(Icon, { name: "minus", size: 16, style: { color: "var(--ink-muted)" } });
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "users", role: "Admin", minHeight: 1400 }, /* @__PURE__ */ React.createElement(PageHeader, { title: "Users", description: "Everyone who can sign in to the Admin Portal, and what they can do.", actions: /* @__PURE__ */ React.createElement(Button, { href: "user-form.html", variant: "primary", icon: "plus" }, "Add user") }), /* @__PURE__ */ React.createElement(Card, { padded: false }, /* @__PURE__ */ React.createElement(Toolbar, null, /* @__PURE__ */ React.createElement(Input, { icon: "search", size: "sm", placeholder: "Search by name or email", style: { width: 280 } }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Role" }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Status" })), /* @__PURE__ */ React.createElement(Table, { columns: [
+      { key: "n", label: "User", render: (r) => /* @__PURE__ */ React.createElement(CellMain, { title: r.n, sub: r.e, lead: /* @__PURE__ */ React.createElement(Avatar, { name: r.n, size: "sm" }) }) },
+      { key: "r", label: "Role", width: 180, render: (r) => /* @__PURE__ */ React.createElement(Badge, { tone: r.r[1], dot: true }, r.r[0]) },
+      { key: "st", label: "Access", width: 160, render: (r) => /* @__PURE__ */ React.createElement("span", { className: "el-row" }, /* @__PURE__ */ React.createElement(Switch, { size: "sm", checked: r.on }), /* @__PURE__ */ React.createElement("span", { className: "el-sm" }, r.on ? "Active" : "Inactive")) },
+      { key: "l", label: "Last active", width: 140 },
+      { key: "x", label: "Action", align: "right", width: 80, render: (r) => /* @__PURE__ */ React.createElement(RowMenu, { items: [{ label: "Edit user", icon: "edit", go: "user-form.html" }, { label: "Reset password", icon: "key" }, "-", r.on ? { label: "Deactivate", icon: "x" } : { label: "Activate", icon: "check" }] }) }
+    ], rows }), /* @__PURE__ */ React.createElement(Pagination, { page: 1, pages: 2, total: 15, shown: rows.length })), /* @__PURE__ */ React.createElement(Card, { title: "What each role can do", subtitle: "A tick means the role can open that area. Access is enforced on every page and action.", padded: false, style: { marginTop: 20 } }, /* @__PURE__ */ React.createElement("table", { className: "el-table is-dense" }, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", null, "Area"), /* @__PURE__ */ React.createElement("th", { className: "ta-c" }, "Admin"), /* @__PURE__ */ React.createElement("th", { className: "ta-c" }, "Content Manager"), /* @__PURE__ */ React.createElement("th", { className: "ta-c" }, "Support Team"), /* @__PURE__ */ React.createElement("th", { className: "ta-c" }, "Sales Assistant"))), /* @__PURE__ */ React.createElement("tbody", null, perms.map(([p, a, b, c, d]) => /* @__PURE__ */ React.createElement("tr", { key: p }, /* @__PURE__ */ React.createElement("td", { style: { fontWeight: 500, color: "var(--ink)" } }, p), /* @__PURE__ */ React.createElement("td", { className: "ta-c" }, cell(a)), /* @__PURE__ */ React.createElement("td", { className: "ta-c" }, cell(b)), /* @__PURE__ */ React.createElement("td", { className: "ta-c" }, cell(c)), /* @__PURE__ */ React.createElement("td", { className: "ta-c" }, cell(d))))))))
+  );
+})();
+</script>
+</body>
+</html>

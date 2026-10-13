@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Case · waiting for support to accept · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Avatar, StatusBadge, Badge, Button, Icon, IconButton, Card, Timeline, DescriptionList, Tabs, Switch, ChatBubble, SystemMessage, Dropzone, FileIcon, ProgressBar, Select, Field, Input, Alert } = window.Elia;
+  const { useState } = React;
+  const INITIAL = { tab: "overview" };
+  const D = {
+    "handoff": true,
+    "name": "Sahan Gunawardena",
+    "id": "CS-1044",
+    "status": "PENDING",
+    "statusLabel": "Waiting for support",
+    "started": "Today 10:12",
+    "phone": "+94 71 555 4417",
+    "line": "Defects liability after 8 years · started 10:12 · waiting for Dinuka to accept",
+    "nowLabel": "Right now",
+    "nowTitle": "Assigned to Dinuka Ranasinghe",
+    "nowText": "Sahan asked for a person at 10:21. ELIA told him to wait and assigned the case to Dinuka, who is available. Dinuka accepts when ready and then continues with Sahan on WhatsApp.",
+    "nowTone": "accent",
+    "nowIcon": "send",
+    "nowBadge": "Waiting",
+    "timelineSub": "Newest at the bottom",
+    "timeline": [
+      {
+        "icon": "chat",
+        "tone": "brand",
+        "title": "Customer started a chat about defects liability after 8 years",
+        "meta": "10:12 · case CS-1044 created · ELIA answered from Warranty-Terms.docx"
+      },
+      {
+        "icon": "chat",
+        "tone": "brand",
+        "title": "Customer asked for a person",
+        "meta": '10:21:08 · "The warranty doc only covers 5 years. Can I speak to someone?"'
+      },
+      {
+        "icon": "sparkle",
+        "tone": "brand",
+        "title": "ELIA told the customer to wait",
+        "meta": "10:21:09 · sent on WhatsApp"
+      },
+      {
+        "icon": "send",
+        "tone": "accent",
+        "title": "ELIA assigned the case to Dinuka Ranasinghe",
+        "meta": "10:21:11 · chat summary, customer details and case link sent on WhatsApp"
+      }
+    ],
+    "rounds": [
+      {
+        "state": "waiting",
+        "sentTo": [
+          "Dinuka Ranasinghe"
+        ],
+        "waitSub": "Sent 10:21 · waiting for Dinuka to accept",
+        "waitText": "ELIA sent Dinuka the chat summary, what Sahan needs, his details and the case link on WhatsApp. Dinuka can accept at any time and then continues with Sahan on WhatsApp. After the chat, Dinuka writes the report from the case link.",
+        "supportTimes": [
+          {
+            "label": "Assigned",
+            "value": "10:21"
+          },
+          {
+            "label": "Accepted",
+            "value": "Not yet"
+          },
+          {
+            "label": "Report",
+            "value": "After the chat"
+          }
+        ]
+      }
+    ],
+    "feedback": /* @__PURE__ */ React.createElement("div", { className: "el-row el-sm el-muted" }, /* @__PURE__ */ React.createElement(Icon, { name: "clock", size: 15 }), "Not asked yet. ELIA asks once the case is resolved."),
+    "need": "Warranty cover for an 8-year-old unit.",
+    "brief": "Sahan asked what the defects liability warranty covers after 8 years. ELIA found only the standard 5-year terms in Warranty-Terms.docx and could not answer for older units, so he asked for a person.",
+    "doubts": "The Warranty-Terms document covers 5 years. Is there any cover after that?",
+    "chat": [
+      {
+        "sys": true,
+        "icon": "calendar",
+        "text": "Wednesday 8 October"
+      },
+      {
+        "from": "customer",
+        "author": "Sahan Gunawardena",
+        "text": "What does the defects liability warranty cover after 8 years?",
+        "time": "10:12"
+      },
+      {
+        "from": "ai",
+        "text": "Our standard defects liability warranty runs for 5 years from handover. I do not have terms for units older than that.",
+        "time": "10:12",
+        "actions": [
+          "Talk to a person"
+        ]
+      },
+      {
+        "from": "customer",
+        "author": "Sahan Gunawardena",
+        "text": "The warranty doc only covers 5 years. Can I speak to someone?",
+        "time": "10:21"
+      },
+      {
+        "from": "ai",
+        "text": "Thanks for waiting, Sahan. One of our support team will contact you here on WhatsApp shortly.",
+        "time": "10:21"
+      },
+      {
+        "sys": true,
+        "icon": "clock",
+        "text": "Assigned to Dinuka Ranasinghe at 10:21 · waiting for Dinuka to accept"
+      }
+    ],
+    "thread": [
+      {
+        "sys": true,
+        "icon": "headset",
+        "text": "10:21 · Sahan asked for a person"
+      },
+      {
+        "from": "ai",
+        "text": "New customer for you.\nSahan Gunawardena · +94 71 555 4417\nChat summary: he asked what the defects liability warranty covers after 8 years. ELIA found only the standard 5-year terms and could not answer for older units.\nHe needs: warranty cover for an 8-year-old unit.\nOpen the case: harbourview.elia.app/case/CS-1044\nAccept, contact him on WhatsApp, then write your report from the case link.",
+        "time": "10:21",
+        "actions": [
+          "Accept and connect"
+        ]
+      },
+      {
+        "sys": true,
+        "icon": "send",
+        "text": "10:21 · ELIA assigned the case to Dinuka Ranasinghe (available) · brief and case link sent · waiting for Dinuka to accept"
+      }
+    ],
+    "outcomeTitle": "Outcome",
+    "outcomeSub": "What ELIA did without help from a person",
+    "aloneNote": "ELIA handled this case alone",
+    "noBooking": "No booking was made."
+  };
+  const ORD = ["1st", "2nd", "3rd", "4th"];
+  function Tl({ items }) {
+    return /* @__PURE__ */ React.createElement(Timeline, { items });
+  }
+  function Transcript({ items }) {
+    return /* @__PURE__ */ React.createElement("div", { className: "el-chat is-wide" }, items.map((m, i) => m.sys ? /* @__PURE__ */ React.createElement(SystemMessage, { key: i, icon: m.icon }, m.text) : /* @__PURE__ */ React.createElement(ChatBubble, { key: i, from: m.from === "support" ? "customer" : m.from, author: m.from === "customer" || m.from === "support" ? m.author : void 0, text: m.text, time: m.time, status: m.from === "ai" ? "read" : void 0, actions: m.actions })));
+  }
+  function FileRow({ f }) {
+    return /* @__PURE__ */ React.createElement("span", { className: "el-row", style: { gap: 8 } }, /* @__PURE__ */ React.createElement(FileIcon, { type: "pdf" }), /* @__PURE__ */ React.createElement("span", { className: "el-sm el-strong" }, f.name), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, f.size), /* @__PURE__ */ React.createElement("a", { className: "el-sm", style: { cursor: "pointer" } }, "Download"));
+  }
+  function RoundReport({ r, i, n }) {
+    const tag = n > 1 ? " · " + ORD[i] + " handoff" : "";
+    if (r.state === "done") {
+      const items = r.report.concat(r.file ? [{ label: "Report file", value: /* @__PURE__ */ React.createElement(FileRow, { f: r.file }) }] : []);
+      return /* @__PURE__ */ React.createElement(Card, { title: "Support report" + tag, subtitle: r.reportBy, actions: /* @__PURE__ */ React.createElement(Badge, { tone: "success", icon: "check" }, "Submitted") }, /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 150, items }));
+    }
+    if (r.state === "due") {
+      return /* @__PURE__ */ React.createElement(Card, { title: "Report due" + tag, subtitle: "Required after every handoff · no time limit", actions: /* @__PURE__ */ React.createElement(Badge, { tone: "warning", icon: "file" }, "Waiting for report") }, /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary", style: { marginBottom: 14 } }, r.support, " chatted with ", D.name, " directly on WhatsApp, so ELIA cannot see it. The report is written from this case link. ELIA carries on with the customer from it."), /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { gap: 12 } }, /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, "Every field is required except the report file, which is an optional attachment."), /* @__PURE__ */ React.createElement(Button, { variant: "primary", icon: "file", onClick: () => {
+        window.location.href = "support-report.html";
+      } }, "Write report")));
+    }
+    if (r.state === "live") {
+      return /* @__PURE__ */ React.createElement(Card, { title: "Support report" + tag, subtitle: "After the chat ends" }, /* @__PURE__ */ React.createElement("div", { className: "el-row el-sm el-muted", style: { alignItems: "flex-start" } }, /* @__PURE__ */ React.createElement(Icon, { name: "clock", size: 15 }), r.support, " is chatting with ", D.name, " now. When the chat ends, ", r.support.split(" ")[0], " writes the report from this case link, with an optional file attached. ELIA continues from it."));
+    }
+    return /* @__PURE__ */ React.createElement(Card, { title: "Assigned to " + r.sentTo[0] + tag, subtitle: r.waitSub }, /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 10 } }, /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary" }, r.waitText), /* @__PURE__ */ React.createElement("div", { className: "el-row", style: { gap: 8, flexWrap: "wrap" } }, r.sentTo.map((p) => /* @__PURE__ */ React.createElement("span", { key: p, className: "el-row", style: { gap: 6, border: "1px solid var(--line)", borderRadius: 999, padding: "3px 10px 3px 4px" } }, /* @__PURE__ */ React.createElement(Avatar, { name: p, size: "xs" }), /* @__PURE__ */ React.createElement("span", { className: "el-sm" }, p))))));
+  }
+  function RoundSide({ r, i, n }) {
+    const tag = n > 1 ? " · " + ORD[i] + " handoff" : "";
+    if (r.state === "waiting") {
+      return /* @__PURE__ */ React.createElement(Card, { title: "Support person" + tag }, /* @__PURE__ */ React.createElement("div", { className: "el-row-3" }, /* @__PURE__ */ React.createElement(Avatar, { name: r.sentTo[0], size: "lg" }), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-strong" }, r.sentTo[0]), /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted" }, "Support team · has not accepted yet"))), /* @__PURE__ */ React.createElement("hr", { className: "el-divider", style: { margin: "14px 0" } }), /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 92, items: r.supportTimes }));
+    }
+    return /* @__PURE__ */ React.createElement(Card, { title: "Support person" + tag }, /* @__PURE__ */ React.createElement("div", { className: "el-row-3" }, /* @__PURE__ */ React.createElement(Avatar, { name: r.support, size: "lg" }), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-strong" }, r.support), /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted" }, r.supportRole))), /* @__PURE__ */ React.createElement("hr", { className: "el-divider", style: { margin: "14px 0" } }), /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 92, items: r.supportTimes }));
+  }
+  function Case() {
+    const [tab, setTab] = useState(INITIAL.tab);
+    const R = D.rounds || [];
+    const [show, setShow] = useState(D.handoff);
+    const [copied, setCopied] = useState(false);
+    const hasThread = D.handoff && D.thread && D.thread.length > 0;
+    const items = [{ id: "overview", label: "Overview" }, { id: "chat", label: "Customer chat" }].concat(show && hasThread ? [{ id: "support", label: "Agent and support" }] : []);
+    const cur = tab === "support" && !(show && hasThread) ? "overview" : tab;
+    return /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "cases", role: "Admin", minHeight: 1e3 }, /* @__PURE__ */ React.createElement(
+      PageHeader,
+      {
+        breadcrumbs: [["Cases", "cases.html"], D.id],
+        title: D.name,
+        badge: /* @__PURE__ */ React.createElement("span", { className: "el-row" }, /* @__PURE__ */ React.createElement(StatusBadge, { status: D.status, label: D.statusLabel }), /* @__PURE__ */ React.createElement("span", { className: "el-mono el-muted", style: { fontSize: 13 } }, D.id)),
+        description: D.line,
+        actions: /* @__PURE__ */ React.createElement("span", { className: "el-row", style: { gap: 16 } }, hasThread ? /* @__PURE__ */ React.createElement(Switch, { checked: show, onChange: setShow, label: /* @__PURE__ */ React.createElement("span", { className: "el-sm" }, "Show agent chat with support") }) : /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted el-row" }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 14 }), D.handoff ? "Support chats are on direct WhatsApp" : D.aloneNote), /* @__PURE__ */ React.createElement(Button, { href: "conversation-profile.html", icon: "user" }, "Profile"))
+      }
+    ), /* @__PURE__ */ React.createElement(Tabs, { value: cur, onChange: setTab, items, style: { marginBottom: 20 } }), cur === "overview" ? /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "minmax(0, 1fr) 380px", gap: 20, alignItems: "start" } }, /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 20 } }, D.dueFirst ? R.map((r, i) => r.state === "due" ? /* @__PURE__ */ React.createElement(RoundReport, { key: "d" + i, r, i, n: R.length }) : null) : null, /* @__PURE__ */ React.createElement(Card, { title: "What happened", subtitle: D.timelineSub }, /* @__PURE__ */ React.createElement(Tl, { items: D.timeline })), D.handoff ? R.map((r, i) => D.dueFirst && r.state === "due" ? null : /* @__PURE__ */ React.createElement(RoundReport, { key: i, r, i, n: R.length })) : /* @__PURE__ */ React.createElement(Card, { title: D.outcomeTitle, subtitle: D.outcomeSub }, /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 150, items: D.outcome })), /* @__PURE__ */ React.createElement(Card, { title: "Customer feedback", subtitle: "Asked by ELIA at the end of the case" }, D.feedback)), /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 20 } }, /* @__PURE__ */ React.createElement(Card, { title: D.handoff ? "Brief sent to support" : "Summary", subtitle: D.handoff ? "Sent on WhatsApp when the case was assigned" : void 0, icon: "sparkle" }, /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 14 } }, D.handoff ? /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-section-title", style: { marginBottom: 4 } }, "Chat summary"), /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary" }, D.brief)) : null, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-section-title", style: { marginBottom: 4 } }, D.handoff ? "What they need from support" : "What they need"), /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary" }, D.need)), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-section-title", style: { marginBottom: 4 } }, "Questions and doubts"), /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary" }, D.doubts)), D.handoff ? /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { marginBottom: 6 } }, /* @__PURE__ */ React.createElement("span", { className: "el-section-title" }, "Case link for support"), /* @__PURE__ */ React.createElement(Button, { size: "sm", icon: copied ? "check" : "copy", onClick: () => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } }, copied ? "Copied" : "Copy")), /* @__PURE__ */ React.createElement("div", { className: "el-mono el-sm", style: { border: "1px solid var(--line)", background: "var(--surface-sunken)", borderRadius: 8, padding: "7px 10px", fontSize: 12.5 } }, "harbourview.elia.app/case/", D.id), /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted", style: { marginTop: 6 } }, "Opens this case for the support person. They write their report from it.")) : null)), /* @__PURE__ */ React.createElement(Card, { title: "Customer" }, /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 92, items: [{ label: "Name", value: D.name }, { label: "Phone", value: D.phone }, { label: "Asked about", value: D.line.split(" · ")[0] }, { label: "Started", value: D.started }] })), D.handoff ? R.map((r, i) => /* @__PURE__ */ React.createElement(RoundSide, { key: i, r, i, n: R.length })) : /* @__PURE__ */ React.createElement(Card, { title: D.booking ? "Linked booking" : "Booking" }, D.booking ? /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { alignItems: "flex-start", gap: 8 } }, /* @__PURE__ */ React.createElement("span", { className: "el-strong" }, D.booking.s), /* @__PURE__ */ React.createElement(StatusBadge, { status: D.booking.st, size: "sm" })), /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary", style: { marginTop: 8 } }, D.booking.when), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 10 } }, /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted el-mono" }, D.booking.id))) : /* @__PURE__ */ React.createElement("div", { className: "el-sm el-muted" }, D.noBooking)))) : null, cur === "chat" ? /* @__PURE__ */ React.createElement("div", { className: "el-card", style: { overflow: "hidden" } }, /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { padding: "12px 20px", borderBottom: "1px solid var(--line)" } }, /* @__PURE__ */ React.createElement("span", { className: "el-sm el-strong" }, "Customer chat with ELIA"), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, "Read-only", D.handoff ? " · the support person's WhatsApp chat is not shown" : "")), /* @__PURE__ */ React.createElement(Transcript, { items: D.chat })) : null, cur === "support" ? /* @__PURE__ */ React.createElement("div", { className: "el-card", style: { overflow: "hidden" } }, /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { padding: "12px 20px", borderBottom: "1px solid var(--line)" } }, /* @__PURE__ */ React.createElement("span", { className: "el-sm el-strong" }, "ELIA with support, on WhatsApp"), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, "Offers, accepts, reminders and the report. Their chat with the customer is not included.")), /* @__PURE__ */ React.createElement(Transcript, { items: D.thread })) : null);
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(/* @__PURE__ */ React.createElement(Case, null));
+})();
+</script>
+</body>
+</html>

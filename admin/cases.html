@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cases · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, Card, Table, Toolbar, Input, FilterChip, CellMain, Avatar, StatusBadge, Badge, Icon, Pagination, Tabs } = window.Elia;
+  const rows = [
+    { id: "CS-1044", c: "Sahan Gunawardena", t: "Defects liability after 8 years", h: "support", st: "PENDING", w: "10:21", sub: "Started 10:12" },
+    { id: "CS-1043", c: "Arjun Selvaraj", t: "Registration documents", h: "elia", st: "AI", sl: "With ELIA", w: "10:19", sub: "Started 10:11" },
+    { id: "CS-1042", c: "Fathima Rizna", t: "Payment plan for the 2BR Sea View", h: "support", st: "FOLLOWING_UP", w: "10:21", sub: "Started 09:55" },
+    { id: "CS-1041", c: "Hasini Mendis", t: "Garden Villa resale question", h: "support", st: "REPORT_DUE", w: "10:18", sub: "Started 09:41" },
+    { id: "CS-1040", c: "Nadeesha Peiris", t: "Payment plan consultation", h: "elia", st: "RESOLVED", w: "10:16", sub: "Started 10:02" },
+    { id: "CS-1039", c: "Nuwan Perera", t: "Site visit · Studio A", h: "elia", st: "AI", sl: "With ELIA", w: "10:06", sub: "Started 09:58" },
+    { id: "CS-1038", c: "Kumari Dissanayake", t: "Resale valuation", h: "support", st: "ASSIGNED", sl: "With support", w: "10:06", sub: "Started 09:50" },
+    { id: "CS-1036", c: "Ruwan Wickramasinghe", t: "Site visit · Studio A", h: "elia", st: "RESOLVED", w: "09:30", sub: "Started 09:05" },
+    { id: "CS-1035", c: "Dinesh Kumar", t: "Delayed key handover", h: "support", st: "COMPLETED", w: "09:41", sub: "Started 09:18" }
+  ];
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "cases", role: "Admin" }, /* @__PURE__ */ React.createElement(PageHeader, { title: "Cases", description: "One case for every customer chat, newest first. Cases end on their own or after a support handoff.", actions: /* @__PURE__ */ React.createElement(Button, { icon: "download" }, "Export") }), /* @__PURE__ */ React.createElement(Card, { padded: false }, /* @__PURE__ */ React.createElement("div", { style: { padding: "0 20px" } }, /* @__PURE__ */ React.createElement(Tabs, { value: "all", items: [{ id: "all", label: "All", count: 312 }, { id: "open", label: "Open", count: 6 }, { id: "support", label: "With support", count: 60 }, { id: "closed", label: "Closed", count: 305 }] })), /* @__PURE__ */ React.createElement(Toolbar, null, /* @__PURE__ */ React.createElement(Input, { icon: "search", size: "sm", placeholder: "Case number, customer or phone", style: { width: 300 } }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Date", value: "Today" }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Handled by" }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Status" }), /* @__PURE__ */ React.createElement("span", { className: "el-spacer" }), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, "Latest first")), /* @__PURE__ */ React.createElement(Table, { columns: [
+      { key: "id", label: "Case", width: 110, sortable: true, sorted: "desc", render: (r) => /* @__PURE__ */ React.createElement("span", { className: "el-mono el-strong" }, r.id) },
+      { key: "c", label: "Customer", render: (r) => /* @__PURE__ */ React.createElement(CellMain, { title: r.c, sub: r.t, lead: /* @__PURE__ */ React.createElement(Avatar, { name: r.c, size: "sm" }) }) },
+      { key: "h", label: "Handled by", width: 150, render: (r) => r.h === "elia" ? /* @__PURE__ */ React.createElement(Badge, { tone: "brand", icon: "sparkle" }, "ELIA only") : /* @__PURE__ */ React.createElement(Badge, { tone: "accent", icon: "headset" }, "With support") },
+      { key: "st", label: "Status", width: 160, render: (r) => /* @__PURE__ */ React.createElement(StatusBadge, { status: r.st, label: r.sl }) },
+      { key: "w", label: "Last activity", width: 140, render: (r) => /* @__PURE__ */ React.createElement(CellMain, { title: r.w, sub: r.sub }) }
+    ], rows, rowHref: (r) => ({ "CS-1044": "case-pending.html", "CS-1043": "case-elia-live.html", "CS-1042": "case.html", "CS-1041": "case-report-due.html", "CS-1040": "case-no-handoff.html", "CS-1039": "conversations.html", "CS-1038": "case-two-handoffs.html", "CS-1036": "chat-sessions-completed.html", "CS-1035": "case-completed.html" })[r.id] || "cases.html" }), /* @__PURE__ */ React.createElement(Pagination, { page: 1, pages: 32, total: 312 })))
+  );
+})();
+</script>
+</body>
+</html>

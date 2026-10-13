@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bookings · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { Menu, Badge, AppShell, PageHeader, Button, Card, Table, Toolbar, Input, FilterChip, CellMain, Avatar, StatusBadge, Icon, IconButton, Pagination, Tabs, SegmentedControl } = window.Elia;
+  const { useState } = React;
+  function RowMenu({ open: o0, onEdit, onDelete }) {
+    const [open, setOpen] = useState(!!o0);
+    return /* @__PURE__ */ React.createElement("span", { onClick: (e) => e.stopPropagation(), style: { position: "relative", display: "inline-block" } }, /* @__PURE__ */ React.createElement(IconButton, { icon: "more", label: "Actions", size: "sm", onClick: () => setOpen(!open) }), open ? /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", right: 0, top: 34, zIndex: 30 } }, /* @__PURE__ */ React.createElement(Menu, { style: { width: 150 }, items: [{ label: "Edit", icon: "edit", onClick: onEdit }, "-", { label: "Delete", icon: "trash", danger: true, onClick: onDelete }] })) : null);
+  }
+  const rows = [
+    { id: "BK-24A8-HJ", c: "Hiruni Jayawardena", p: "+94 78 ••• 5530", s: "Site visit · Garden Villa", a: "Tharushi Fernando", w: "Wed 8 Oct", t: "09:30–10:15", st: "COMPLETED" },
+    { id: "BK-24B0-VK", c: "Kamal Perera", p: "+94 75 ••• 9014", s: "Payment plan consultation", a: "Nimal Perera", w: "Wed 8 Oct", t: "14:00–14:30", st: "CONFIRMED" },
+    { id: "BK-24A7-QX", c: "Ruwan Wickramasinghe", p: "+94 77 ••• 4182", s: "Site visit · Studio A", a: "Tharushi Fernando", w: "Thu 9 Oct", t: "10:30–11:15", st: "CONFIRMED" },
+    { id: "BK-24A9-PE", c: "Nadeesha Peiris", p: "+94 77 ••• 3310", s: "Payment plan consultation", a: "Nimal Perera", w: "Thu 9 Oct", t: "11:30–12:00", st: "CONFIRMED" },
+    { id: "BK-24A6-MW", c: "Chathuri Abeysekara", p: "+94 71 ••• 6620", s: "Site visit · 2BR Sea View", a: "Tharushi Fernando", w: "Thu 9 Oct", t: "14:00–14:45", st: "CONFIRMED" },
+    { id: "BK-24A5-KD", c: "Mohamed Imran", p: "+94 72 ••• 7781", s: "Resale valuation", a: "Kavin Rajan", w: "Wed 8 Oct", t: "11:15–11:45", st: "CONFIRMED" },
+    { id: "BK-24A3-LB", c: "Lahiru Bandara", p: "+94 70 ••• 4420", s: "Key handover", a: "Ayesha Nazeer", w: "Fri 10 Oct", t: "15:30–16:30", st: "CONFIRMED" },
+    { id: "BK-24A2-TT", c: "Sahan Gunawardena", p: "+94 76 ••• 2210", s: "Site visit · Penthouse", a: "Kavin Rajan", w: "Wed 8 Oct", t: "15:00–15:45", st: "CANCELLED" },
+    { id: "BK-24A1-RF", c: "Kumari Dissanayake", p: "+94 77 ••• 5521", s: "Resale valuation", a: "Kavin Rajan", w: "Tue 7 Oct", t: "09:00–09:30", st: "COMPLETED" },
+    { id: "BK-249Z-QA", c: "Dinesh Kumar", p: "+94 72 ••• 6402", s: "Site visit · Garden Villa", a: "Dilan Jayasuriya", w: "Tue 7 Oct", t: "08:30–09:30", st: "COMPLETED" }
+  ];
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "appointments", role: "Admin" }, /* @__PURE__ */ React.createElement(PageHeader, { title: "Bookings", description: "Every appointment across your sales assistants, booked by customers through ELIA on WhatsApp.", actions: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(SegmentedControl, { options: [{ value: "list", label: "List", icon: "list" }, { value: "cal", label: "Calendar", icon: "calendar", href: "calendar.html" }], value: "list" }), /* @__PURE__ */ React.createElement(Button, { icon: "download" }, "Export")) }), /* @__PURE__ */ React.createElement(Card, { padded: false }, /* @__PURE__ */ React.createElement("div", { style: { padding: "0 20px" } }, /* @__PURE__ */ React.createElement(Tabs, { value: "all", items: [{ id: "all", label: "All", count: 186 }, { id: "up", label: "Confirmed", count: 124 }, { id: "done", label: "Completed", count: 47 }, { id: "can", label: "Cancelled", count: 15 }] })), /* @__PURE__ */ React.createElement(Toolbar, null, /* @__PURE__ */ React.createElement(Input, { icon: "search", size: "sm", placeholder: "Booking ID, customer or phone", style: { width: 280 } }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Date", value: "This week" }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Sales assistant" }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Service" }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Status" }), /* @__PURE__ */ React.createElement("span", { className: "el-spacer" }), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, "Times in Asia/Colombo")), /* @__PURE__ */ React.createElement(Table, { columns: [
+      { key: "id", label: "Booking ID", width: 130, render: (r) => /* @__PURE__ */ React.createElement("span", { className: "el-mono el-strong" }, r.id) },
+      { key: "c", label: "Customer", render: (r) => /* @__PURE__ */ React.createElement(CellMain, { title: r.c, sub: r.p }) },
+      { key: "s", label: "Service" },
+      { key: "a", label: "Sales assistant", render: (r) => /* @__PURE__ */ React.createElement("span", { className: "el-row" }, /* @__PURE__ */ React.createElement(Avatar, { name: r.a, size: "xs" }), r.a) },
+      { key: "w", label: "When", sortable: true, sorted: "asc", render: (r) => /* @__PURE__ */ React.createElement(CellMain, { title: r.w, sub: r.t }) },
+      { key: "st", label: "Status", render: (r) => /* @__PURE__ */ React.createElement(StatusBadge, { status: r.st }) },
+      { key: "x", label: "Action", align: "right", width: 90, render: (r) => /* @__PURE__ */ React.createElement(RowMenu, { open: false, onEdit: () => {
+        window.location.href = "edit-booking.html";
+      }, onDelete: () => {
+        window.location.href = "delete-booking.html";
+      } }) }
+    ], rows, rowHref: () => "booking.html" }), /* @__PURE__ */ React.createElement(Pagination, { page: 1, pages: 19, total: 186, shown: rows.length })))
+  );
+})();
+</script>
+</body>
+</html>

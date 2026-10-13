@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Case · resolved by ELIA (no handoff) · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Avatar, StatusBadge, Badge, Button, Icon, IconButton, Card, Timeline, DescriptionList, Tabs, Switch, ChatBubble, SystemMessage, Dropzone, FileIcon, ProgressBar, Select, Field, Input, Alert } = window.Elia;
+  const { useState } = React;
+  const INITIAL = { tab: "overview" };
+  const D = {
+    "handoff": false,
+    "name": "Nadeesha Peiris",
+    "id": "CS-1040",
+    "status": "RESOLVED",
+    "statusLabel": null,
+    "started": "Today 10:02",
+    "line": "Payment plan consultation · started 10:02 · resolved by ELIA at 10:15",
+    "nowLabel": "Outcome",
+    "nowTitle": "Resolved by ELIA with a booking",
+    "nowText": "ELIA answered from the payment plan documents and booked a consultation. The customer confirmed and rated the chat 5 of 5.",
+    "nowTone": "success",
+    "nowIcon": "check",
+    "nowBadge": "Resolved",
+    "timelineSub": "Newest at the bottom",
+    "timeline": [
+      {
+        "icon": "chat",
+        "tone": "brand",
+        "title": "Customer started a chat",
+        "meta": "10:02 · case CS-1040 created · asked about payment plans"
+      },
+      {
+        "icon": "sparkle",
+        "tone": "brand",
+        "title": "ELIA answered from the knowledge base",
+        "meta": "10:03 · Payment-Plans-2025.pdf · Bank-Partners.xlsx"
+      },
+      {
+        "icon": "calendar",
+        "tone": "brand",
+        "title": "ELIA offered consultation times",
+        "meta": "10:09 · Thu 9 Oct · 11:30 chosen"
+      },
+      {
+        "icon": "calcheck",
+        "tone": "success",
+        "title": "ELIA booked the consultation",
+        "meta": "10:14 · BK-24A9-PE with Nimal Perera"
+      },
+      {
+        "icon": "chat",
+        "tone": "brand",
+        "title": "ELIA asked for feedback",
+        "meta": "10:15 · rating received 10:16"
+      },
+      {
+        "icon": "checkcircle",
+        "tone": "success",
+        "title": "Case resolved",
+        "meta": "10:16 · no person was needed"
+      }
+    ],
+    "outcome": [
+      {
+        "label": "Result",
+        "value": /* @__PURE__ */ React.createElement(Badge, { tone: "success", dot: true }, "Resolved")
+      },
+      {
+        "label": "Answered by",
+        "value": "ELIA only"
+      },
+      {
+        "label": "Booking made",
+        "value": "Payment plan consultation · Thu 9 Oct · 11:30–12:00"
+      },
+      {
+        "label": "Support handoff",
+        "value": "Not needed"
+      }
+    ],
+    "feedback": /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 10 } }, /* @__PURE__ */ React.createElement("div", { className: "el-row" }, /* @__PURE__ */ React.createElement("span", { style: { color: "var(--accent)", fontSize: 20, letterSpacing: 2 } }, "★★★★★"), /* @__PURE__ */ React.createElement("span", { className: "el-strong" }, "5 out of 5")), /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary" }, '"Very quick, thank you."'), /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted" }, "Received 10:16 on WhatsApp")),
+    "need": "Payment plan options and a consultation.",
+    "doubts": "Which banks do you work with? Is a guarantor needed?",
+    "phone": "+94 77 555 3310",
+    "booking": {
+      "id": "BK-24A9-PE",
+      "s": "Payment plan consultation",
+      "st": "CONFIRMED",
+      "when": "Thu 9 Oct · 11:30–12:00 · with Nimal Perera"
+    },
+    "chat": [
+      {
+        "from": "customer",
+        "author": "Nadeesha Peiris",
+        "text": "Which banks do you work with for a payment plan?",
+        "time": "10:02"
+      },
+      {
+        "from": "ai",
+        "text": "We work with Commercial Bank PLC and two others. A guarantor is not needed for salaried applicants. Would you like a payment plan consultation?",
+        "time": "10:03",
+        "actions": [
+          "Book a consultation",
+          "Not now"
+        ]
+      },
+      {
+        "from": "customer",
+        "author": "Nadeesha Peiris",
+        "text": "Yes please, tomorrow morning if possible.",
+        "time": "10:09"
+      },
+      {
+        "from": "ai",
+        "text": "Tomorrow (Thu 9 Oct) at 11:30 with Nimal is free. Shall I book it?",
+        "time": "10:09",
+        "actions": [
+          "Confirm",
+          "Another time"
+        ]
+      },
+      {
+        "from": "customer",
+        "author": "Nadeesha Peiris",
+        "text": "Confirm",
+        "time": "10:14"
+      },
+      {
+        "from": "ai",
+        "text": "Booked. Your reference is BK-24A9-PE. You will get a reminder on WhatsApp the day before.",
+        "time": "10:14"
+      },
+      {
+        "from": "ai",
+        "text": "How was your experience today? Reply 1 to 5, or tell us in your own words.",
+        "time": "10:15",
+        "actions": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ]
+      },
+      {
+        "from": "customer",
+        "author": "Nadeesha Peiris",
+        "text": "5. Very quick, thank you.",
+        "time": "10:16"
+      }
+    ],
+    "thread": [],
+    "outcomeTitle": "Outcome",
+    "outcomeSub": "What ELIA did without help from a person",
+    "aloneNote": "ELIA handled this case alone",
+    "noBooking": "No booking was made."
+  };
+  const ORD = ["1st", "2nd", "3rd", "4th"];
+  function Tl({ items }) {
+    return /* @__PURE__ */ React.createElement(Timeline, { items });
+  }
+  function Transcript({ items }) {
+    return /* @__PURE__ */ React.createElement("div", { className: "el-chat is-wide" }, items.map((m, i) => m.sys ? /* @__PURE__ */ React.createElement(SystemMessage, { key: i, icon: m.icon }, m.text) : /* @__PURE__ */ React.createElement(ChatBubble, { key: i, from: m.from === "support" ? "customer" : m.from, author: m.from === "customer" || m.from === "support" ? m.author : void 0, text: m.text, time: m.time, status: m.from === "ai" ? "read" : void 0, actions: m.actions })));
+  }
+  function FileRow({ f }) {
+    return /* @__PURE__ */ React.createElement("span", { className: "el-row", style: { gap: 8 } }, /* @__PURE__ */ React.createElement(FileIcon, { type: "pdf" }), /* @__PURE__ */ React.createElement("span", { className: "el-sm el-strong" }, f.name), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, f.size), /* @__PURE__ */ React.createElement("a", { className: "el-sm", style: { cursor: "pointer" } }, "Download"));
+  }
+  function RoundReport({ r, i, n }) {
+    const tag = n > 1 ? " · " + ORD[i] + " handoff" : "";
+    if (r.state === "done") {
+      const items = r.report.concat(r.file ? [{ label: "Report file", value: /* @__PURE__ */ React.createElement(FileRow, { f: r.file }) }] : []);
+      return /* @__PURE__ */ React.createElement(Card, { title: "Support report" + tag, subtitle: r.reportBy, actions: /* @__PURE__ */ React.createElement(Badge, { tone: "success", icon: "check" }, "Submitted") }, /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 150, items }));
+    }
+    if (r.state === "due") {
+      return /* @__PURE__ */ React.createElement(Card, { title: "Report due" + tag, subtitle: "Required after every handoff · no time limit", actions: /* @__PURE__ */ React.createElement(Badge, { tone: "warning", icon: "file" }, "Waiting for report") }, /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary", style: { marginBottom: 14 } }, r.support, " chatted with ", D.name, " directly on WhatsApp, so ELIA cannot see it. The report is written from this case link. ELIA carries on with the customer from it."), /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { gap: 12 } }, /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, "Every field is required except the report file, which is an optional attachment."), /* @__PURE__ */ React.createElement(Button, { variant: "primary", icon: "file", onClick: () => {
+        window.location.href = "support-report.html";
+      } }, "Write report")));
+    }
+    if (r.state === "live") {
+      return /* @__PURE__ */ React.createElement(Card, { title: "Support report" + tag, subtitle: "After the chat ends" }, /* @__PURE__ */ React.createElement("div", { className: "el-row el-sm el-muted", style: { alignItems: "flex-start" } }, /* @__PURE__ */ React.createElement(Icon, { name: "clock", size: 15 }), r.support, " is chatting with ", D.name, " now. When the chat ends, ", r.support.split(" ")[0], " writes the report from this case link, with an optional file attached. ELIA continues from it."));
+    }
+    return /* @__PURE__ */ React.createElement(Card, { title: "Assigned to " + r.sentTo[0] + tag, subtitle: r.waitSub }, /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 10 } }, /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary" }, r.waitText), /* @__PURE__ */ React.createElement("div", { className: "el-row", style: { gap: 8, flexWrap: "wrap" } }, r.sentTo.map((p) => /* @__PURE__ */ React.createElement("span", { key: p, className: "el-row", style: { gap: 6, border: "1px solid var(--line)", borderRadius: 999, padding: "3px 10px 3px 4px" } }, /* @__PURE__ */ React.createElement(Avatar, { name: p, size: "xs" }), /* @__PURE__ */ React.createElement("span", { className: "el-sm" }, p))))));
+  }
+  function RoundSide({ r, i, n }) {
+    const tag = n > 1 ? " · " + ORD[i] + " handoff" : "";
+    if (r.state === "waiting") {
+      return /* @__PURE__ */ React.createElement(Card, { title: "Support person" + tag }, /* @__PURE__ */ React.createElement("div", { className: "el-row-3" }, /* @__PURE__ */ React.createElement(Avatar, { name: r.sentTo[0], size: "lg" }), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-strong" }, r.sentTo[0]), /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted" }, "Support team · has not accepted yet"))), /* @__PURE__ */ React.createElement("hr", { className: "el-divider", style: { margin: "14px 0" } }), /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 92, items: r.supportTimes }));
+    }
+    return /* @__PURE__ */ React.createElement(Card, { title: "Support person" + tag }, /* @__PURE__ */ React.createElement("div", { className: "el-row-3" }, /* @__PURE__ */ React.createElement(Avatar, { name: r.support, size: "lg" }), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-strong" }, r.support), /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted" }, r.supportRole))), /* @__PURE__ */ React.createElement("hr", { className: "el-divider", style: { margin: "14px 0" } }), /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 92, items: r.supportTimes }));
+  }
+  function Case() {
+    const [tab, setTab] = useState(INITIAL.tab);
+    const R = D.rounds || [];
+    const [show, setShow] = useState(D.handoff);
+    const [copied, setCopied] = useState(false);
+    const hasThread = D.handoff && D.thread && D.thread.length > 0;
+    const items = [{ id: "overview", label: "Overview" }, { id: "chat", label: "Customer chat" }].concat(show && hasThread ? [{ id: "support", label: "Agent and support" }] : []);
+    const cur = tab === "support" && !(show && hasThread) ? "overview" : tab;
+    return /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "cases", role: "Admin", minHeight: 1e3 }, /* @__PURE__ */ React.createElement(
+      PageHeader,
+      {
+        breadcrumbs: [["Cases", "cases.html"], D.id],
+        title: D.name,
+        badge: /* @__PURE__ */ React.createElement("span", { className: "el-row" }, /* @__PURE__ */ React.createElement(StatusBadge, { status: D.status, label: D.statusLabel }), /* @__PURE__ */ React.createElement("span", { className: "el-mono el-muted", style: { fontSize: 13 } }, D.id)),
+        description: D.line,
+        actions: /* @__PURE__ */ React.createElement("span", { className: "el-row", style: { gap: 16 } }, hasThread ? /* @__PURE__ */ React.createElement(Switch, { checked: show, onChange: setShow, label: /* @__PURE__ */ React.createElement("span", { className: "el-sm" }, "Show agent chat with support") }) : /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted el-row" }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 14 }), D.handoff ? "Support chats are on direct WhatsApp" : D.aloneNote), /* @__PURE__ */ React.createElement(Button, { href: "conversation-profile.html", icon: "user" }, "Profile"))
+      }
+    ), /* @__PURE__ */ React.createElement(Tabs, { value: cur, onChange: setTab, items, style: { marginBottom: 20 } }), cur === "overview" ? /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "minmax(0, 1fr) 380px", gap: 20, alignItems: "start" } }, /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 20 } }, D.dueFirst ? R.map((r, i) => r.state === "due" ? /* @__PURE__ */ React.createElement(RoundReport, { key: "d" + i, r, i, n: R.length }) : null) : null, /* @__PURE__ */ React.createElement(Card, { title: "What happened", subtitle: D.timelineSub }, /* @__PURE__ */ React.createElement(Tl, { items: D.timeline })), D.handoff ? R.map((r, i) => D.dueFirst && r.state === "due" ? null : /* @__PURE__ */ React.createElement(RoundReport, { key: i, r, i, n: R.length })) : /* @__PURE__ */ React.createElement(Card, { title: D.outcomeTitle, subtitle: D.outcomeSub }, /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 150, items: D.outcome })), /* @__PURE__ */ React.createElement(Card, { title: "Customer feedback", subtitle: "Asked by ELIA at the end of the case" }, D.feedback)), /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 20 } }, /* @__PURE__ */ React.createElement(Card, { title: D.handoff ? "Brief sent to support" : "Summary", subtitle: D.handoff ? "Sent on WhatsApp when the case was assigned" : void 0, icon: "sparkle" }, /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 14 } }, D.handoff ? /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-section-title", style: { marginBottom: 4 } }, "Chat summary"), /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary" }, D.brief)) : null, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-section-title", style: { marginBottom: 4 } }, D.handoff ? "What they need from support" : "What they need"), /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary" }, D.need)), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-section-title", style: { marginBottom: 4 } }, "Questions and doubts"), /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary" }, D.doubts)), D.handoff ? /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { marginBottom: 6 } }, /* @__PURE__ */ React.createElement("span", { className: "el-section-title" }, "Case link for support"), /* @__PURE__ */ React.createElement(Button, { size: "sm", icon: copied ? "check" : "copy", onClick: () => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } }, copied ? "Copied" : "Copy")), /* @__PURE__ */ React.createElement("div", { className: "el-mono el-sm", style: { border: "1px solid var(--line)", background: "var(--surface-sunken)", borderRadius: 8, padding: "7px 10px", fontSize: 12.5 } }, "harbourview.elia.app/case/", D.id), /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted", style: { marginTop: 6 } }, "Opens this case for the support person. They write their report from it.")) : null)), /* @__PURE__ */ React.createElement(Card, { title: "Customer" }, /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 92, items: [{ label: "Name", value: D.name }, { label: "Phone", value: D.phone }, { label: "Asked about", value: D.line.split(" · ")[0] }, { label: "Started", value: D.started }] })), D.handoff ? R.map((r, i) => /* @__PURE__ */ React.createElement(RoundSide, { key: i, r, i, n: R.length })) : /* @__PURE__ */ React.createElement(Card, { title: D.booking ? "Linked booking" : "Booking" }, D.booking ? /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { alignItems: "flex-start", gap: 8 } }, /* @__PURE__ */ React.createElement("span", { className: "el-strong" }, D.booking.s), /* @__PURE__ */ React.createElement(StatusBadge, { status: D.booking.st, size: "sm" })), /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary", style: { marginTop: 8 } }, D.booking.when), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 10 } }, /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted el-mono" }, D.booking.id))) : /* @__PURE__ */ React.createElement("div", { className: "el-sm el-muted" }, D.noBooking)))) : null, cur === "chat" ? /* @__PURE__ */ React.createElement("div", { className: "el-card", style: { overflow: "hidden" } }, /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { padding: "12px 20px", borderBottom: "1px solid var(--line)" } }, /* @__PURE__ */ React.createElement("span", { className: "el-sm el-strong" }, "Customer chat with ELIA"), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, "Read-only", D.handoff ? " · the support person's WhatsApp chat is not shown" : "")), /* @__PURE__ */ React.createElement(Transcript, { items: D.chat })) : null, cur === "support" ? /* @__PURE__ */ React.createElement("div", { className: "el-card", style: { overflow: "hidden" } }, /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { padding: "12px 20px", borderBottom: "1px solid var(--line)" } }, /* @__PURE__ */ React.createElement("span", { className: "el-sm el-strong" }, "ELIA with support, on WhatsApp"), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, "Offers, accepts, reminders and the report. Their chat with the customer is not included.")), /* @__PURE__ */ React.createElement(Transcript, { items: D.thread })) : null);
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(/* @__PURE__ */ React.createElement(Case, null));
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Notifications · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, Card, Table, Toolbar, Input, FilterChip, CellMain, StatusBadge, Icon, IconButton, Pagination, Tabs, StatCard, Alert, Badge, Menu } = window.Elia;
+  function RowMenu({ open: o0, items }) {
+    const [open, setOpen] = React.useState(!!o0);
+    return /* @__PURE__ */ React.createElement("span", { onClick: (e) => e.stopPropagation(), style: { position: "relative", display: "inline-block" } }, /* @__PURE__ */ React.createElement(IconButton, { icon: "more", label: "Actions", size: "sm", onClick: () => setOpen(!open) }), open ? /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", right: 0, top: 34, zIndex: 30 } }, /* @__PURE__ */ React.createElement(Menu, { style: { width: 190 }, items: items.map((it) => it === "-" ? it : Object.assign({}, it, { onClick: () => {
+      setOpen(false);
+      if (it.go) window.location.href = it.go;
+    } })) })) : null);
+  }
+  const rows = [
+    { id: 1, t: "Booking confirmed", tp: "booking_confirmed", r: "Nadeesha Peiris", rr: "Customer", b: "BK-24A9-PE", st: "FAILED", a: "1 / 1", m: "—", u: "10:14", err: "Template rejected (132015)" },
+    { id: 2, t: "Booking confirmed", tp: "booking_confirmed", r: "Ruwan Wickramasinghe", rr: "Customer", b: "BK-24A7-QX", st: "READ", a: "1", m: "wamid.HBgM…8f2", u: "09:24" },
+    { id: 3, t: "New booking", tp: "assistant_new_booking", r: "Tharushi Fernando", rr: "Assistant", b: "BK-24A7-QX", st: "DELIVERED", a: "1", m: "wamid.HBgM…91c", u: "09:24" },
+    { id: 4, t: "Handoff offer", tp: "support_handoff_offer", r: "Sanduni Herath", rr: "Support", b: "—", st: "ACCEPTED", a: "1", m: "wamid.HBgM…a07", u: "10:01" },
+    { id: 5, t: "Booking confirmed", tp: "booking_confirmed", r: "Kamal Perera", rr: "Customer", b: "BK-24B0-VK", st: "RETRY_DUE", a: "2 / 5", m: "—", u: "10:00", err: "Rate limited · next 10:14" },
+    { id: 6, t: "Booking cancelled", tp: "booking_cancelled", r: "Sahan Gunawardena", rr: "Customer", b: "BK-24A2-TT", st: "READ", a: "1", m: "wamid.HBgM…c33", u: "09:40" },
+    { id: 7, t: "Reminder · 2h", tp: "booking_reminder_2h", r: "Hiruni Jayawardena", rr: "Customer", b: "BK-24A8-HJ", st: "UNCERTAIN", a: "1", m: "—", u: "07:30", err: "Timeout after send" }
+  ];
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "notifications", minHeight: 980 }, /* @__PURE__ */ React.createElement(PageHeader, { title: "Notifications", description: "Messages ELIA sends from committed bookings and handoffs, with provider delivery status.", actions: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Button, { href: "settings.html", icon: "file" }, "Templates"), /* @__PURE__ */ React.createElement(Button, { href: "rules.html", icon: "settings" }, "Reminder settings")) }), /* @__PURE__ */ React.createElement("div", { style: { marginBottom: 20 } }, /* @__PURE__ */ React.createElement(Alert, { tone: "danger", title: "Template booking_confirmed was rejected by the provider", action: /* @__PURE__ */ React.createElement(Button, { size: "sm", variant: "danger-soft" }, "Edit template") }, "3 confirmations couldn't be sent since 10:04. The bookings themselves are confirmed — customers just haven't been told yet.")), /* @__PURE__ */ React.createElement(Card, { padded: false }, /* @__PURE__ */ React.createElement("div", { style: { padding: "0 20px" } }, /* @__PURE__ */ React.createElement(Tabs, { value: "o", items: [{ id: "o", label: "Outbox", count: 612 }, { id: "f", label: "Needs action", count: 4 }, { id: "r", label: "Scheduled reminders", count: 86 }] })), /* @__PURE__ */ React.createElement(Toolbar, null, /* @__PURE__ */ React.createElement(Input, { icon: "search", size: "sm", placeholder: "Booking ID, recipient or message ID", style: { width: 300 } }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Status" }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Type" }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Recipient", value: "Any" }), /* @__PURE__ */ React.createElement("span", { className: "el-spacer" }), /* @__PURE__ */ React.createElement(Button, { size: "sm", icon: "refresh" }, "Retry failed")), /* @__PURE__ */ React.createElement(Table, { columns: [
+      { key: "t", label: "Message", render: (r) => /* @__PURE__ */ React.createElement(CellMain, { title: r.t, sub: /* @__PURE__ */ React.createElement("span", { className: "el-mono", style: { fontSize: 11 } }, r.tp) }) },
+      { key: "r", label: "Recipient", render: (r) => /* @__PURE__ */ React.createElement(CellMain, { title: /* @__PURE__ */ React.createElement("span", { className: "el-sm" }, r.r), sub: r.rr }) },
+      { key: "b", label: "Booking", render: (r) => /* @__PURE__ */ React.createElement("span", { className: "el-mono" }, r.b) },
+      { key: "st", label: "Status", render: (r) => /* @__PURE__ */ React.createElement("div", { className: "el-stack-1", style: { alignItems: "flex-start" } }, /* @__PURE__ */ React.createElement(StatusBadge, { status: r.st }), r.err ? /* @__PURE__ */ React.createElement("span", { className: "el-xs", style: { color: r.st === "FAILED" ? "var(--danger)" : "var(--warning)" } }, r.err) : null) },
+      { key: "a", label: "Attempts", align: "right" },
+      { key: "m", label: "Provider message ID", render: (r) => /* @__PURE__ */ React.createElement("span", { className: "el-mono el-muted" }, r.m) },
+      { key: "u", label: "Updated", align: "right" },
+      { key: "x", label: "Action", align: "right", width: 80, render: (r) => /* @__PURE__ */ React.createElement(RowMenu, { items: (r.st === "FAILED" ? [{ label: "Retry sending", icon: "refresh" }] : r.st === "UNCERTAIN" ? [{ label: "Reconcile with provider", icon: "refresh" }] : r.st === "RETRY_DUE" ? [{ label: "Retry now", icon: "refresh" }] : []).concat([{ label: "View message", icon: "eye" }, { label: "Open booking", icon: "calcheck", go: "booking.html" }]) }) }
+    ], rows }), /* @__PURE__ */ React.createElement(Pagination, { page: 1, pages: 62, total: 612, shown: rows.length })))
+  );
+})();
+</script>
+</body>
+</html>

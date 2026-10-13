@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Calendar · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, ButtonGroup, IconButton, Card, Avatar, Checkbox, Radio, Select, Icon, Badge, SegmentedControl } = window.Elia;
+  const days = [["Mon", 6], ["Tue", 7], ["Wed", 8], ["Thu", 9], ["Fri", 10], ["Sat", 11], ["Sun", 12]];
+  const hours = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+  const H = 56;
+  const ev = [
+    [0, 11, 1, "Site visit · Studio A", "Ishara S."],
+    [1, 9, 0.75, "Site visit · Penthouse", "Roshan T."],
+    [1, 14, 0.75, "Site visit · 2BR Sea View", "Chathuri A."],
+    [2, 10, 0.75, "Site visit · Penthouse", "Cancelled", true],
+    [2, 15, 0.75, "Site visit · Garden Villa", "Hasini M."],
+    [3, 10.5, 0.75, "Site visit · Studio A", "Ruwan W."],
+    [3, 14, 0.75, "Site visit · 2BR Sea View", "Chathuri A."],
+    [4, 11, 0.75, "Site visit · 2BR Sea View", "Roshan T."],
+    [4, 16, 0.75, "Site visit · Studio A", "Nuwan P."],
+    [5, 10, 0.75, "Site visit · Studio A", "Priyanka J."],
+    [5, 11.5, 0.75, "Site visit · 2BR Sea View", "Dilhani F."]
+  ];
+  const people = [["Tharushi Fernando", "Site visits", true], ["Nimal Perera", "Payment plans", false], ["Kavin Rajan", "Resale", false], ["Ayesha Nazeer", "Key handover", false], ["Dilan Jayasuriya", "Defects", false]];
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "calendar", role: "Admin", minHeight: 980 }, /* @__PURE__ */ React.createElement(PageHeader, { title: "Tharushi Fernando · Calendar", description: "6 – 12 October 2026 · 11 bookings", actions: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(ButtonGroup, null, /* @__PURE__ */ React.createElement(Button, { size: "sm", icon: "chevleft" }), /* @__PURE__ */ React.createElement(Button, { size: "sm" }, "Today"), /* @__PURE__ */ React.createElement(Button, { size: "sm", icon: "chevright" })), /* @__PURE__ */ React.createElement(Select, { options: ["Tharushi Fernando", "Nimal Perera", "Kavin Rajan", "Ayesha Nazeer", "Dilan Jayasuriya"], icon: "user", style: { width: 210 } }), /* @__PURE__ */ React.createElement(SegmentedControl, { options: ["Day", "Week", "Month"], value: "Week" })) }), /* @__PURE__ */ React.createElement("div", { className: "el-grid", style: { gridTemplateColumns: "228px minmax(0, 1fr)" } }, /* @__PURE__ */ React.createElement("div", { className: "el-stack-5" }, /* @__PURE__ */ React.createElement(Card, { title: "Sales assistants", padded: false }, /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { padding: 16, gap: 12 } }, people.map(([n, r, on]) => /* @__PURE__ */ React.createElement("div", { key: n, className: "el-row", style: { gap: 10 } }, /* @__PURE__ */ React.createElement(Radio, { checked: on }), /* @__PURE__ */ React.createElement(Avatar, { name: n, size: "xs" }), /* @__PURE__ */ React.createElement("div", { style: { minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { className: "el-sm el-strong el-truncate" }, n), /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted" }, r)))))), /* @__PURE__ */ React.createElement(Card, { title: "Legend" }, /* @__PURE__ */ React.createElement("div", { className: "el-stack-2 el-sm" }, /* @__PURE__ */ React.createElement("span", { className: "el-row" }, /* @__PURE__ */ React.createElement("span", { className: "el-swatch", style: { width: 16, height: 16, background: "var(--brand-soft)", border: 0 } }), "Booking"), /* @__PURE__ */ React.createElement("span", { className: "el-row" }, /* @__PURE__ */ React.createElement("span", { className: "el-swatch", style: { width: 16, height: 16, background: "var(--surface-sunken)" } }), "Cancelled"), /* @__PURE__ */ React.createElement("span", { className: "el-row" }, /* @__PURE__ */ React.createElement("span", { className: "el-swatch el-cal-c is-off", style: { width: 16, height: 16 } }), "Unavailable")))), /* @__PURE__ */ React.createElement(Card, { padded: false, style: { overflow: "hidden" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "64px repeat(7, minmax(0, 1fr))" } }, /* @__PURE__ */ React.createElement("div", { style: { borderBottom: "1px solid var(--line)" } }), days.map(([d, n], i) => /* @__PURE__ */ React.createElement("div", { key: d, className: "el-cal-h" + (i === 3 ? " is-today" : "") }, /* @__PURE__ */ React.createElement("span", null, d), /* @__PURE__ */ React.createElement("b", null, n))), /* @__PURE__ */ React.createElement("div", { style: { paddingTop: 0 } }, hours.map((h) => /* @__PURE__ */ React.createElement("div", { key: h, className: "el-cal-t", style: { height: H } }, String(h).padStart(2, "0"), ":00"))), days.map(([d], di) => /* @__PURE__ */ React.createElement("div", { key: d, style: { position: "relative" } }, hours.map((h) => /* @__PURE__ */ React.createElement("div", { key: h, className: "el-cal-c" + (di === 6 || di === 5 && h >= 13 || h === 12 || di === 0 && h === 16 ? " is-off" : ""), style: { height: H } })), ev.filter((e) => e[0] === di).map((e, k) => /* @__PURE__ */ React.createElement("div", { key: k, onClick: () => {
+      window.location.href = "booking.html";
+    }, className: "el-ev", style: { top: (e[1] - 8) * H + 2, height: e[2] * H - 4, opacity: e[5] ? 0.5 : 1, textDecoration: e[5] ? "line-through" : "none" } }, /* @__PURE__ */ React.createElement("b", { className: "el-truncate" }, e[3]), /* @__PURE__ */ React.createElement("span", { className: "el-truncate", style: { display: "block", color: "var(--ink-secondary)" } }, e[4]))), di === 3 ? /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", left: 0, right: 0, top: (10.2 - 8) * H, height: 2, background: "var(--danger)", zIndex: 2 } }, /* @__PURE__ */ React.createElement("span", { style: { position: "absolute", left: -4, top: -3, width: 8, height: 8, borderRadius: 4, background: "var(--danger)" } })) : null))))))
+  );
+})();
+</script>
+</body>
+</html>

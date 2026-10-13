@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Document detail · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, Card, Stepper, Table, DescriptionList, StatusBadge, Alert, Badge, FileIcon, Tabs, Icon, Toast } = window.Elia;
+  const chunks = [
+    ["Section 1", "Page 4 · Table 2", "Studio A, Tower A (2026) — LKR 14,950,000 incl. legal fees and registration, 5-year defects liability warranty…"],
+    ["Section 2", "Page 4 · Table 2", "Studio A, Tower A — LKR 14,950,000; sea-view upgrade +LKR 650,000 (floors 12 and above)…"],
+    ["Section 3", "Page 5 · “2BR Sea View”", "2BR Sea View, Tower B — LKR 31,750,000. Includes parking and a 5-year defects liability warranty…"],
+    ["Section 4", "Page 5 · Table 3", "Optional extras: covered parking LKR 450,000; fitted wardrobes LKR 380,000; smart-home pack…"],
+    ["Section 5", "Page 6 · Footnote", "Prices valid until 31 Dec 2026 and subject to change with construction cost revisions."]
+  ].map(([id, l, t]) => ({ id, l, t }));
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "documents", role: "Admin", minHeight: 980 }, /* @__PURE__ */ React.createElement(
+      PageHeader,
+      {
+        breadcrumbs: [["Knowledge base", "documents.html"], "Unit-Pricing-2026.pdf"],
+        title: /* @__PURE__ */ React.createElement("span", { className: "el-row-3" }, /* @__PURE__ */ React.createElement(FileIcon, { type: "pdf" }), "Unit-Pricing-2026.pdf"),
+        badge: /* @__PURE__ */ React.createElement(StatusBadge, { status: "INDEXED" }),
+        description: "PDF · 2.4 MB · 18 pages · uploaded by Pavithiran S today at 09:12",
+        actions: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Button, { icon: "download" }, "Download"), /* @__PURE__ */ React.createElement(Button, { icon: "refresh" }, "Re-index"), /* @__PURE__ */ React.createElement(Button, { href: "replace-document.html", icon: "upload" }, "Replace file"), /* @__PURE__ */ React.createElement(Button, { href: "remove-document.html", variant: "danger-soft", icon: "trash" }, "Remove"))
+      }
+    ), /* @__PURE__ */ React.createElement("div", { className: "el-grid", style: { gridTemplateColumns: "minmax(0, 1.7fr) minmax(0, 1fr)" } }, /* @__PURE__ */ React.createElement("div", { className: "el-stack-5" }, /* @__PURE__ */ React.createElement(Card, { title: "Processing", subtitle: "Finished in 3m 41s", actions: /* @__PURE__ */ React.createElement(Badge, { tone: "success", icon: "check" }, "Indexed") }, /* @__PURE__ */ React.createElement(Stepper, { steps: [
+      { label: "Uploaded", status: "done", meta: "09:12" },
+      { label: "Text read", status: "done", meta: "18 pages · 4 tables" },
+      { label: "Split into sections", status: "done", meta: "482 sections" },
+      { label: "Indexed", status: "done", meta: "09:15" }
+    ] }), /* @__PURE__ */ React.createElement(Alert, { tone: "warning", title: "2 pages were hard to read" }, "Pages 17 and 18 are scanned and the text may be incomplete. Check that totals in those tables read correctly.")), /* @__PURE__ */ React.createElement(Card, { title: "What ELIA can quote", subtitle: "A preview of the indexed content", padded: false, actions: /* @__PURE__ */ React.createElement(Button, { size: "sm", variant: "ghost", iconRight: "arrowright" }, "All 482") }, /* @__PURE__ */ React.createElement(Table, { dense: true, columns: [
+      { key: "id", label: "Section", width: 100 },
+      { key: "l", label: "Location", width: 160 },
+      { key: "t", label: "Text", render: (r) => /* @__PURE__ */ React.createElement("span", { className: "el-sm el-truncate", style: { display: "block", maxWidth: 420 } }, r.t) }
+    ], rows: chunks }))), /* @__PURE__ */ React.createElement("div", { className: "el-stack-5" }, /* @__PURE__ */ React.createElement(Card, { title: "Details" }, /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 120, items: [
+      { label: "File type", value: "PDF" },
+      { label: "Size", value: "2.4 MB · 18 pages" },
+      { label: "Uploaded by", value: "Pavithiran S" },
+      { label: "Uploaded", value: "Today, 09:12" },
+      { label: "Last indexed", value: "Today, 09:15" },
+      { label: "Times used", value: "1,290 answers this week" }
+    ] })), /* @__PURE__ */ React.createElement(Card, { title: "History" }, /* @__PURE__ */ React.createElement("div", { className: "el-stack-2 el-sm" }, /* @__PURE__ */ React.createElement("div", { className: "el-between" }, /* @__PURE__ */ React.createElement("span", null, "Replaced by Pavithiran S"), /* @__PURE__ */ React.createElement("span", { className: "el-muted" }, "Today")), /* @__PURE__ */ React.createElement("div", { className: "el-between" }, /* @__PURE__ */ React.createElement("span", null, "Replaced by Ishara Silva"), /* @__PURE__ */ React.createElement("span", { className: "el-muted" }, "14 Sep")), /* @__PURE__ */ React.createElement("div", { className: "el-between" }, /* @__PURE__ */ React.createElement("span", null, "Uploaded by Ishara Silva"), /* @__PURE__ */ React.createElement("span", { className: "el-muted" }, "2 Aug")))))), /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", right: 24, bottom: 24, width: 380 } }, /* @__PURE__ */ React.createElement(Toast, { tone: "success", title: "Re-indexed successfully", description: "482 sections are up to date. ELIA is already using the latest content." })))
+  );
+})();
+</script>
+</body>
+</html>

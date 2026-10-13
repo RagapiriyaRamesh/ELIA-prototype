@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dashboard · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, SegmentedControl, StatCard, Card, LineChart, HBarChart, Legend, Avatar, StatusBadge, Table, CellMain, Icon, Alert } = window.Elia;
+  const days = ["1 Oct", "2", "3", "4", "5", "6", "7"];
+  const queries = [150, 172, 160, 190, 205, 214, 193];
+  const appts = [
+    { id: "1", t: "09:30", c: "Hiruni Jayawardena", s: "Site visit · Garden Villa", a: "Tharushi Fernando", st: "COMPLETED" },
+    { id: "2", t: "11:15", c: "Mohamed Imran", s: "Resale valuation", a: "Kavin Rajan", st: "CONFIRMED" },
+    { id: "3", t: "14:00", c: "Kamal Perera", s: "Payment plan consultation", a: "Nimal Perera", st: "CONFIRMED" },
+    { id: "4", t: "15:00", c: "Sahan Gunawardena", s: "Site visit · Penthouse", a: "Kavin Rajan", st: "CANCELLED" }
+  ];
+  const queue = [
+    { n: "Sahan Gunawardena", r: "Assigned to Dinuka · waiting to accept", st: "PENDING" },
+    { n: "Kumari Dissanayake", r: "Malini accepted · 2nd handoff · chatting on WhatsApp", st: "ASSIGNED" },
+    { n: "Hasini Mendis", r: "Sanduni chatted on WhatsApp · waiting for the report", st: "REPORT_DUE" }
+  ];
+  const top = [
+    { label: "Do you have a site visit slot this Saturday?", value: 214 },
+    { label: "What is the price of the 2BR Sea View?", value: 188 },
+    { label: "Do you offer instalment plans or a bank loan?", value: 142 },
+    { label: "What are your sales gallery opening hours?", value: 117 },
+    { label: "Can I sell my current apartment through you?", value: 86 },
+    { label: "How do I reschedule my appointment?", value: 61 }
+  ];
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "dashboard", role: "Admin", minHeight: 1180 }, /* @__PURE__ */ React.createElement(PageHeader, { title: "Dashboard", description: "How customers are using ELIA and how many conversations become bookings.", actions: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(SegmentedControl, { options: ["Today", "7 days", "30 days"], value: "7 days" }), /* @__PURE__ */ React.createElement(Button, { icon: "download" }, "Export")) }), /* @__PURE__ */ React.createElement("div", { className: "el-grid el-g4" }, /* @__PURE__ */ React.createElement(StatCard, { label: "Customer queries", value: "1,284", delta: "+12.4%", hint: "vs prior 7 days", icon: "chat", spark: queries }), /* @__PURE__ */ React.createElement(StatCard, { label: "Appointment bookings", value: "186", delta: "+8.1%", hint: "vs prior 7 days", icon: "calcheck", spark: [20, 24, 22, 28, 27, 31, 34] }), /* @__PURE__ */ React.createElement(StatCard, { label: "Booking conversion", value: "14.5", unit: "%", delta: "-0.6pt", deltaTone: "bad", hint: "queries → bookings", icon: "trend", spark: [15.2, 15, 14.8, 14.9, 14.6, 14.4, 14.5] }), /* @__PURE__ */ React.createElement("div", { className: "el-card el-stat" }, /* @__PURE__ */ React.createElement("div", { className: "el-stat-top" }, /* @__PURE__ */ React.createElement("span", null, "Booking status"), /* @__PURE__ */ React.createElement("span", { className: "el-stat-ic" }, /* @__PURE__ */ React.createElement(Icon, { name: "calcheck", size: 15 }))), /* @__PURE__ */ React.createElement("div", { className: "el-stack-2", style: { marginTop: 14 } }, [["Confirmed", 124, "var(--success)"], ["Completed", 47, "var(--chart-3)"], ["Cancelled", 15, "var(--ink-muted)"]].map(([l, v, c]) => /* @__PURE__ */ React.createElement("div", { key: l, className: "el-between el-sm" }, /* @__PURE__ */ React.createElement("span", { className: "el-row" }, /* @__PURE__ */ React.createElement("i", { style: { width: 8, height: 8, borderRadius: 99, background: c, display: "inline-block" } }), l), /* @__PURE__ */ React.createElement("span", { className: "el-strong" }, v)))))), /* @__PURE__ */ React.createElement("div", { className: "el-grid", style: { gridTemplateColumns: "1.5fr 1fr", marginTop: 20 } }, /* @__PURE__ */ React.createElement(Card, { title: "Customer queries over time", subtitle: "Messages ELIA received each day", actions: /* @__PURE__ */ React.createElement(Legend, { items: [{ label: "Queries" }, { label: "Bookings", color: "var(--chart-3)" }] }) }, /* @__PURE__ */ React.createElement(LineChart, { height: 268, labels: days, series: [{ data: queries }, { data: [20, 24, 22, 28, 27, 31, 34], color: "var(--chart-3)" }] })), /* @__PURE__ */ React.createElement(Card, { title: "Top customer questions", subtitle: "Most frequently asked this week" }, /* @__PURE__ */ React.createElement(HBarChart, { items: top }))), /* @__PURE__ */ React.createElement("div", { className: "el-grid el-g3", style: { marginTop: 20 } }, [["chat", "Chat sessions", "See who is chatting with ELIA right now", "brand"], ["layers", "Cases", "Every customer case, latest first", "brand"], ["calcheck", "Bookings", "Every appointment booked through ELIA", "brand"]].map((n) => /* @__PURE__ */ React.createElement("a", { key: n[1], href: { "Chat sessions": "conversations.html", "Cases": "cases.html", "Bookings": "bookings.html" }[n[1]], className: "el-navcard" }, /* @__PURE__ */ React.createElement("span", { className: "el-stat-ic", style: { width: 40, height: 40, borderRadius: 10, background: "var(--brand-soft)", color: "var(--brand)", borderColor: "transparent" } }, /* @__PURE__ */ React.createElement(Icon, { name: n[0], size: 18 })), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { className: "t" }, n[1]), /* @__PURE__ */ React.createElement("div", { className: "d" }, n[2])), /* @__PURE__ */ React.createElement(Icon, { name: "arrowright", size: 16, className: "el-muted" })))), /* @__PURE__ */ React.createElement("div", { className: "el-grid", style: { gridTemplateColumns: "1.75fr 1fr", marginTop: 20 } }, /* @__PURE__ */ React.createElement(Card, { title: "Today's appointments", subtitle: "Wednesday 8 October · 4 booked", padded: false, actions: /* @__PURE__ */ React.createElement(Button, { href: "calendar.html", size: "sm", variant: "ghost", iconRight: "arrowright" }, "Calendar") }, /* @__PURE__ */ React.createElement(Table, { dense: true, columns: [
+      { key: "t", label: "Time", width: 70, render: (r) => /* @__PURE__ */ React.createElement("span", { className: "el-strong" }, r.t) },
+      { key: "c", label: "Customer", render: (r) => /* @__PURE__ */ React.createElement(CellMain, { title: r.c, sub: r.s }) },
+      { key: "a", label: "Sales assistant", render: (r) => /* @__PURE__ */ React.createElement("span", { className: "el-row" }, /* @__PURE__ */ React.createElement(Avatar, { name: r.a, size: "xs" }), r.a) },
+      { key: "st", label: "Status", render: (r) => /* @__PURE__ */ React.createElement(StatusBadge, { status: r.st }) }
+    ], rows: appts, rowHref: () => "booking.html" })), /* @__PURE__ */ React.createElement(Card, { title: "Support handoff", subtitle: "2 of 7 support people available · 1 waiting to accept", padded: false, actions: /* @__PURE__ */ React.createElement(Button, { href: "handoff.html", size: "sm", variant: "ghost", iconRight: "arrowright" }, "Open") }, /* @__PURE__ */ React.createElement("div", { className: "el-list" }, queue.map((q) => /* @__PURE__ */ React.createElement("div", { key: q.n, className: "el-list-item" }, /* @__PURE__ */ React.createElement(Avatar, { name: q.n, size: "sm" }), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { className: "el-cell-title" }, q.n), /* @__PURE__ */ React.createElement("div", { className: "el-cell-sub" }, q.r)), /* @__PURE__ */ React.createElement(StatusBadge, { status: q.st, size: "sm" })))))))
+  );
+})();
+</script>
+</body>
+</html>

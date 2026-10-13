@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sales assistant detail · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, Card, Avatar, Badge, StatusBadge, Icon, Input, Toolbar, FilterChip, Table, CellMain, Pagination, Tabs, StatCard, IconButton, Menu } = window.Elia;
+  function RowMenu({ open: o0, items }) {
+    const [open, setOpen] = React.useState(!!o0);
+    return /* @__PURE__ */ React.createElement("span", { onClick: (e) => e.stopPropagation(), style: { position: "relative", display: "inline-block" } }, /* @__PURE__ */ React.createElement(IconButton, { icon: "more", label: "Actions", size: "sm", onClick: () => setOpen(!open) }), open ? /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", right: 0, top: 34, zIndex: 30 } }, /* @__PURE__ */ React.createElement(Menu, { style: { width: 190 }, items: items.map((it) => it === "-" ? it : Object.assign({}, it, { onClick: () => {
+      setOpen(false);
+      if (it.go) window.location.href = it.go;
+    } })) })) : null);
+  }
+  const rows = [
+    { id: 0, n: "Hiruni Jayawardena", p: "+94 78 ••• 5530", t: "Site visit · Garden Villa", o: "Booking confirmed", ot: "success", w: "Today 09:24", m: 10 },
+    { id: 1, n: "Ruwan Wickramasinghe", p: "+94 77 ••• 4182", t: "Site visit · Studio A", o: "Booking confirmed", ot: "success", w: "Today 09:30", m: 14 },
+    { id: 2, n: "Chathuri Abeysekara", p: "+94 71 ••• 6620", t: "Site visit · 2BR Sea View", o: "Booking confirmed", ot: "success", w: "Yesterday 17:05", m: 11 },
+    { id: 3, n: "Fathima Rizna", p: "+94 71 ••• 0937", t: "Payment plan consultation", o: "Booking confirmed", ot: "success", w: "Mon 22 Sep", m: 23 },
+    { id: 4, n: "Hasini Mendis", p: "+94 75 ••• 9087", t: "Site visit · Garden Villa", o: "Booking confirmed", ot: "success", w: "Yesterday 11:18", m: 9 },
+    { id: 5, n: "Roshan Tennakoon", p: "+94 76 ••• 3345", t: "Defects warranty", o: "Answered by ELIA", ot: "neutral", w: "Mon 6 Oct", m: 7 },
+    { id: 6, n: "Priyanka Jayawardena", p: "+94 70 ••• 5521", t: "Site visit · Studio A", o: "Booking cancelled", ot: "neutral", w: "Mon 6 Oct", m: 12 }
+  ];
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "assistants", role: "Admin", minHeight: 980 }, /* @__PURE__ */ React.createElement(PageHeader, { breadcrumbs: [["Sales assistants", "assistants.html"], "Tharushi Fernando"], title: /* @__PURE__ */ React.createElement("span", { className: "el-row-3" }, /* @__PURE__ */ React.createElement(Avatar, { name: "Tharushi Fernando", size: "lg" }), "Tharushi Fernando"), badge: /* @__PURE__ */ React.createElement(StatusBadge, { status: "ACTIVE" }), description: "Senior Sales Consultant · +94 77 123 4567", actions: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Button, { href: "assistant-form.html", icon: "edit" }, "Edit profile"), /* @__PURE__ */ React.createElement(Button, { href: "deactivate-assistant.html", variant: "danger-soft", icon: "pause" }, "Deactivate")) }), /* @__PURE__ */ React.createElement("div", { className: "el-row", style: { gap: 6, marginBottom: 16, flexWrap: "wrap" } }, /* @__PURE__ */ React.createElement(Badge, { tone: "brand" }, "Site visits"), /* @__PURE__ */ React.createElement(Badge, { tone: "brand" }, "Apartments"), /* @__PURE__ */ React.createElement(Badge, { tone: "brand" }, "Villas")), /* @__PURE__ */ React.createElement(Tabs, { value: "conv", items: [{ id: "profile", label: "Profile", href: "assistant-form.html" }, { id: "avail", label: "Availability", href: "availability.html" }, { id: "conv", label: "Booked customers", count: 64 }], style: { marginBottom: 20 } }), /* @__PURE__ */ React.createElement("div", { className: "el-grid el-g3", style: { marginBottom: 20 } }, /* @__PURE__ */ React.createElement(StatCard, { label: "Conversations this month", value: "64", icon: "chat", hint: "associated with Tharushi" }), /* @__PURE__ */ React.createElement(StatCard, { label: "Bookings made", value: "38", icon: "calcheck", hint: "from those conversations" }), /* @__PURE__ */ React.createElement(StatCard, { label: "Bookings completed", value: "31", icon: "checkcircle", hint: "customers who attended" })), /* @__PURE__ */ React.createElement(Card, { padded: false }, /* @__PURE__ */ React.createElement(Toolbar, null, /* @__PURE__ */ React.createElement(Input, { icon: "search", size: "sm", placeholder: "Search customer or topic", style: { width: 260 } }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Outcome" }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Date", value: "This month" })), /* @__PURE__ */ React.createElement(Table, { columns: [
+      { key: "n", label: "Customer", width: 240, render: (r) => /* @__PURE__ */ React.createElement(CellMain, { title: r.n, sub: r.p, lead: /* @__PURE__ */ React.createElement(Avatar, { name: r.n, size: "sm" }) }) },
+      { key: "t", label: "Topic" },
+      { key: "o", label: "Outcome", width: 170, render: (r) => /* @__PURE__ */ React.createElement(Badge, { tone: r.ot, dot: true }, r.o) },
+      { key: "m", label: "Messages", align: "right", width: 90 },
+      { key: "w", label: "Last message", width: 140 },
+      { key: "x", label: "Action", align: "right", width: 80, render: () => /* @__PURE__ */ React.createElement(RowMenu, { items: [{ label: "Open case", icon: "layers", go: "cases.html" }, { label: "View booking", icon: "calcheck", go: "booking.html" }] }) }
+    ], rows }), /* @__PURE__ */ React.createElement(Pagination, { page: 1, pages: 11, total: 64, shown: rows.length })))
+  );
+})();
+</script>
+</body>
+</html>

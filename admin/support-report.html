@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Write report · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, Card, Field, Select, Textarea, Radio, Checkbox, Avatar, Badge, Alert, DescriptionList, StatusBadge, Dropzone, FileIcon, ProgressBar, IconButton } = window.Elia;
+  const { useState } = React;
+  const D = {
+    "user": "Sanduni Herath",
+    "title": "Write report on your chat with Hasini Mendis",
+    "crumbs": [
+      [
+        "Reports",
+        "reports.html"
+      ],
+      "CS-1041",
+      "Write report"
+    ],
+    "desc": "You chatted with her directly on WhatsApp, so ELIA cannot see it. You opened this from your case link. Your report tells ELIA what to do next.",
+    "badge": /* @__PURE__ */ React.createElement(StatusBadge, { status: "REPORT_DUE" }),
+    "action": /* @__PURE__ */ React.createElement(Badge, { tone: "warning", icon: "file" }, "Required after contact · no time limit"),
+    "sentTitle": "Report sent",
+    "sentText": "ELIA is now following up with Hasini on WhatsApp. You will see the result in Reports.",
+    "note": null,
+    "out": "info",
+    "asked": "Wants to buy the Garden Villa and sell her current apartment through us. She asked what it is worth.",
+    "discussed": "Estimated resale at LKR 41M after a site inspection. She needs to bring the title deed and the last three utility bills. She prefers a weekend visit.",
+    "next": "Send information or a document",
+    "file": true,
+    "fileName": "Report-CS-1041-Sanduni.pdf",
+    "fileMeta": "Attached just now",
+    "cust": "Hasini Mendis",
+    "topic": "Defects liability cover · Garden Villa",
+    "facts": [
+      {
+        "label": "Case",
+        "value": "CS-1041"
+      },
+      {
+        "label": "Phone",
+        "value": "+94 75 555 9087"
+      },
+      {
+        "label": "Accepted",
+        "value": "10:04"
+      },
+      {
+        "label": "Chat ended",
+        "value": "10:18"
+      }
+    ],
+    "summary": "Asked about selling her apartment to buy the Garden Villa and about the defects liability warranty."
+  };
+  const outcomes = [
+    ["resolved", "Resolved", "I answered everything. No more help needed."],
+    ["appointment", "Needs an appointment", "The customer should book a visit or consultation."],
+    ["info", "Needs information", "ELIA should send a document, price list or details."],
+    ["followup", "Needs a follow-up", "Someone needs to come back to them later."],
+    ["noreply", "Customer did not respond", "I tried but they did not answer."]
+  ];
+  const nextSteps = ["Book an appointment", "Send information or a document", "Follow up later", "Close and ask for feedback", "Return to ELIA"];
+  function Report() {
+    const [out, setOut] = useState(D.out);
+    const [fb, setFb] = useState(true);
+    const [sent, setSent] = useState(false);
+    const [file, setFile] = useState(D.file ? "chosen" : "empty");
+    const [asked, setAsked] = useState(D.asked);
+    const [discussed, setDiscussed] = useState(D.discussed);
+    const ok = asked.trim().length > 0 && discussed.trim().length > 0;
+    return /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "reports", role: "Support Team", user: D.user, minHeight: 1460 }, /* @__PURE__ */ React.createElement(PageHeader, { title: D.title, breadcrumbs: D.crumbs, description: D.desc, badge: D.badge, actions: D.action }), sent ? /* @__PURE__ */ React.createElement("div", { style: { marginBottom: 20 } }, /* @__PURE__ */ React.createElement(Alert, { tone: "success", title: D.sentTitle }, D.sentText)) : null, D.note ? /* @__PURE__ */ React.createElement("div", { style: { marginBottom: 20 } }, /* @__PURE__ */ React.createElement(Alert, { tone: "info", title: D.note[0] }, D.note[1])) : null, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "minmax(0, 1fr) 400px", gap: 20, alignItems: "start" } }, /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 20 } }, /* @__PURE__ */ React.createElement(Card, { title: "How did it go?", subtitle: "Required · pick the one that fits best" }, /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 12 } }, outcomes.map(([k, t, d]) => /* @__PURE__ */ React.createElement(Radio, { key: k, checked: out === k, onChange: () => setOut(k), label: t, description: d })))), /* @__PURE__ */ React.createElement(Card, { title: "Details for ELIA", subtitle: "All required" }, /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 16 } }, /* @__PURE__ */ React.createElement(Field, { label: "What the customer asked", required: true, hint: "In a line or two", error: asked.trim() ? null : "Required. Tell ELIA what they asked." }, /* @__PURE__ */ React.createElement(Textarea, { rows: 3, value: asked, onChange: (e) => setAsked(e.target.value), "aria-label": "What the customer asked" })), /* @__PURE__ */ React.createElement(Field, { label: "What you discussed or agreed", required: true, error: discussed.trim() ? null : "Required. Tell ELIA what you agreed." }, /* @__PURE__ */ React.createElement(Textarea, { rows: 4, value: discussed, onChange: (e) => setDiscussed(e.target.value), "aria-label": "What you discussed or agreed" })), /* @__PURE__ */ React.createElement(Field, { label: "Next step for ELIA", required: true, hint: "ELIA does this with the customer on WhatsApp" }, /* @__PURE__ */ React.createElement(Select, { options: nextSteps, value: D.next })), /* @__PURE__ */ React.createElement(Checkbox, { checked: fb, onChange: setFb, label: "Ask the customer for feedback at the end", description: "ELIA asks for a 1 to 5 rating once the next step is done." }))), /* @__PURE__ */ React.createElement(Card, { title: "Report file", subtitle: "Optional attachment. Everything above is still required", actions: /* @__PURE__ */ React.createElement(Badge, null, "PDF, DOCX, JPG, PNG · 10 MB") }, file === "empty" ? /* @__PURE__ */ React.createElement(Dropzone, { title: "Attach a report file", hint: /* @__PURE__ */ React.createElement("span", null, "Drag a file here or ", /* @__PURE__ */ React.createElement("a", null, "browse")), onClick: () => setFile("chosen") }) : /* @__PURE__ */ React.createElement("div", { className: "el-row-3", style: { padding: "10px 12px", border: "1px solid var(--line)", borderRadius: 8, alignItems: "flex-start" } }, /* @__PURE__ */ React.createElement(FileIcon, { type: "pdf" }), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { className: "el-between" }, /* @__PURE__ */ React.createElement("span", { className: "el-sm el-strong el-truncate" }, D.fileName), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, "184 KB")), /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted", style: { marginTop: 2 } }, D.fileMeta), /* @__PURE__ */ React.createElement(ProgressBar, { value: 100, tone: "success", style: { height: 4, marginTop: 8 } })), /* @__PURE__ */ React.createElement(IconButton, { icon: "x", label: "Remove file", size: "sm", onClick: () => setFile("empty") }))), /* @__PURE__ */ React.createElement("div", { className: "el-row", style: { justifyContent: "flex-end", gap: 12 } }, /* @__PURE__ */ React.createElement(Button, { href: "reports.html" }, "Save draft"), /* @__PURE__ */ React.createElement(Button, { variant: "primary", icon: "send", disabled: !ok, onClick: () => {
+      setSent(true);
+      setTimeout(() => {
+        window.location.href = "reports.html";
+      }, 900);
+    } }, "Submit report"))), /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 20 } }, /* @__PURE__ */ React.createElement(Card, { title: "Customer" }, /* @__PURE__ */ React.createElement("div", { className: "el-row-3", style: { marginBottom: 14 } }, /* @__PURE__ */ React.createElement(Avatar, { name: D.cust }), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-cell-title" }, D.cust), /* @__PURE__ */ React.createElement("div", { className: "el-cell-sub" }, D.topic))), /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 92, items: D.facts })), /* @__PURE__ */ React.createElement(Card, { title: "Summary ELIA gave you", icon: "sparkle" }, /* @__PURE__ */ React.createElement("div", { className: "el-sm el-secondary" }, D.summary)))));
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(/* @__PURE__ */ React.createElement(Report, null));
+})();
+</script>
+</body>
+</html>

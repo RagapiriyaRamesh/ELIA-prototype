@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Two-factor verification · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AuthLayout, OtpInput, Button, Checkbox, Icon } = window.Elia;
+  function Art() {
+    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("svg", { style: { position: "absolute", right: -120, top: 120, opacity: 0.16 }, width: "700", height: "700", viewBox: "0 0 700 700", fill: "none" }, [50, 110, 170, 230, 290, 340].map((r) => /* @__PURE__ */ React.createElement("circle", { key: r, cx: "350", cy: "350", r, stroke: "currentColor", strokeWidth: "1.5" }))), /* @__PURE__ */ React.createElement("div", { style: { position: "relative", maxWidth: 440 } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 28, lineHeight: "34px", fontWeight: 600, letterSpacing: "-0.02em" } }, "One more step keeps customer conversations private."), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 12, fontSize: 15, lineHeight: "22px", opacity: 0.85 } }, "Your workspace requires two-factor authentication for everyone with access to transcripts and bookings.")));
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    /* @__PURE__ */ React.createElement(AuthLayout, { portal: "admin", art: /* @__PURE__ */ React.createElement(Art, null) }, /* @__PURE__ */ React.createElement("span", { className: "el-stat-ic", style: { width: 48, height: 48, borderRadius: 12, background: "var(--brand-soft)", color: "var(--brand)", borderColor: "transparent" } }, /* @__PURE__ */ React.createElement(Icon, { name: "fingerprint", size: 22 })), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h1", null, "Verify it's you"), /* @__PURE__ */ React.createElement("p", { className: "lead" }, "Enter the 6-digit code from your authenticator app for ", /* @__PURE__ */ React.createElement("b", { style: { color: "var(--ink)" } }, "pavithiran@harbourview.lk"), ".")), /* @__PURE__ */ React.createElement(OtpInput, { value: "4821", focusIndex: 4 }), /* @__PURE__ */ React.createElement(Checkbox, { checked: true, label: "Trust this device for 30 days", description: "Don't use on shared computers." }), /* @__PURE__ */ React.createElement(Button, { href: "dashboard.html", variant: "primary", size: "lg", block: true }, "Verify and continue"), /* @__PURE__ */ React.createElement("div", { className: "el-between el-sm" }, /* @__PURE__ */ React.createElement("a", { href: "dashboard.html" }, "Use a recovery code"), /* @__PURE__ */ React.createElement("span", { className: "el-muted" }, "Code refreshes in 18s")))
+  );
+})();
+</script>
+</body>
+</html>

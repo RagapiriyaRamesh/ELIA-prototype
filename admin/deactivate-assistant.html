@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Deactivate assistant · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, Card, Avatar, Badge, Switch, Icon, IconButton, Input, FilterChip, Toolbar, Table, CellMain, Modal, Alert, Radio, Select, Field } = window.Elia;
+  const rows = [
+    { id: 1, n: "Tharushi Fernando", d: "Senior Sales Consultant", tags: ["Site visits", "Apartments", "Villas"], on: true },
+    { id: 2, n: "Nimal Perera", d: "Payment Plan Specialist", tags: ["Payment plans", "Legal"], on: true },
+    { id: 3, n: "Kavin Rajan", d: "Resale Valuer", tags: ["Valuations", "Resale listings"], on: true }
+  ];
+  const modal = /* @__PURE__ */ React.createElement(
+    Modal,
+    {
+      closeHref: "assistant.html",
+      width: 560,
+      icon: "pause",
+      iconTone: "danger",
+      title: "Deactivate Tharushi Fernando?",
+      description: "They will stop receiving new bookings. Their history is kept.",
+      footer: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Button, { href: "assistant.html" }, "Cancel"), /* @__PURE__ */ React.createElement(Button, { href: "assistants.html", variant: "danger", icon: "pause" }, "Deactivate"))
+    },
+    /* @__PURE__ */ React.createElement("div", { className: "el-stack" }, /* @__PURE__ */ React.createElement(Alert, { tone: "warning", title: "6 upcoming bookings" }, "Between today and 17 Oct. Choose what happens to them."), /* @__PURE__ */ React.createElement("div", { className: "el-stack-2" }, /* @__PURE__ */ React.createElement("div", { className: "el-evidence", style: { flexDirection: "row", alignItems: "flex-start", gap: 12, borderColor: "var(--brand)", background: "var(--brand-soft)" } }, /* @__PURE__ */ React.createElement(Radio, { checked: true }), /* @__PURE__ */ React.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ React.createElement("div", { className: "el-strong el-sm" }, "Reassign them to another sales assistant"), /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted", style: { marginBottom: 8 } }, "Only assistants free at each time are used. Customers are told."), /* @__PURE__ */ React.createElement(Select, { options: ["Best match by expertise", "Nimal Perera", "Kavin Rajan"] }))), /* @__PURE__ */ React.createElement("div", { className: "el-evidence", style: { flexDirection: "row", alignItems: "flex-start", gap: 12 } }, /* @__PURE__ */ React.createElement(Radio, null), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "el-strong el-sm" }, "Leave them with Tharushi"), /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted" }, "Existing bookings stay; she just won't get new ones.")))), /* @__PURE__ */ React.createElement("div", { className: "el-xs el-muted" }, "To delete this profile permanently instead, use Delete in the Action control. Deleted profiles cannot be restored."))
+  );
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "assistants", role: "Admin", overlay: modal }, /* @__PURE__ */ React.createElement(PageHeader, { title: "Sales assistants", description: "The people customers are booked with.", actions: /* @__PURE__ */ React.createElement(Button, { href: "assistant-form.html", variant: "primary", icon: "plus" }, "Add sales assistant") }), /* @__PURE__ */ React.createElement(Card, { padded: false }, /* @__PURE__ */ React.createElement(Table, { columns: [
+      { key: "n", label: "Sales assistant", render: (r) => /* @__PURE__ */ React.createElement(CellMain, { title: r.n, sub: r.d, lead: /* @__PURE__ */ React.createElement(Avatar, { name: r.n, size: "md" }) }) },
+      { key: "tags", label: "Expertise", render: (r) => /* @__PURE__ */ React.createElement("span", { className: "el-row", style: { gap: 6 } }, r.tags.map((t) => /* @__PURE__ */ React.createElement(Badge, { key: t, tone: "brand" }, t))) },
+      { key: "st", label: "Status", render: (r) => /* @__PURE__ */ React.createElement("span", { className: "el-row" }, /* @__PURE__ */ React.createElement(Switch, { size: "sm", checked: r.on }), /* @__PURE__ */ React.createElement("span", { className: "el-sm" }, "Active")) }
+    ], rows })))
+  );
+})();
+</script>
+</body>
+</html>

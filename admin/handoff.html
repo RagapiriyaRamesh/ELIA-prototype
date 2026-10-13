@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Support handoff · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, Card, Avatar, StatusBadge, StatCard, Alert, Icon, IconButton, Badge, Input, Menu } = window.Elia;
+  const { useState } = React;
+  const COLS = "180px 112px minmax(0, 1fr) 64px 56px";
+  const groups = [
+    { title: "Current session", sub: "3 support people", rows: [
+      { n: "Malini Jayawardena", st: "BUSY", cust: "Kumari Dissanayake", stage: "Chatting on WhatsApp · since 10:06 · 2nd handoff", h: 2, href: "case-two-handoffs.html" },
+      { n: "Sanduni Herath", st: "REPORT_DUE", cust: "Hasini Mendis", stage: "Chat ended 10:18 · waiting for the report", h: 1, href: "case-report-due.html" },
+      { n: "Dinuka Ranasinghe", st: "PENDING", label: "Assigned", cust: "Sahan Gunawardena", stage: "Assigned 10:21 · waiting to accept", h: 1, href: "case-pending.html" }
+    ] },
+    { title: "Available", sub: "Next new request is assigned from here", rows: [
+      { n: "Chamod Silva", st: "AVAILABLE", cust: null, stage: "Free since 10:03", h: 1 },
+      { n: "Dilshan Perera", st: "AVAILABLE", cust: null, stage: "Free since 09:00", h: 0 }
+    ] },
+    { title: "Unavailable", sub: "Not assigned any requests", rows: [
+      { n: "Ruwani Silva", st: "AWAY", cust: null, stage: "On a break · back at 10:45", h: 0 },
+      { n: "Thilina De Silva", st: "OFF_SHIFT", cust: null, stage: "Back tomorrow 09:00", h: 0 }
+    ] }
+  ];
+  function RowMenu({ open: o0, items }) {
+    const [open, setOpen] = useState(!!o0);
+    return /* @__PURE__ */ React.createElement("span", { onClick: (e) => e.stopPropagation(), style: { position: "relative", display: "inline-block" } }, /* @__PURE__ */ React.createElement(IconButton, { icon: "more", label: "Actions", size: "sm", onClick: () => setOpen(!open) }), open ? /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", right: 0, top: 34, zIndex: 30 } }, /* @__PURE__ */ React.createElement(Menu, { style: { width: 160 }, items: items.map((it) => Object.assign({}, it, { onClick: () => {
+      setOpen(false);
+      if (it.go) window.location.href = it.go;
+    } })) })) : null);
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "handoff", role: "Admin", minHeight: 1200 }, /* @__PURE__ */ React.createElement(PageHeader, { title: "Support handoff", description: "Your support team, live. A new request is assigned to one available support person, who accepts when ready and contacts the customer directly on WhatsApp.", actions: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Button, { href: "support-teams.html", icon: "users" }, "Support team"), /* @__PURE__ */ React.createElement(Button, { href: "handoff-rules.html", icon: "settings" }, "Handoff rules")) }), /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 12 } }, /* @__PURE__ */ React.createElement(Alert, { tone: "accent", title: "Sahan Gunawardena asked for a person at 10:21", action: /* @__PURE__ */ React.createElement(Button, { href: "case-pending.html", size: "sm" }, "View case") }, "Assigned to Dinuka Ranasinghe with the chat summary and case link. Waiting for Dinuka to accept.")), /* @__PURE__ */ React.createElement("div", { className: "el-grid el-g4", style: { margin: "20px 0" } }, /* @__PURE__ */ React.createElement(StatCard, { label: "Available now", value: "2", unit: "of 7", hint: "free to take a customer", icon: "checkcircle" }), /* @__PURE__ */ React.createElement(StatCard, { label: "In a session", value: "3", hint: "1 chatting · 1 report due · 1 to accept", icon: "headset" }), /* @__PURE__ */ React.createElement(StatCard, { label: "Waiting to accept", value: "1", hint: "assigned, not accepted yet", icon: "clock" }), /* @__PURE__ */ React.createElement(StatCard, { label: "Handled today", value: "4", hint: "customers · 5 handoffs", icon: "users" })), /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "minmax(0, 1fr) 340px", gap: 20, alignItems: "start" } }, /* @__PURE__ */ React.createElement(Card, { padded: false, title: "Support team", subtitle: "Live status, in priority order", actions: /* @__PURE__ */ React.createElement(Input, { icon: "search", size: "sm", placeholder: "Search support person", style: { width: 220 } }) }, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: COLS, gap: 12, padding: "10px 20px", background: "var(--surface-sunken)", borderTop: "1px solid var(--line)", borderBottom: "1px solid var(--line)", fontSize: 12, fontWeight: 600, color: "var(--ink-muted)" } }, /* @__PURE__ */ React.createElement("span", null, "Support person"), /* @__PURE__ */ React.createElement("span", null, "Status"), /* @__PURE__ */ React.createElement("span", null, "Current session"), /* @__PURE__ */ React.createElement("span", null, "Today"), /* @__PURE__ */ React.createElement("span", null)), groups.map((g) => /* @__PURE__ */ React.createElement("div", { key: g.title }, /* @__PURE__ */ React.createElement("div", { className: "el-between", style: { padding: "10px 20px", background: "var(--surface)", borderBottom: "1px solid var(--line)" } }, /* @__PURE__ */ React.createElement("span", { className: "el-section-title" }, g.title), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted" }, g.sub)), g.rows.map((r) => /* @__PURE__ */ React.createElement("div", { key: r.n, style: { display: "grid", gridTemplateColumns: COLS, gap: 12, alignItems: "center", padding: "12px 20px", borderBottom: "1px solid var(--line)", opacity: g.title === "Unavailable" ? 0.75 : 1 } }, /* @__PURE__ */ React.createElement("span", { className: "el-row-3" }, /* @__PURE__ */ React.createElement(Avatar, { name: r.n, size: "sm", presence: g.title === "Unavailable" ? "off" : "on" }), /* @__PURE__ */ React.createElement("span", { className: "el-cell-title" }, r.n)), /* @__PURE__ */ React.createElement("span", null, /* @__PURE__ */ React.createElement(StatusBadge, { status: r.st, label: r.label, size: "sm" })), /* @__PURE__ */ React.createElement("span", { style: { minWidth: 0 } }, r.cust ? /* @__PURE__ */ React.createElement("span", null, /* @__PURE__ */ React.createElement("span", { className: "el-sm el-strong" }, r.cust), /* @__PURE__ */ React.createElement("span", { className: "el-xs el-muted", style: { display: "block" } }, r.stage)) : /* @__PURE__ */ React.createElement("span", { className: "el-sm el-muted" }, r.stage)), /* @__PURE__ */ React.createElement("span", { className: "el-sm el-strong" }, r.h), /* @__PURE__ */ React.createElement("span", { style: { textAlign: "right" } }, r.cust ? /* @__PURE__ */ React.createElement(RowMenu, { items: [{ label: "Open case", icon: "layers", go: r.href }] }) : null)))))), /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 20 } }, /* @__PURE__ */ React.createElement(Card, { title: "How a customer is assigned" }, /* @__PURE__ */ React.createElement("div", { className: "el-stack", style: { gap: 10 } }, /* @__PURE__ */ React.createElement("div", { className: "el-row el-sm", style: { alignItems: "flex-start" } }, /* @__PURE__ */ React.createElement(Icon, { name: "send", size: 15 }), "ELIA assigns the case to the next available support person and sends the chat summary, what the customer needs, the customer's details and a case link."), /* @__PURE__ */ React.createElement("div", { className: "el-row el-sm", style: { alignItems: "flex-start" } }, /* @__PURE__ */ React.createElement(Icon, { name: "checkcircle", size: 15 }), "They accept whenever they are ready (no time limit) and contact the customer directly on WhatsApp."), /* @__PURE__ */ React.createElement("div", { className: "el-row el-sm", style: { alignItems: "flex-start" } }, /* @__PURE__ */ React.createElement(Icon, { name: "file", size: 15 }), "After the chat they write a report from the case link, then ELIA carries on with the customer."), /* @__PURE__ */ React.createElement("div", { className: "el-row el-sm", style: { alignItems: "flex-start" } }, /* @__PURE__ */ React.createElement(Icon, { name: "users", size: 15 }), "People who are in a session, away or off shift are not assigned."))))))
+  );
+})();
+</script>
+</body>
+</html>

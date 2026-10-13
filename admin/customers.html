@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Customers · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, Card, Table, Toolbar, Input, FilterChip, CellMain, Avatar, Badge, StatusBadge, Icon, IconButton, Pagination, Tabs, Menu } = window.Elia;
+  function RowMenu({ open: o0, items }) {
+    const [open, setOpen] = React.useState(!!o0);
+    return /* @__PURE__ */ React.createElement("span", { onClick: (e) => e.stopPropagation(), style: { position: "relative", display: "inline-block" } }, /* @__PURE__ */ React.createElement(IconButton, { icon: "more", label: "Actions", size: "sm", onClick: () => setOpen(!open) }), open ? /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", right: 0, top: 34, zIndex: 30 } }, /* @__PURE__ */ React.createElement(Menu, { style: { width: 190 }, items: items.map((it) => it === "-" ? it : Object.assign({}, it, { onClick: () => {
+      setOpen(false);
+      if (it.go) window.location.href = it.go;
+    } })) })) : null);
+  }
+  const rows = [
+    { id: 1, n: "Ruwan Wickramasinghe", p: "+94 77 ••• 4182", c: 6, b: "CONFIRMED", i: "Studio A, 2BR Sea View", a: "Tharushi Fernando", l: "4 min ago" },
+    { id: 2, n: "Fathima Rizna", p: "+94 71 ••• 0937", c: 3, b: "HOLD_EXPIRED", i: "2BR Sea View payment plan", a: "Nimal Perera", l: "8 min ago" },
+    { id: 3, n: "Arjun Selvaraj", p: "+94 75 ••• 8830", c: 2, b: null, i: "Bulk purchase · 12 units", a: "—", l: "12 min ago" },
+    { id: 4, n: "Nadeesha Peiris", p: "+94 77 ••• 3310", c: 4, b: "CONFIRMED", i: "Payment plans", a: "Nimal Perera", l: "29 min ago" },
+    { id: 5, n: "Sahan Gunawardena", p: "+94 76 ••• 2210", c: 5, b: "CANCELLED", i: "Defects warranty", a: "Kavin Rajan", l: "33 min ago" },
+    { id: 6, n: "Kumari Dissanayake", p: "+94 77 ••• 5521", c: 2, b: "CONFIRMED", i: "Penthouse resale", a: "Kavin Rajan", l: "50 min ago" },
+    { id: 7, n: "Mohamed Imran", p: "+94 72 ••• 7781", c: 1, b: "CONFIRMED", i: "Apartment resale", a: "Kavin Rajan", l: "1 h ago" },
+    { id: 8, n: "Lahiru Bandara", p: "+94 70 ••• 4420", c: 7, b: "COMPLETED", i: "Key handover", a: "Ayesha Nazeer", l: "Yesterday" }
+  ];
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "customers", role: "Admin" }, /* @__PURE__ */ React.createElement(PageHeader, { title: "Customers", description: "Everyone who has messaged Harbour View Homes through ELIA.", actions: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Button, { icon: "download" }, "Export CSV"), /* @__PURE__ */ React.createElement(Button, { variant: "primary", icon: "plus" }, "Add customer")) }), /* @__PURE__ */ React.createElement(Card, { padded: false }, /* @__PURE__ */ React.createElement("div", { style: { padding: "0 20px" } }, /* @__PURE__ */ React.createElement(Tabs, { value: "all", items: [{ id: "all", label: "All", count: 2418 }, { id: "active", label: "Active this week", count: 312 }, { id: "booked", label: "With bookings", count: 640 }, { id: "opt", label: "Opted out", count: 21 }] })), /* @__PURE__ */ React.createElement(Toolbar, null, /* @__PURE__ */ React.createElement(Input, { icon: "search", size: "sm", placeholder: "Name or phone", style: { width: 260 } }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Assistant" }), /* @__PURE__ */ React.createElement(FilterChip, { label: "Last active" }), /* @__PURE__ */ React.createElement("span", { className: "el-spacer" }), /* @__PURE__ */ React.createElement(IconButton, { icon: "sliders", label: "Columns", size: "sm", variant: "secondary" })), /* @__PURE__ */ React.createElement(Table, { selectable: true, columns: [
+      { key: "n", label: "Customer", render: (r) => /* @__PURE__ */ React.createElement(CellMain, { title: r.n, sub: r.p, lead: /* @__PURE__ */ React.createElement(Avatar, { name: r.n, size: "sm" }) }) },
+      { key: "i", label: "Interested in" },
+      { key: "c", label: "Conversations", align: "right", render: (r) => /* @__PURE__ */ React.createElement("span", { className: "el-strong" }, r.c) },
+      { key: "b", label: "Latest booking", render: (r) => r.b ? /* @__PURE__ */ React.createElement(StatusBadge, { status: r.b }) : /* @__PURE__ */ React.createElement("span", { className: "el-muted" }, "None") },
+      { key: "a", label: "Assistant", render: (r) => r.a !== "—" ? /* @__PURE__ */ React.createElement("span", { className: "el-row" }, /* @__PURE__ */ React.createElement(Avatar, { name: r.a, size: "xs" }), r.a) : /* @__PURE__ */ React.createElement("span", { className: "el-muted" }, "—") },
+      { key: "l", label: "Last active", sortable: true, sorted: "desc" },
+      { key: "x", label: "Action", align: "right", width: 80, render: (r) => /* @__PURE__ */ React.createElement(RowMenu, { items: [{ label: "View chats", icon: "chat", go: "conversations.html" }, { label: "View bookings", icon: "calcheck", go: "bookings.html" }].concat(r.b ? [{ label: "Open latest case", icon: "layers", go: "cases.html" }] : []) }) }
+    ], rows, rowHref: () => "conversations.html" }), /* @__PURE__ */ React.createElement(Pagination, { page: 1, pages: 242, total: 2418, shown: rows.length })))
+  );
+})();
+</script>
+</body>
+</html>

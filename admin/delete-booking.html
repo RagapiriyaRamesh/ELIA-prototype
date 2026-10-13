@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Delete booking · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, Card, Table, Toolbar, Input, CellMain, Avatar, StatusBadge, IconButton, Pagination, Tabs, Modal, Checkbox, Alert, DescriptionList } = window.Elia;
+  const rows = [
+    { id: "BK-24A7-QX", c: "Ruwan Wickramasinghe", s: "Site visit · Studio A", a: "Tharushi Fernando", w: "Thu 9 Oct · 10:30", st: "CONFIRMED" },
+    { id: "BK-24A9-PE", c: "Nadeesha Peiris", s: "Payment plan consultation", a: "Nimal Perera", w: "Thu 9 Oct · 11:30", st: "CONFIRMED" },
+    { id: "BK-24A6-MW", c: "Chathuri Abeysekara", s: "Site visit · 2BR Sea View", a: "Tharushi Fernando", w: "Thu 9 Oct · 14:00", st: "CONFIRMED" },
+    { id: "BK-24A5-KD", c: "Mohamed Imran", s: "Resale valuation", a: "Kavin Rajan", w: "Wed 8 Oct · 11:15", st: "CONFIRMED" }
+  ];
+  const modal = /* @__PURE__ */ React.createElement(
+    Modal,
+    {
+      closeHref: "bookings.html",
+      width: 520,
+      icon: "trash",
+      iconTone: "danger",
+      title: "Delete booking BK-24A9-PE?",
+      description: "This removes the booking and frees the slot. It cannot be undone.",
+      footer: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Button, { href: "bookings.html" }, "Cancel"), /* @__PURE__ */ React.createElement(Button, { href: "bookings.html", variant: "danger", icon: "trash" }, "Delete booking"))
+    },
+    /* @__PURE__ */ React.createElement("div", { className: "el-stack" }, /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 110, items: [
+      { label: "Customer", value: "Nadeesha Peiris" },
+      { label: "Service", value: "Payment plan consultation" },
+      { label: "When", value: "Thu 9 Oct · 11:30–12:00" },
+      { label: "Sales assistant", value: "Nimal Perera" }
+    ] }), /* @__PURE__ */ React.createElement(Checkbox, { checked: true, label: "Tell the customer on WhatsApp", description: "ELIA lets her know the appointment was cancelled and offers new times." }))
+  );
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "appointments", role: "Admin", overlay: modal }, /* @__PURE__ */ React.createElement(PageHeader, { title: "Bookings", description: "Every appointment across your sales assistants, booked by customers through ELIA on WhatsApp." }), /* @__PURE__ */ React.createElement(Card, { padded: false }, /* @__PURE__ */ React.createElement(Table, { columns: [
+      { key: "id", label: "Booking ID", render: (r) => /* @__PURE__ */ React.createElement("span", { className: "el-mono el-strong" }, r.id) },
+      { key: "c", label: "Customer", render: (r) => /* @__PURE__ */ React.createElement(CellMain, { title: r.c, lead: /* @__PURE__ */ React.createElement(Avatar, { name: r.c, size: "sm" }) }) },
+      { key: "s", label: "Service" },
+      { key: "a", label: "Sales assistant" },
+      { key: "w", label: "When" },
+      { key: "st", label: "Status", render: (r) => /* @__PURE__ */ React.createElement(StatusBadge, { status: r.st }) },
+      { key: "x", label: "Action", align: "right", width: 90, render: () => /* @__PURE__ */ React.createElement(IconButton, { icon: "more", label: "Actions", size: "sm" }) }
+    ], rows })))
+  );
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Edit booking · ELIA Admin</title>
+<script src="../assets/routes.js"></script>
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/bundle.css">
+<link rel="stylesheet" href="../assets/proto.css">
+<script src="../assets/react.production.min.js"></script>
+<script src="../assets/react-dom.production.min.js"></script>
+<script src="../assets/bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(() => {
+  const { AppShell, PageHeader, Button, Card, Field, Input, Select, Avatar, Textarea, Checkbox, Alert, DescriptionList, StatusBadge } = window.Elia;
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    /* @__PURE__ */ React.createElement(AppShell, { portal: "admin", active: "appointments", role: "Admin", minHeight: 900 }, /* @__PURE__ */ React.createElement(PageHeader, { breadcrumbs: [["Bookings", "bookings.html"], "BK-24A9-PE", "Edit"], title: "Edit booking", description: "Changes are sent to the customer on WhatsApp by ELIA.", badge: /* @__PURE__ */ React.createElement(StatusBadge, { status: "CONFIRMED" }), actions: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Button, { href: "bookings.html" }, "Cancel"), /* @__PURE__ */ React.createElement(Button, { href: "bookings.html", variant: "primary", icon: "check" }, "Save changes")) }), /* @__PURE__ */ React.createElement("div", { className: "el-grid", style: { gridTemplateColumns: "minmax(0, 1.6fr) minmax(0, 1fr)", alignItems: "start" } }, /* @__PURE__ */ React.createElement("div", { className: "el-stack-5" }, /* @__PURE__ */ React.createElement(Card, { title: "Appointment" }, /* @__PURE__ */ React.createElement("div", { className: "el-stack" }, /* @__PURE__ */ React.createElement("div", { className: "el-grid el-g2" }, /* @__PURE__ */ React.createElement(Field, { label: "Service", required: true }, /* @__PURE__ */ React.createElement(Select, { options: ["Payment plan consultation", "Site visit · Studio A", "Site visit · 2BR Sea View", "Resale valuation", "Key handover"], value: "Payment plan consultation" })), /* @__PURE__ */ React.createElement(Field, { label: "Sales assistant", required: true }, /* @__PURE__ */ React.createElement(Select, { options: ["Nimal Perera", "Tharushi Fernando", "Kavin Rajan", "Ayesha Nazeer"], value: "Nimal Perera", icon: "user" }))), /* @__PURE__ */ React.createElement("div", { className: "el-grid el-g2" }, /* @__PURE__ */ React.createElement(Field, { label: "Date", required: true }, /* @__PURE__ */ React.createElement(Input, { icon: "calendar", defaultValue: "Thu 9 Oct 2026" })), /* @__PURE__ */ React.createElement(Field, { label: "Time", required: true, hint: "Free slots for Nimal on this date" }, /* @__PURE__ */ React.createElement(Select, { options: ["11:30 – 12:00", "12:00 – 12:30", "14:00 – 14:30", "15:30 – 16:00"], value: "11:30 – 12:00", icon: "clock" }))), /* @__PURE__ */ React.createElement(Field, { label: "Status" }, /* @__PURE__ */ React.createElement(Select, { options: ["Confirmed", "Completed", "Cancelled"], value: "Confirmed" })), /* @__PURE__ */ React.createElement(Field, { label: "Internal note", optional: true, hint: "Only your team sees this" }, /* @__PURE__ */ React.createElement(Textarea, { rows: 3, defaultValue: "Customer wants to bring her husband as guarantor." })), /* @__PURE__ */ React.createElement(Checkbox, { checked: true, label: "Tell the customer about this change", description: "ELIA sends the updated time on WhatsApp." })))), /* @__PURE__ */ React.createElement("div", { className: "el-stack-5" }, /* @__PURE__ */ React.createElement(Card, { title: "Booking" }, /* @__PURE__ */ React.createElement(DescriptionList, { labelWidth: 110, items: [
+      { label: "Booking ID", value: /* @__PURE__ */ React.createElement("span", { className: "el-mono" }, "BK-24A9-PE") },
+      { label: "Customer", value: /* @__PURE__ */ React.createElement("span", { className: "el-row" }, /* @__PURE__ */ React.createElement(Avatar, { name: "Nadeesha Peiris", size: "xs" }), "Nadeesha Peiris") },
+      { label: "Phone", value: "+94 77 ••• 3310" },
+      { label: "Case", value: /* @__PURE__ */ React.createElement("a", { href: "case-no-handoff.html" }, "CS-1040 · Open case") }
+    ] })), /* @__PURE__ */ React.createElement(Alert, { tone: "info", title: "Booked through ELIA" }, "Customers cannot be added here. To create a booking, the customer asks ELIA on WhatsApp."))))
+  );
+})();
+</script>
+</body>
+</html>
